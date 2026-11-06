@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="andromedaBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#1E1B4B" />
+      <stop offset="100%" stop-color="#311042" />
+    </linearGradient>
+    <linearGradient id="rocketGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="50%" stop-color="#818CF8" />
+      <stop offset="100%" stop-color="#F43F5E" />
+    </linearGradient>
+    <linearGradient id="accentGold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#FBBF24" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="512" height="512" rx="112" fill="url(#andromedaBg)" />
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="none" stroke="#475569" stroke-width="4" stroke-opacity="0.4" />
+
+  <!-- Orbital Rings -->
+  <ellipse cx="256" cy="256" rx="180" ry="80" fill="none" stroke="#818CF8" stroke-width="4" stroke-dasharray="12 8" transform="rotate(-30 256 256)" opacity="0.6" />
+  <ellipse cx="256" cy="256" rx="200" ry="90" fill="none" stroke="#F43F5E" stroke-width="3" stroke-dasharray="16 10" transform="rotate(40 256 256)" opacity="0.4" />
+
+  <!-- Core Emblem: Scaling Growth Arrow / Rocket Monogram -->
+  <g transform="translate(136, 126)">
+    <!-- Upward Scaling Chart Bars -->
+    <rect x="30" y="160" width="36" height="80" rx="8" fill="#334155" />
+    <rect x="80" y="110" width="36" height="130" rx="8" fill="#4F46E5" />
+    <rect x="130" y="60" width="36" height="180" rx="8" fill="#7C3AED" />
+    <rect x="180" y="10" width="36" height="230" rx="8" fill="url(#accentGold)" />
+
+    <!-- Trajectory Rocket Line -->
+    <path d="M10 210 Q 110 180, 210 20" fill="none" stroke="url(#rocketGrad)" stroke-width="12" stroke-linecap="round" />
+    <!-- Glowing Rocket Head -->
+    <polygon points="216,10 236,16 226,36" fill="#FBBF24" />
+  </g>
+</svg>
