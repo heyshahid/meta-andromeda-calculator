@@ -96,6 +96,16 @@
   </script>
   
   <style>
+    /* Disable default number input spin buttons to avoid overlap with unit badges */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
+    }
+    input[type=number] { 
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
     -webkit-tap-highlight-color: transparent;
     body {
       font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -958,7 +968,7 @@
         navigator.serviceWorker.getRegistrations().then(regs => {
           for (let r of regs) r.update();
         });
-        navigator.serviceWorker.register('sw.js?v=6', { updateViaCache: 'none' })
+        navigator.serviceWorker.register('sw.js?v=7', { updateViaCache: 'none' })
           .catch(err => console.log('SW registration error:', err));
       });
     }
