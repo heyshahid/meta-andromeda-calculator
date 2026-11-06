@@ -1,4 +1,4 @@
-# Meta Andromeda ROAS & Ad Scaling Calculator 🚀
+# Meta Andromeda ROAS & Ad Scaling Calculator
 
 [![Live App](https://img.shields.io/badge/Live_App-heyshahid.github.io%2Fmeta--andromeda--calculator-6366F1?style=for-the-badge&logo=googlechrome&logoColor=white)](https://heyshahid.github.io/meta-andromeda-calculator/)
 [![PWA Ready](https://img.shields.io/badge/PWA-Installable_Offline-10B981?style=for-the-badge&logo=pwa&logoColor=white)](https://heyshahid.github.io/meta-andromeda-calculator/)
@@ -10,16 +10,16 @@
 
 ---
 
-## ⚡ Live Web Application
-👉 **Launch Tool:** **[https://heyshahid.github.io/meta-andromeda-calculator/](https://heyshahid.github.io/meta-andromeda-calculator/)**  
+## Live Web Application
+Launch Tool: [https://heyshahid.github.io/meta-andromeda-calculator/](https://heyshahid.github.io/meta-andromeda-calculator/)  
 *(Installable directly to iOS, Android, macOS, and Windows home screens with zero app store downloads).*
 
 ---
 
-## 🎯 The Problem It Solves
+## The Problem It Solves
 
 Most e-commerce brands and media buyers scale paid media incorrectly:
-1. **Flawed Break-Even ROAS:** Traditional calculators use `1 / Margin`, ignoring merchant processing fees (2.9% + \$0.30), return rates, and shipping costs. Brands think they are profitable at a 1.8x ROAS when they are actually bleeding cash.
+1. **Flawed Break-Even ROAS:** Traditional calculators use `1 / Margin`, ignoring merchant processing fees (2.9% + $0.30), return rates, and shipping costs. Brands think they are profitable at a 1.8x ROAS when they are actually bleeding cash.
 2. **Algorithmic Learning Phase Resets:** Increasing Meta ad budgets by more than 20% in a single day shocks Meta’s delivery system, re-entering the campaign into the volatile learning phase and spiking Cost Per Acquisition (CPA).
 3. **No Executive Client Reporting:** Media buyers lack a fast, clean way to export a professional 1-page scaling roadmap and financial audit for founders and CFOs.
 
@@ -27,7 +27,7 @@ Most e-commerce brands and media buyers scale paid media incorrectly:
 
 ---
 
-## 🛠️ Core Calculation Engines
+## Core Calculation Engines
 
 ### 1. Unit Economics & True Break-Even ROAS
 - **Inputs:** Average Order Value (AOV), Cost of Goods Sold (COGS), Pick/Pack/Shipping, Merchant Gateway Fee (%), Return/Refund Rate (%).
@@ -38,7 +38,7 @@ Most e-commerce brands and media buyers scale paid media incorrectly:
   - **Target ROAS at Desired Margin (10%, 20%, 30%):** Exact ROAS needed to hit specific bottom-line profit targets.
 
 ### 2. Andromeda Machine Learning Scaling Trajectory
-- **Safe Scaling Increments:** Automatically models day-by-day +15% and +20% compounding budget steps to scale from \$100/day to \$5,000+/day without throwing campaigns back into the learning phase.
+- **Safe Scaling Increments:** Automatically models day-by-day +15% and +20% compounding budget steps to scale from $100/day to $5,000+/day without throwing campaigns back into the learning phase.
 - **70 / 20 / 10 Budget Allocation:**
   - **70% Core Scaling:** Meta Advantage+ Shopping Campaigns (ASC) and proven winning CBOs.
   - **20% Creative Testing:** Dynamic Creative Ad sets (DCT) testing new hooks and visual angles.
@@ -46,7 +46,7 @@ Most e-commerce brands and media buyers scale paid media incorrectly:
 - **Projected Revenue & Profit at Scale:** Models forecasted blended ROAS degradation as budgets expand.
 
 ### 3. Reverse Target Profit Simulator
-- Enter your **Monthly Net Profit Target** (e.g. \$20,000/month).
+- Enter your **Monthly Net Profit Target** (e.g. $20,000/month).
 - Instantly computes:
   - Required Monthly Ad Spend.
   - Minimum blended ROAS required.
@@ -61,7 +61,7 @@ Most e-commerce brands and media buyers scale paid media incorrectly:
 
 ---
 
-## 📐 Formulas & Financial Logic
+## Formulas & Financial Logic
 
 $$\text{Net Margin (\%)} = \frac{\text{AOV} - (\text{COGS} + \text{Shipping} + \text{Payment Fee} + \text{Return Allowance})}{\text{AOV}}$$
 
@@ -71,14 +71,14 @@ $$\text{Daily Scaled Budget}_{t+1} = \text{Budget}_t \times (1 + \text{Scaling F
 
 ---
 
-## 📱 Progressive Web App (PWA) Features
+## Progressive Web App (PWA) Features
 - **Offline First:** Cached via Service Worker (`sw.js`). Operates seamlessly mid-flight or on spotty connections.
 - **Instant Load Time:** Built with zero runtime JavaScript frameworks (vanilla JavaScript logic) and styled with Tailwind CSS for 60 FPS performance.
 - **Local Storage Vault:** Stores recent audits and scaling models locally in your browser with zero data sent to external servers.
 
 ---
 
-## 🚀 Installation & Local Development
+## Installation & Local Development
 
 No Node.js or build steps required. Clone and open:
 
@@ -92,12 +92,12 @@ start index.html # On Windows
 
 ---
 
-## 🏷️ Search & Topic Tags
+## Search & Topic Tags
 `meta-ads`, `roas-calculator`, `facebook-ads`, `andromeda-scaling`, `break-even-roas`, `cpa-calculator`, `performance-marketing`, `media-buying`, `ad-spend-calculator`, `ecommerce-growth`, `pwa`, `progressive-web-app`
 
 ---
 
-## 👤 Author & Architecture
+## Author & Architecture
 **Shahid Akram**  
 *Paid Ads Architect & Systems Lead*  
 - Portfolio: [byshahid.vercel.app](https://byshahid.vercel.app/)  
@@ -109,5 +109,5 @@ start index.html # On Windows
 
 ---
 
-## 📄 License
+## License
 This project is open-source under the [MIT License](LICENSE).
