@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -7,9 +7,9 @@
   
   <!-- PWA & Mobile Web App Meta -->
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#060913">
+  <meta name="theme-color" content="#7C3AED">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="AndromedaROAS">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="icon" type="image/png" href="icons/favicon.png">
@@ -17,13 +17,13 @@
   
   <!-- SEO & Social Sharing -->
   <link rel="canonical" href="https://heyshahid.github.io/meta-andromeda-calculator/">
-  <meta name="description" content="Professional Meta Andromeda ROAS, Break-Even CPA & Ad Budget Scaling Calculator. Optimize e-commerce paid acquisition, CAC headroom, and 70/20/10 CBO allocation.">
-  <meta name="keywords" content="Meta ROAS calculator, break even ROAS calculator, Andromeda scaling framework, Facebook ads budget calculator, maximum allowable CPA, e-commerce profit modeler, paid media scaling, MER calculator">
+  <meta name="description" content="Meta Andromeda 2026 ROAS, Break-Even CPA & Ad Budget Scaling Cockpit. Built on the 2026 Meta Andromeda retrieval algorithm, Advantage+ shopping, creative fatigue velocity, and 70/20/10 scaling.">
+  <meta name="keywords" content="Meta Andromeda 2026, Meta ROAS calculator, break even ROAS calculator, Advantage+ shopping scaling, Facebook ads budget calculator, creative fatigue calculator, maximum allowable CPA, eCommerce profit modeler">
   <meta name="author" content="Shahid Akram">
   <meta name="robots" content="index, follow">
 
   <meta property="og:title" content="Meta Andromeda ROAS & Ad Scaling Calculator">
-  <meta property="og:description" content="Free tool for media buyers & e-commerce founders to calculate Break-Even ROAS, Max Allowable CAC, and Andromeda budget scaling trajectories.">
+  <meta property="og:description" content="Professional Meta Andromeda 2026 Media Planning & Scaling Suite. Calculate Break-Even ROAS, Max CAC, Audience strategy, and safe +20% scaling increments.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://heyshahid.github.io/meta-andromeda-calculator/">
   <meta property="og:site_name" content="Meta Andromeda ROAS Calculator">
@@ -62,21 +62,24 @@
       theme: {
         extend: {
           colors: {
-            meta: {
-              400: '#38A4FD',
-              500: '#0081FB', // Official Meta Blue
-              600: '#006CE0',
-              700: '#0054B3',
+            purple: {
+              50: '#FAF5FF',
+              100: '#F3E8FF',
+              200: '#E9D5FF',
+              300: '#D8B4FE',
+              400: '#C084FC',
+              500: '#A855F7',
+              600: '#9333EA',
+              700: '#7E22CE',
+              800: '#6B21A8',
+              900: '#581C87',
+              950: '#3B0764',
             },
-            andromeda: {
-              400: '#A78BFA',
-              500: '#8B5CF6', // Purple Aurora
-              600: '#7C3AED',
-            },
-            conversion: {
-              400: '#34D399',
-              500: '#10B981', // Profit Green
-              600: '#059669',
+            brand: {
+              primary: '#7C3AED',
+              accent: '#8B5CF6',
+              light: '#F5F3FF',
+              dark: '#1E1B4B'
             }
           }
         }
@@ -88,42 +91,49 @@
     -webkit-tap-highlight-color: transparent;
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #060913;
+      background-color: #FAFAFD;
+      color: #1E1B4B;
     }
 
-    /* Subtle Animated Meta Mesh Grid */
-    .meta-grid-pattern {
+    /* Ambient Light Purple Aurora Background */
+    .aurora-bg {
+      background-color: #FAFAFD;
       background-image: 
-        radial-gradient(circle at 50% 0%, rgba(0, 129, 251, 0.18) 0%, transparent 60%),
-        radial-gradient(circle at 100% 50%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 0% 100%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+        radial-gradient(circle at 10% 0%, rgba(168, 85, 247, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 90% 10%, rgba(124, 58, 237, 0.10) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(192, 132, 252, 0.06) 0%, transparent 60%),
+        radial-gradient(circle at 80% 90%, rgba(147, 51, 234, 0.08) 0%, transparent 45%),
+        linear-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124, 58, 237, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
     }
 
-    /* Glass Panels */
-    .glass-card {
-      background: rgba(13, 19, 36, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    /* Light Frosted Glass Panels */
+    .glass-card-light {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(233, 213, 255, 0.7);
+      box-shadow: 0 10px 30px -10px rgba(124, 58, 237, 0.08), 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .glass-card-glow {
+    .glass-card-light:hover {
+      border-color: rgba(192, 132, 252, 0.9);
+      box-shadow: 0 16px 36px -10px rgba(124, 58, 237, 0.14), 0 2px 6px 0 rgba(0, 0, 0, 0.04);
+    }
+
+    .kpi-card-glow {
       position: relative;
+      overflow: hidden;
     }
-    .glass-card-glow::before {
+    .kpi-card-glow::before {
       content: '';
       position: absolute;
-      inset: -1px;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(0, 129, 251, 0.4), rgba(139, 92, 246, 0.2), transparent 60%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #7C3AED, #A855F7, #EC4899);
     }
 
     /* Print Stylesheet for 1-Page Scaling Audit PDF */
@@ -158,7 +168,7 @@
         width: 100% !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
-        padding: 14mm 16mm !important;
+        padding: 12mm 14mm !important;
         margin: 0 !important;
       }
     }
@@ -167,45 +177,39 @@
     }
   </style>
 </head>
-<body class="meta-grid-pattern text-slate-100 min-h-screen flex flex-col selection:bg-meta-500 selection:text-white">
+<body class="aurora-bg text-slate-900 min-h-screen flex flex-col selection:bg-purple-600 selection:text-white">
 
-  <!-- Subtle Meta Infinity Background Watermark -->
-  <div class="fixed inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden opacity-[0.035]">
-    <svg class="w-[900px] h-[900px] text-white" viewBox="0 0 24 24" fill="currentColor">
+  <!-- Subtle Ambient Meta Infinity Watermark in Soft Purple -->
+  <div class="fixed inset-0 pointer-events-none z-0 flex items-center justify-center overflow-hidden opacity-[0.03]">
+    <svg class="w-[900px] h-[900px] text-purple-900" viewBox="0 0 24 24" fill="currentColor">
       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5c-2.48 0-4.5-2.02-4.5-4.5S8.52 7.5 11 7.5s4.5 2.02 4.5 4.5-2.02 4.5-4.5 4.5z"/>
     </svg>
   </div>
 
-  <!-- Command Header -->
-  <header class="no-print sticky top-0 z-40 bg-[#060913]/90 backdrop-blur-xl border-b border-white/[0.08] shadow-2xl px-4 py-3 sm:px-8">
+  <!-- Header: Light White + Purple Theme -->
+  <header class="no-print sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-purple-100 shadow-sm px-4 py-3 sm:px-8">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       
-      <!-- Logo + App Identity -->
+      <!-- Brand & 3D Logo -->
       <div class="flex items-center space-x-3.5">
         <div class="relative group">
-          <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-meta-500 via-andromeda-500 to-conversion-500 opacity-60 blur-sm group-hover:opacity-100 transition duration-300"></div>
-          <img src="icons/icon-192.png" alt="Meta Andromeda Logo" class="relative w-11 h-11 object-contain rounded-xl bg-slate-950 p-0.5 border border-white/10 shadow-xl">
+          <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-500 opacity-30 blur-sm group-hover:opacity-60 transition duration-300"></div>
+          <img src="icons/icon-192.png" alt="Meta Andromeda Logo" class="relative w-11 h-11 object-contain rounded-2xl bg-white p-0.5 border border-purple-200 shadow-md">
         </div>
         <div>
           <div class="flex items-center space-x-2.5">
-            <span class="font-black text-xl tracking-tight text-white">Meta <span class="text-transparent bg-clip-text bg-gradient-to-r from-meta-400 via-andromeda-400 to-amber-300">Andromeda</span></span>
-            <span class="text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-meta-500/15 text-meta-400 border border-meta-500/30">ROAS Engine</span>
+            <span class="font-black text-xl tracking-tight text-slate-950">Meta <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-purple-600 to-indigo-600">Andromeda</span></span>
+            <span class="text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 border border-purple-200">2026 Engine</span>
           </div>
-          <div class="flex items-center space-x-2 text-[11px] text-slate-400 hidden sm:flex">
-            <span class="inline-flex items-center">
-              <span class="w-1.5 h-1.5 rounded-full bg-conversion-500 animate-pulse mr-1.5"></span>
-              Advantage+ Machine Learning Active
-            </span>
-            <span>&bull;</span>
-            <span>Precision Ad Spend &amp; Scaling Cockpit</span>
-          </div>
+          <p class="text-xs text-slate-500 hidden sm:block">Advantage+ &bull; Creative Velocity &bull; 70/20/10 Capital Allocation</p>
         </div>
       </div>
 
-      <!-- Header Actions -->
+      <!-- Controls: Global Currency Selector & Actions -->
       <div class="flex items-center space-x-2 sm:space-x-3">
-        <!-- Currency Selector with Worldwide Currencies (GCC, Asia, Europe, Americas, Africa) -->
-        <select id="selCurrency" onchange="calcAll()" class="bg-slate-900 border border-slate-700/80 text-slate-200 text-xs font-bold rounded-xl px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-meta-500 max-w-[130px] sm:max-w-none">
+        
+        <!-- Worldwide Currency Dropdown -->
+        <select id="selCurrency" onchange="calcAll()" class="bg-white border border-purple-200 text-slate-800 text-xs font-bold rounded-xl px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
           <optgroup label="Major Currencies">
             <option value="$" selected>USD ($) - US Dollar</option>
             <option value="€">EUR (€) - Euro</option>
@@ -259,133 +263,133 @@
           </optgroup>
         </select>
 
-        <!-- PWA Install Button -->
-        <button id="pwaInstallBtn" class="hidden text-xs bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-2 rounded-xl items-center space-x-1.5 transition font-semibold">
-          <svg class="w-4 h-4 text-meta-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- Install PWA Button -->
+        <button id="pwaInstallBtn" class="hidden text-xs bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-200 px-3 py-2 rounded-xl items-center space-x-1.5 transition font-bold shadow-sm">
+          <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
           </svg>
           <span class="hidden md:inline">Install App</span>
         </button>
 
         <!-- Export Media Plan PDF -->
-        <button onclick="exportAuditPdf()" class="text-xs bg-gradient-to-r from-meta-500 to-andromeda-600 hover:from-meta-600 hover:to-andromeda-700 text-white font-black px-4 py-2 rounded-xl flex items-center space-x-2 transition shadow-lg shadow-meta-500/25">
+        <button onclick="exportAuditPdf()" class="text-xs bg-gradient-to-r from-purple-700 via-purple-600 to-indigo-600 hover:from-purple-800 hover:to-indigo-700 text-white font-extrabold px-4 py-2 rounded-xl flex items-center space-x-2 transition shadow-md shadow-purple-500/25">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4H7v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
           </svg>
-          <span>Export Media Plan (PDF)</span>
+          <span>Export 1-Page Audit (PDF)</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Live Meta Ads Ticker Bar -->
-  <div class="no-print bg-[#080d1a] border-b border-white/[0.05] px-4 py-2 text-xs">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-slate-400">
+  <!-- Algorithm Insight Ticker (Confect 2026 Study) -->
+  <div class="no-print bg-purple-50/80 border-b border-purple-100/80 px-4 py-2 text-xs">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-slate-700">
       <div class="flex items-center space-x-2">
-        <span class="px-2 py-0.5 rounded bg-meta-500/20 text-meta-400 font-bold text-[10px] uppercase tracking-wide">Rule #1</span>
-        <span class="text-slate-300">Daily budget increases > 20% reset Meta Machine Learning to volatile learning phase.</span>
+        <span class="px-2 py-0.5 rounded bg-purple-600 text-white font-black text-[10px] uppercase tracking-wide">2026 Shift</span>
+        <span class="text-slate-700">Andromeda 10,000x retrieval model means ads peak in Week 1. Top performers run <strong>+33% more creative volume</strong> and <strong>+72% catalog ads</strong>.</span>
       </div>
-      <div class="flex items-center space-x-4 text-[11px]">
-        <span class="text-slate-400">Safe Scale: <strong class="text-conversion-400">&le; +20% / 24h</strong></span>
-        <span class="text-slate-400">Target Split: <strong class="text-meta-400">70% ASC / 20% DCT / 10% Moon</strong></span>
+      <div class="flex items-center space-x-4 text-[11px] font-semibold text-purple-900">
+        <span>Audience: <strong>Broad (Creative is Targeting)</strong></span>
+        <span>&bull;</span>
+        <span>Velocity: <strong id="tickerVelocity">6 Variants / Wk</strong></span>
       </div>
     </div>
   </div>
 
-  <!-- Main Workspace -->
+  <!-- Main Calculator Workspace -->
   <main class="no-print flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 relative z-10">
 
-    <!-- KPI COMMAND DECK (4 Key Numbers) -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
+    <!-- 4 HERO KPI METRIC CARDS -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5 mb-6">
       
-      <!-- Stat 1: Break-Even ROAS -->
-      <div class="glass-card glass-card-glow rounded-2xl p-4 sm:p-5">
-        <div class="flex items-center justify-between text-xs text-slate-400 mb-1 font-semibold">
+      <!-- Card 1: Break-Even ROAS -->
+      <div class="glass-card-light kpi-card-glow rounded-2xl p-4 sm:p-5">
+        <div class="flex items-center justify-between text-xs font-bold text-slate-500 mb-1">
           <span>Break-Even ROAS</span>
-          <span class="w-2 h-2 rounded-full bg-meta-400"></span>
+          <span class="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-purple-100 text-purple-800">Survival</span>
         </div>
-        <div class="text-2xl sm:text-3xl font-black text-white tracking-tight" id="dispBeRoas">1.82x</div>
-        <div class="mt-2 flex items-center justify-between text-[11px]">
-          <span class="text-slate-400">Target 20% Margin:</span>
-          <span class="font-extrabold text-conversion-400" id="dispTargetRoas">2.68x</span>
+        <div class="text-2xl sm:text-3xl font-black text-purple-900 tracking-tight" id="dispBeRoas">1.82x</div>
+        <div class="mt-2.5 flex items-center justify-between text-[11px] border-t border-purple-100/80 pt-2">
+          <span class="text-slate-500">Target 20% Net:</span>
+          <span class="font-extrabold text-purple-700" id="dispTargetRoas">2.68x</span>
         </div>
       </div>
 
-      <!-- Stat 2: Max Allowable CAC -->
-      <div class="glass-card glass-card-glow rounded-2xl p-4 sm:p-5">
-        <div class="flex items-center justify-between text-xs text-slate-400 mb-1 font-semibold">
+      <!-- Card 2: Max Allowable CAC -->
+      <div class="glass-card-light kpi-card-glow rounded-2xl p-4 sm:p-5">
+        <div class="flex items-center justify-between text-xs font-bold text-slate-500 mb-1">
           <span>Max Allowable CAC</span>
-          <span class="w-2 h-2 rounded-full bg-andromeda-400"></span>
+          <span class="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-800">Ceiling</span>
         </div>
-        <div class="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-200 tracking-tight" id="dispMaxCac">$46.75</div>
-        <div class="mt-2 flex items-center justify-between text-[11px]">
-          <span class="text-slate-400">Acquisition Ceiling:</span>
-          <span class="font-bold text-slate-300" id="dispNetMarginPct">55.0% AOV</span>
-        </div>
-      </div>
-
-      <!-- Stat 3: Net Margin / Order -->
-      <div class="glass-card glass-card-glow rounded-2xl p-4 sm:p-5">
-        <div class="flex items-center justify-between text-xs text-slate-400 mb-1 font-semibold">
-          <span>Net Profit / Order</span>
-          <span class="w-2 h-2 rounded-full bg-conversion-400"></span>
-        </div>
-        <div class="text-2xl sm:text-3xl font-black text-conversion-400 tracking-tight" id="dispNetProfit">$46.75</div>
-        <div class="mt-2 flex items-center justify-between text-[11px]">
-          <span class="text-slate-400">Before Ad Spend:</span>
-          <span class="font-bold text-slate-300">Unit Contribution</span>
+        <div class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight" id="dispMaxCac">$46.75</div>
+        <div class="mt-2.5 flex items-center justify-between text-[11px] border-t border-purple-100/80 pt-2">
+          <span class="text-slate-500">Net Margin %:</span>
+          <span class="font-extrabold text-slate-700" id="dispNetMarginPct">55.0% AOV</span>
         </div>
       </div>
 
-      <!-- Stat 4: Daily Scaling Jump -->
-      <div class="glass-card glass-card-glow rounded-2xl p-4 sm:p-5">
-        <div class="flex items-center justify-between text-xs text-slate-400 mb-1 font-semibold">
-          <span>Next Safe Daily Jump</span>
-          <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+      <!-- Card 3: Creative Velocity Required -->
+      <div class="glass-card-light kpi-card-glow rounded-2xl p-4 sm:p-5">
+        <div class="flex items-center justify-between text-xs font-bold text-slate-500 mb-1">
+          <span>Required Creative Velocity</span>
+          <span class="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-pink-100 text-pink-800">Fatigue Defense</span>
         </div>
-        <div class="text-2xl sm:text-3xl font-black text-amber-400 tracking-tight" id="dispNextScale">+$50.00</div>
-        <div class="mt-2 flex items-center justify-between text-[11px]">
-          <span class="text-slate-400">Andromeda Step:</span>
-          <span class="font-extrabold text-amber-300">+20% / 24h</span>
+        <div class="text-2xl sm:text-3xl font-black text-pink-700 tracking-tight" id="dispCreativeVelocity">6 Ads / Wk</div>
+        <div class="mt-2.5 flex items-center justify-between text-[11px] border-t border-purple-100/80 pt-2">
+          <span class="text-slate-500">Ad Lifecycle:</span>
+          <span class="font-extrabold text-slate-700">7-Day Peak Window</span>
+        </div>
+      </div>
+
+      <!-- Card 4: Safe Scaling Increment -->
+      <div class="glass-card-light kpi-card-glow rounded-2xl p-4 sm:p-5">
+        <div class="flex items-center justify-between text-xs font-bold text-slate-500 mb-1">
+          <span>Safe Daily Budget Step</span>
+          <span class="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800">&le; +20% / 24h</span>
+        </div>
+        <div class="text-2xl sm:text-3xl font-black text-emerald-700 tracking-tight" id="dispNextScale">+$50.00</div>
+        <div class="mt-2.5 flex items-center justify-between text-[11px] border-t border-purple-100/80 pt-2">
+          <span class="text-slate-500">Learning Phase:</span>
+          <span class="font-extrabold text-emerald-700">Safe From Resets</span>
         </div>
       </div>
 
     </div>
 
-    <!-- DUAL COLUMN WORKSPACE -->
+    <!-- DUAL WORKSPACE LAYOUT -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-      <!-- LEFT COLUMN: MEDIA BUYER INPUTS -->
+      <!-- LEFT COLUMN: INPUT PARAMETERS -->
       <div class="lg:col-span-6 space-y-6">
 
-        <!-- Card: Unit Economics & Campaign Spend -->
-        <div class="glass-card rounded-2xl p-5 sm:p-6 border border-white/[0.08]">
-          <div class="flex items-center justify-between pb-3.5 mb-4 border-b border-white/[0.06]">
+        <!-- Panel 1: Unit Economics & Campaign Spend -->
+        <div class="glass-card-light rounded-2xl p-5 sm:p-6">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-purple-100">
             <div>
-              <h2 class="text-sm sm:text-base font-extrabold text-white flex items-center space-x-2">
-                <span>Unit Economics &amp; Spend Inputs</span>
-              </h2>
-              <p class="text-xs text-slate-400">Real e-commerce metrics to establish true profitability</p>
+              <h2 class="text-base font-extrabold text-purple-950">Unit Economics &amp; Spend Inputs</h2>
+              <p class="text-xs text-slate-500">Fundamental product margin architecture</p>
             </div>
-            <span class="text-[10px] font-extrabold px-2.5 py-1 rounded bg-meta-500/20 text-meta-400 border border-meta-500/30 uppercase tracking-wider">Inputs</span>
+            <span class="text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-purple-100 text-purple-800 border border-purple-200">Financials</span>
           </div>
 
           <div class="space-y-4">
+            
             <!-- Row 1: AOV & Daily Spend -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1">Average Order Value (AOV)</label>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Average Order Value (AOV)</label>
                 <div class="relative">
-                  <span class="curr-symbol absolute left-3 top-2.5 text-xs text-slate-500 font-bold">$</span>
-                  <input type="number" id="inpAOV" value="85" step="1" min="1" oninput="calcAll()" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl pl-8 pr-3 py-2 text-white font-extrabold text-sm focus:ring-2 focus:ring-meta-500 focus:outline-none">
+                  <span class="curr-symbol absolute left-3.5 top-2.5 text-xs text-slate-400 font-bold">$</span>
+                  <input type="number" id="inpAOV" value="85" step="1" min="1" oninput="calcAll()" class="w-full bg-white border border-purple-200 rounded-xl pl-8 pr-3 py-2 text-slate-900 font-extrabold text-sm focus:ring-2 focus:ring-purple-500 focus:outline-none shadow-sm">
                 </div>
               </div>
 
               <div>
-                <label class="block text-xs font-bold text-slate-300 mb-1">Current Daily Meta Ad Spend</label>
+                <label class="block text-xs font-bold text-slate-700 mb-1">Current Daily Meta Ad Spend</label>
                 <div class="relative">
-                  <span class="curr-symbol absolute left-3 top-2.5 text-xs text-slate-500 font-bold">$</span>
-                  <input type="number" id="inpDailySpend" value="250" step="10" min="0" oninput="calcAll()" class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl pl-8 pr-3 py-2 text-white font-extrabold text-sm focus:ring-2 focus:ring-meta-500 focus:outline-none">
+                  <span class="curr-symbol absolute left-3.5 top-2.5 text-xs text-slate-400 font-bold">$</span>
+                  <input type="number" id="inpDailySpend" value="250" step="10" min="0" oninput="calcAll()" class="w-full bg-white border border-purple-200 rounded-xl pl-8 pr-3 py-2 text-slate-900 font-extrabold text-sm focus:ring-2 focus:ring-purple-500 focus:outline-none shadow-sm">
                 </div>
               </div>
             </div>
@@ -393,55 +397,55 @@
             <!-- Row 2: Product COGS % -->
             <div>
               <div class="flex items-center justify-between mb-1.5">
-                <label class="text-xs font-bold text-slate-300">Product COGS (% of Selling Price)</label>
-                <span class="text-xs font-extrabold text-meta-400" id="dispCogsVal">30%</span>
+                <label class="text-xs font-bold text-slate-700">Product COGS (% of Revenue)</label>
+                <span class="text-xs font-black text-purple-700" id="dispCogsVal">30%</span>
               </div>
               <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2">
-                <button type="button" onclick="setCogsPreset(20)" class="cogs-btn py-1.5 px-2 rounded-lg text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition" data-val="20">20% Digital</button>
-                <button type="button" onclick="setCogsPreset(30)" class="cogs-btn py-1.5 px-2 rounded-lg text-xs font-bold bg-meta-500/20 text-meta-300 border border-meta-500/50" data-val="30">30% DTC</button>
-                <button type="button" onclick="setCogsPreset(40)" class="cogs-btn py-1.5 px-2 rounded-lg text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition" data-val="40">40% Apparel</button>
-                <button type="button" onclick="setCogsPreset(50)" class="cogs-btn py-1.5 px-2 rounded-lg text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition" data-val="50">50% Retail</button>
+                <button type="button" onclick="setCogsPreset(20)" class="cogs-btn py-1.5 px-2 rounded-lg text-xs font-bold bg-white text-slate-700 border border-purple-200 hover:bg-purple-50 transition shadow-xs" data-val="20">20% Digital</button>
+                <button type="button" onclick="setCogsPreset(30)" class="cogs-btn py-1.5 px-2 rounded-lg text-xs font-bold bg-purple-600 text-white border border-purple-600 shadow-sm" data-val="30">30% DTC</button>
+                <button type="button" onclick="setCogsPreset(40)" class="cogs-btn py-1.5 px-2 rounded-lg text-xs font-bold bg-white text-slate-700 border border-purple-200 hover:bg-purple-50 transition shadow-xs" data-val="40">40% Fashion</button>
+                <button type="button" onclick="setCogsPreset(50)" class="cogs-btn py-1.5 px-2 rounded-lg text-xs font-bold bg-white text-slate-700 border border-purple-200 hover:bg-purple-50 transition shadow-xs" data-val="50">50% Retail</button>
               </div>
               <div class="flex items-center space-x-3">
-                <input type="range" id="rngCOGS" min="5" max="80" step="1" value="30" oninput="onCogsSlider(this.value)" class="flex-1 accent-meta-500 h-1.5 bg-slate-800 rounded-lg cursor-pointer">
+                <input type="range" id="rngCOGS" min="5" max="80" step="1" value="30" oninput="onCogsSlider(this.value)" class="flex-1 accent-purple-600 h-2 bg-purple-100 rounded-lg cursor-pointer">
                 <div class="relative w-24">
-                  <input type="number" id="inpCOGS" value="30" min="0" max="95" oninput="onCogsInput(this.value)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1 text-xs font-extrabold text-white text-center focus:outline-none">
+                  <input type="number" id="inpCOGS" value="30" min="0" max="95" oninput="onCogsInput(this.value)" class="w-full bg-white border border-purple-200 rounded-lg px-2.5 py-1 text-xs font-black text-slate-800 text-center focus:outline-none">
                   <span class="absolute right-2 top-1 text-xs text-slate-400 font-bold">%</span>
                 </div>
               </div>
             </div>
 
-            <!-- Row 3: Friction & Leakages (Payment, Shipping, Returns) -->
-            <div class="pt-2 border-t border-white/[0.06] space-y-3">
-              <span class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 block">Hidden Variable Leakages</span>
+            <!-- Row 3: Hidden Friction & Leakages -->
+            <div class="pt-3 border-t border-purple-100 space-y-3">
+              <span class="text-[11px] font-black uppercase tracking-wider text-slate-500 block">Hidden Variable Leakages</span>
               
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 
-                <!-- Payment Processing Fee -->
+                <!-- Gateway Fee -->
                 <div>
-                  <label class="block text-[11px] font-bold text-slate-300 mb-1">Gateway Fee</label>
-                  <select id="selGateway" onchange="calcAll()" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-2.5 py-2 text-xs font-semibold text-white focus:outline-none">
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Payment Gateway</label>
+                  <select id="selGateway" onchange="calcAll()" class="w-full bg-white border border-purple-200 rounded-xl px-2.5 py-2 text-xs font-semibold text-slate-800 focus:outline-none shadow-sm">
                     <option value="2.9" selected>Stripe/Shopify (2.9%)</option>
                     <option value="3.49">PayPal (3.49%)</option>
-                    <option value="1.5">Local Debit (1.5%)</option>
-                    <option value="0">Zero / Absorbed (0%)</option>
+                    <option value="1.5">Direct Debit (1.5%)</option>
+                    <option value="0">Zero (0%)</option>
                   </select>
                 </div>
 
-                <!-- Pick, Pack & Shipping -->
+                <!-- Shipping -->
                 <div>
-                  <label class="block text-[11px] font-bold text-slate-300 mb-1">Shipping / Delivery</label>
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Shipping / Fulfillment</label>
                   <div class="relative">
-                    <span class="curr-symbol absolute left-3 top-2 text-xs text-slate-500 font-bold">$</span>
-                    <input type="number" id="inpShipping" value="5" step="0.5" min="0" oninput="calcAll()" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl pl-7 pr-2 py-1.5 text-xs font-bold text-white focus:outline-none">
+                    <span class="curr-symbol absolute left-3 top-2 text-xs text-slate-400 font-bold">$</span>
+                    <input type="number" id="inpShipping" value="5" step="0.5" min="0" oninput="calcAll()" class="w-full bg-white border border-purple-200 rounded-xl pl-7 pr-2 py-1.5 text-xs font-bold text-slate-800 focus:outline-none shadow-sm">
                   </div>
                 </div>
 
-                <!-- Return & Refund Allowance -->
+                <!-- Returns -->
                 <div>
-                  <label class="block text-[11px] font-bold text-slate-300 mb-1">Return / Refund %</label>
+                  <label class="block text-[11px] font-bold text-slate-700 mb-1">Return / Refund %</label>
                   <div class="relative">
-                    <input type="number" id="inpReturns" value="4" step="1" min="0" max="30" oninput="calcAll()" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-1.5 text-xs font-bold text-white focus:outline-none">
+                    <input type="number" id="inpReturns" value="4" step="1" min="0" max="30" oninput="calcAll()" class="w-full bg-white border border-purple-200 rounded-xl px-3 py-1.5 text-xs font-bold text-slate-800 focus:outline-none shadow-sm">
                     <span class="absolute right-3 top-1.5 text-xs text-slate-400 font-bold">%</span>
                   </div>
                 </div>
@@ -449,16 +453,16 @@
               </div>
             </div>
 
-            <!-- Target Profit Margin Desired -->
-            <div class="pt-2 border-t border-white/[0.06]">
+            <!-- Desired Profit Target -->
+            <div class="pt-3 border-t border-purple-100">
               <div class="flex items-center justify-between mb-1.5">
-                <label class="text-xs font-bold text-slate-300">Desired Net Profit Margin (%)</label>
-                <span class="text-xs font-extrabold text-conversion-400" id="dispDesiredMargin">20% Net Target</span>
+                <label class="text-xs font-bold text-slate-700">Desired Net Profit Target (%)</label>
+                <span class="text-xs font-black text-purple-700" id="dispDesiredMargin">20% Net Target</span>
               </div>
               <div class="flex items-center space-x-3">
-                <input type="range" id="rngDesiredMargin" min="5" max="40" step="1" value="20" oninput="onDesiredMarginChange(this.value)" class="flex-1 accent-conversion-500 h-1.5 bg-slate-800 rounded-lg cursor-pointer">
+                <input type="range" id="rngDesiredMargin" min="5" max="40" step="1" value="20" oninput="onDesiredMarginChange(this.value)" class="flex-1 accent-purple-600 h-2 bg-purple-100 rounded-lg cursor-pointer">
                 <div class="relative w-20">
-                  <input type="number" id="inpDesiredMargin" value="20" min="0" max="50" oninput="onDesiredMarginChange(this.value)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1 text-xs font-extrabold text-white text-center focus:outline-none">
+                  <input type="number" id="inpDesiredMargin" value="20" min="0" max="50" oninput="onDesiredMarginChange(this.value)" class="w-full bg-white border border-purple-200 rounded-lg px-2.5 py-1 text-xs font-black text-slate-800 text-center focus:outline-none">
                   <span class="absolute right-2 top-1 text-xs text-slate-400 font-bold">%</span>
                 </div>
               </div>
@@ -467,171 +471,162 @@
           </div>
         </div>
 
-        <!-- Card: Reverse Target Profit Modeler -->
-        <div class="glass-card rounded-2xl p-5 sm:p-6 border border-white/[0.08]">
-          <div class="flex items-center justify-between pb-3 mb-3 border-b border-white/[0.06]">
+        <!-- Panel 2: Andromeda 2026 Audience & Catalog Strategy (Confect Findings) -->
+        <div class="glass-card-light rounded-2xl p-5 sm:p-6">
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-purple-100">
             <div>
-              <h3 class="text-sm font-extrabold text-white">Reverse Target Profit Simulator</h3>
-              <p class="text-xs text-slate-400">Determine ad spend required to achieve specific monthly net income</p>
+              <h3 class="text-sm font-extrabold text-purple-950">Andromeda 2026 Targeting &amp; Catalog</h3>
+              <p class="text-xs text-slate-500">Retrieval model architecture settings</p>
             </div>
-            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-andromeda-500/20 text-andromeda-300 border border-andromeda-500/30 uppercase">Forecast</span>
+            <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-indigo-100 text-indigo-800 border border-indigo-200">Algorithm</span>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-4">
+          <div class="space-y-3.5 text-xs">
+            
+            <!-- Targeting Architecture Selector -->
             <div>
-              <label class="block text-xs font-bold text-slate-300 mb-1">Target Monthly Net Profit</label>
-              <div class="relative">
-                <span class="curr-symbol absolute left-3 top-2.5 text-xs text-slate-500 font-bold">$</span>
-                <input type="number" id="inpTargetProfit" value="20000" step="1000" min="500" oninput="calcReverseProfit()" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl pl-8 pr-3 py-2 text-white font-extrabold text-sm focus:ring-2 focus:ring-andromeda-500 focus:outline-none">
+              <label class="block font-bold text-slate-700 mb-1">Targeting Framework</label>
+              <select id="selAudienceType" onchange="calcAll()" class="w-full bg-white border border-purple-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none shadow-sm">
+                <option value="broad" selected>Advantage+ Broad Audience (Creative is the Targeting - Recommended)</option>
+                <option value="catalog">Advantage+ Catalog / Dynamic Ads (60% Revenue Driver)</option>
+                <option value="segmented">Interest / Custom Audience Stacks (Legacy - Higher CPA)</option>
+              </select>
+            </div>
+
+            <!-- Catalog Size Tier -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Product Catalog Size</label>
+                <select id="selCatalogSize" onchange="calcAll()" class="w-full bg-white border border-purple-200 rounded-xl px-2.5 py-2 text-xs font-semibold text-slate-800 focus:outline-none shadow-sm">
+                  <option value="small">&lt; 100 SKUs (Focused DTC)</option>
+                  <option value="mid" selected>100 - 1,000 SKUs (Catalog Growth)</option>
+                  <option value="large">1,000 - 5,000 SKUs (Multi-Category)</option>
+                  <option value="moat">5,000+ SKUs (Andromeda Competitive Moat)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block font-bold text-slate-700 mb-1">Primary Ad Format</label>
+                <select id="selPrimaryFormat" onchange="calcAll()" class="w-full bg-white border border-purple-200 rounded-xl px-2.5 py-2 text-xs font-semibold text-slate-800 focus:outline-none shadow-sm">
+                  <option value="catalog" selected>Dynamic Catalog Ads (+72% top performers)</option>
+                  <option value="hybrid">Hybrid (50% Catalog + 50% Video/Static)</option>
+                  <option value="static">Static Creatives Only (-24% retrieval efficiency)</option>
+                </select>
               </div>
             </div>
 
-            <div>
-              <label class="block text-xs font-bold text-slate-300 mb-1">Achievable Blended ROAS</label>
-              <div class="relative">
-                <input type="number" id="inpAchievableRoas" value="2.8" step="0.1" min="1.1" oninput="calcReverseProfit()" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-white font-extrabold text-sm focus:ring-2 focus:ring-andromeda-500 focus:outline-none">
-                <span class="absolute right-3 top-2 text-xs text-slate-400 font-bold">x</span>
-              </div>
+            <div class="p-3 bg-purple-50/70 border border-purple-200 rounded-xl text-slate-700 text-[11px] leading-relaxed">
+              <span class="font-bold text-purple-900 block mb-0.5">Andromeda 2026 Retrieval Insight:</span>
+              Meta's retrieval engine ranks ads with dynamic multi-creative formats <strong>20-30% higher in ROAS</strong> from week 1 through week 6. Static ads plateau within 7 days.
             </div>
-          </div>
 
-          <!-- Simulator Results -->
-          <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-3.5 grid grid-cols-3 gap-2 text-center text-xs">
-            <div>
-              <span class="text-slate-400 block text-[10px] uppercase font-bold">Req. Monthly Spend</span>
-              <span class="text-white font-black text-sm" id="dispReqSpend">$22,222</span>
-            </div>
-            <div>
-              <span class="text-slate-400 block text-[10px] uppercase font-bold">Target Revenue</span>
-              <span class="text-meta-400 font-black text-sm" id="dispReqRevenue">$62,222</span>
-            </div>
-            <div>
-              <span class="text-slate-400 block text-[10px] uppercase font-bold">Daily Orders Needed</span>
-              <span class="text-conversion-400 font-black text-sm" id="dispReqOrders">24 / day</span>
-            </div>
           </div>
         </div>
 
       </div>
 
-      <!-- RIGHT COLUMN: ANDROMEDA ENGINE & SCALING TRAJECTORY -->
+      <!-- RIGHT COLUMN: ANDROMEDA BUDGET SCALING & EXECUTION -->
       <div class="lg:col-span-6 space-y-6">
 
-        <!-- Card: Andromeda 70/20/10 Budget Distribution -->
-        <div class="glass-card rounded-2xl p-5 sm:p-6 border border-white/[0.08]">
-          <div class="flex items-center justify-between pb-3.5 mb-4 border-b border-white/[0.06]">
+        <!-- Panel 3: Capital Allocation (70 / 20 / 10 Split) -->
+        <div class="glass-card-light rounded-2xl p-5 sm:p-6">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-purple-100">
             <div>
-              <h2 class="text-sm sm:text-base font-extrabold text-white flex items-center space-x-2">
-                <span>Andromeda Budget Split (70 / 20 / 10)</span>
-              </h2>
-              <p class="text-xs text-slate-400">Algorithmic capital allocation across campaign architectures</p>
+              <h2 class="text-base font-extrabold text-purple-950">Andromeda 70 / 20 / 10 Capital Allocation</h2>
+              <p class="text-xs text-slate-500">Prevent audience cannibalization and machine learning overlap</p>
             </div>
-            <span class="text-[10px] font-extrabold px-2.5 py-1 rounded bg-conversion-500/20 text-conversion-400 border border-conversion-500/30 uppercase tracking-wider">Optimal</span>
+            <span class="text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-purple-100 text-purple-800 border border-purple-200">Structure</span>
           </div>
 
           <!-- Visual Progress Allocation Bar -->
-          <div class="h-3.5 w-full bg-slate-950 rounded-full overflow-hidden flex p-0.5 border border-slate-800 mb-4">
-            <div class="h-full bg-meta-500 rounded-l-full transition-all duration-500" style="width: 70%"></div>
-            <div class="h-full bg-andromeda-500 transition-all duration-500" style="width: 20%"></div>
-            <div class="h-full bg-amber-400 rounded-r-full transition-all duration-500" style="width: 10%"></div>
+          <div class="h-3 w-full bg-purple-100 rounded-full overflow-hidden flex p-0.5 border border-purple-200 mb-4">
+            <div class="h-full bg-purple-600 rounded-l-full transition-all duration-500" style="width: 70%"></div>
+            <div class="h-full bg-indigo-500 transition-all duration-500" style="width: 20%"></div>
+            <div class="h-full bg-pink-500 rounded-r-full transition-all duration-500" style="width: 10%"></div>
           </div>
 
-          <!-- Split Details -->
+          <!-- Split Detail Cards -->
           <div class="grid grid-cols-3 gap-2.5 text-xs">
-            <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3">
-              <div class="flex items-center space-x-1.5 text-meta-400 font-bold text-[11px] mb-1">
-                <span class="w-2 h-2 rounded-full bg-meta-500"></span>
-                <span>70% Core Scale</span>
-              </div>
-              <div class="text-base sm:text-lg font-black text-white" id="dispSplitCore">$175.00</div>
-              <span class="text-[10px] text-slate-400 block mt-0.5">Advantage+ &amp; CBOs</span>
+            
+            <div class="bg-purple-50/80 border border-purple-200 rounded-xl p-3">
+              <span class="font-bold text-purple-800 text-[11px] block mb-1">70% Core Scale</span>
+              <div class="text-base sm:text-lg font-black text-slate-900" id="dispSplitCore">$175.00</div>
+              <span class="text-[10px] text-slate-500 block mt-0.5">Advantage+ &amp; CBOs</span>
             </div>
 
-            <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3">
-              <div class="flex items-center space-x-1.5 text-andromeda-400 font-bold text-[11px] mb-1">
-                <span class="w-2 h-2 rounded-full bg-andromeda-500"></span>
-                <span>20% Testing</span>
-              </div>
-              <div class="text-base sm:text-lg font-black text-white" id="dispSplitTest">$50.00</div>
-              <span class="text-[10px] text-slate-400 block mt-0.5">DCT Angle Tests</span>
+            <div class="bg-indigo-50/80 border border-indigo-200 rounded-xl p-3">
+              <span class="font-bold text-indigo-800 text-[11px] block mb-1">20% Testing</span>
+              <div class="text-base sm:text-lg font-black text-slate-900" id="dispSplitTest">$50.00</div>
+              <span class="text-[10px] text-slate-500 block mt-0.5">DCT Creative Angles</span>
             </div>
 
-            <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-3">
-              <div class="flex items-center space-x-1.5 text-amber-400 font-bold text-[11px] mb-1">
-                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-                <span>10% Moonshot</span>
-              </div>
-              <div class="text-base sm:text-lg font-black text-white" id="dispSplitMoon">$25.00</div>
-              <span class="text-[10px] text-slate-400 block mt-0.5">High-Leverage Retarget</span>
+            <div class="bg-pink-50/80 border border-pink-200 rounded-xl p-3">
+              <span class="font-bold text-pink-800 text-[11px] block mb-1">10% Moonshots</span>
+              <div class="text-base sm:text-lg font-black text-slate-900" id="dispSplitMoon">$25.00</div>
+              <span class="text-[10px] text-slate-500 block mt-0.5">Whitelisting &amp; Retarget</span>
             </div>
+
           </div>
         </div>
 
-        <!-- Card: 14-Day Safe Compounding Scale Ladder -->
-        <div class="glass-card rounded-2xl p-5 sm:p-6 border border-white/[0.08]">
-          <div class="flex items-center justify-between pb-3.5 mb-4 border-b border-white/[0.06]">
+        <!-- Panel 4: 14-Day Safe Compounding Scale Ladder -->
+        <div class="glass-card-light rounded-2xl p-5 sm:p-6">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-purple-100">
             <div>
-              <h2 class="text-sm sm:text-base font-extrabold text-white">14-Day Andromeda Scaling Trajectory</h2>
-              <p class="text-xs text-slate-400">Compounding daily +20% increases without triggering Meta learning phase resets</p>
+              <h2 class="text-base font-extrabold text-purple-950">14-Day Andromeda Scaling Roadmap</h2>
+              <p class="text-xs text-slate-500">Compounding +20% increases without resetting the Learning Phase</p>
             </div>
-            <div class="flex items-center space-x-1 text-xs">
-              <span class="text-[10px] font-bold text-slate-400">Rate:</span>
-              <span class="text-[10px] font-extrabold px-2 py-0.5 rounded bg-meta-500/20 text-meta-400 border border-meta-500/30">+20% / Day</span>
-            </div>
+            <span class="text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">&le; +20% Daily</span>
           </div>
 
           <div class="overflow-x-auto">
             <table class="w-full text-left text-xs">
               <thead>
-                <tr class="text-slate-400 border-b border-slate-800 text-[10px] uppercase tracking-wider">
-                  <th class="pb-2.5 font-bold">Timeline</th>
-                  <th class="pb-2.5 font-bold">Daily Spend</th>
-                  <th class="pb-2.5 font-bold text-right">Core ASC (70%)</th>
-                  <th class="pb-2.5 font-bold text-right">Projected Rev (@ Target)</th>
+                <tr class="text-slate-500 border-b border-purple-100 text-[10px] uppercase tracking-wider">
+                  <th class="pb-2 font-bold">Timeline</th>
+                  <th class="pb-2 font-bold">Daily Spend</th>
+                  <th class="pb-2 font-bold text-right">Core ASC (70%)</th>
+                  <th class="pb-2 font-bold text-right">Projected Revenue</th>
                 </tr>
               </thead>
-              <tbody id="tblTrajectoryBody" class="divide-y divide-slate-800/60 font-semibold text-slate-200">
+              <tbody id="tblTrajectoryBody" class="divide-y divide-purple-50 font-semibold text-slate-800">
                 <!-- Injected via JavaScript -->
               </tbody>
             </table>
           </div>
-
-          <div class="mt-4 p-3 rounded-xl bg-meta-500/10 border border-meta-500/20 text-[11px] text-slate-300 flex items-start space-x-2">
-            <svg class="w-4 h-4 text-meta-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            <span><strong>Media Buyer Protocol:</strong> Only scale campaigns that have exited the Learning Phase with a 72-hour rolling ROAS exceeding your target threshold.</span>
-          </div>
         </div>
 
-        <!-- Card: Unit Economics Waterfall Breakdown -->
-        <div class="glass-card rounded-2xl p-5 sm:p-6 border border-white/[0.08]">
-          <h3 class="text-xs font-extrabold text-white mb-2 uppercase tracking-wider text-slate-300">Revenue Waterfall per Single Order</h3>
+        <!-- Panel 5: Revenue Waterfall & Reverse Modeler -->
+        <div class="glass-card-light rounded-2xl p-5 sm:p-6">
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-purple-100">
+            <h3 class="text-sm font-extrabold text-purple-950">Revenue Waterfall (Single Order)</h3>
+            <span class="text-[10px] font-bold text-purple-700 bg-purple-100 px-2 py-0.5 rounded-full">Unit Level</span>
+          </div>
           
           <div class="space-y-2 text-xs">
-            <div class="flex justify-between py-1 border-b border-slate-800/60">
-              <span class="text-slate-400">Average Order Value (Gross)</span>
-              <span class="font-extrabold text-white" id="wfAov">$85.00</span>
+            <div class="flex justify-between py-1 border-b border-purple-50">
+              <span class="text-slate-500">Average Order Value (Gross)</span>
+              <span class="font-extrabold text-slate-900" id="wfAov">$85.00</span>
             </div>
-            <div class="flex justify-between py-1 border-b border-slate-800/60 text-rose-400">
-              <span>(-) Product Cost (COGS)</span>
+            <div class="flex justify-between py-1 border-b border-purple-50 text-rose-600">
+              <span>(-) Product Cost of Goods (COGS)</span>
               <span class="font-semibold" id="wfCogs">-$25.50</span>
             </div>
-            <div class="flex justify-between py-1 border-b border-slate-800/60 text-rose-400">
+            <div class="flex justify-between py-1 border-b border-purple-50 text-rose-600">
               <span>(-) Shipping / Fulfillment</span>
               <span class="font-semibold" id="wfShipping">-$5.00</span>
             </div>
-            <div class="flex justify-between py-1 border-b border-slate-800/60 text-rose-400">
+            <div class="flex justify-between py-1 border-b border-purple-50 text-rose-600">
               <span>(-) Payment Processing (2.9% + $0.30)</span>
               <span class="font-semibold" id="wfPayment">-$2.77</span>
             </div>
-            <div class="flex justify-between py-1 border-b border-slate-800/60 text-rose-400">
+            <div class="flex justify-between py-1 border-b border-purple-50 text-rose-600">
               <span>(-) Return &amp; Refund Allowance</span>
               <span class="font-semibold" id="wfReturns">-$3.40</span>
             </div>
-            <div class="flex justify-between py-1.5 font-bold text-sm bg-slate-950/40 px-2 rounded-lg text-conversion-400">
+            <div class="flex justify-between py-2 font-black text-sm bg-purple-50/80 px-2.5 rounded-xl text-purple-900">
               <span>Net Contribution (Max CAC Available)</span>
-              <span id="wfNet">$48.33</span>
+              <span id="wfNet" class="text-purple-700">$48.33</span>
             </div>
           </div>
         </div>
@@ -642,104 +637,104 @@
 
   </main>
 
-  <!-- Printable 1-Page Scaling Audit PDF (Print-Only) -->
+  <!-- Printable 1-Page Scaling Audit PDF (Light Mode Clean Format) -->
   <div class="print-only">
-    <div style="border-bottom: 2px solid #0081FB; padding-bottom: 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-end;">
+    <div style="border-bottom: 2px solid #7C3AED; padding-bottom: 10px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: flex-end;">
       <div>
-        <h1 style="font-size: 20px; font-weight: 900; color: #0f172a; margin: 0; text-transform: uppercase; letter-spacing: -0.5px;">Meta Andromeda Performance Scaling Audit</h1>
-        <p style="font-size: 11px; color: #64748b; margin: 3px 0 0 0;">Advantage+ &amp; Machine Learning Unit Economics Roadmap</p>
+        <h1 style="font-size: 19px; font-weight: 900; color: #1e1b4b; margin: 0; text-transform: uppercase;">Meta Andromeda 2026 Media Planning Audit</h1>
+        <p style="font-size: 10px; color: #6b7280; margin: 2px 0 0 0;">Advantage+ Retrieval Architecture &bull; Creative Velocity &bull; Unit Economics</p>
       </div>
-      <div style="text-align: right; font-size: 10px; color: #64748b;">
-        <p style="margin: 0; font-weight: bold; color: #0081FB;">AUDIT DATE: <span id="printDate"></span></p>
-        <p style="margin: 2px 0 0 0;">ARCHITECT: Shahid Akram | byshahid.vercel.app</p>
+      <div style="text-align: right; font-size: 9.5px; color: #6b7280;">
+        <p style="margin: 0; font-weight: bold; color: #7C3AED;">AUDIT DATE: <span id="printDate"></span></p>
+        <p style="margin: 1px 0 0 0;">ARCHITECT: Shahid Akram | byshahid.vercel.app</p>
       </div>
     </div>
 
     <!-- Executive Summary Table -->
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 18px;">
-      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px;">
-        <span style="font-size: 9px; text-transform: uppercase; color: #64748b; font-weight: bold; display: block;">Break-Even ROAS</span>
-        <span style="font-size: 16px; font-weight: 900; color: #0f172a;" id="printBeRoas">1.82x</span>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 14px;">
+      <div style="background: #fbf9fe; border: 1px solid #e9d5ff; border-radius: 6px; padding: 8px;">
+        <span style="font-size: 8.5px; text-transform: uppercase; color: #6b7280; font-weight: bold; display: block;">Break-Even ROAS</span>
+        <span style="font-size: 15px; font-weight: 900; color: #1e1b4b;" id="printBeRoas">1.82x</span>
       </div>
-      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px;">
-        <span style="font-size: 9px; text-transform: uppercase; color: #64748b; font-weight: bold; display: block;">Max Allowable CAC</span>
-        <span style="font-size: 16px; font-weight: 900; color: #0081FB;" id="printMaxCac">$46.75</span>
+      <div style="background: #fbf9fe; border: 1px solid #e9d5ff; border-radius: 6px; padding: 8px;">
+        <span style="font-size: 8.5px; text-transform: uppercase; color: #6b7280; font-weight: bold; display: block;">Max Allowable CAC</span>
+        <span style="font-size: 15px; font-weight: 900; color: #7C3AED;" id="printMaxCac">$46.75</span>
       </div>
-      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px;">
-        <span style="font-size: 9px; text-transform: uppercase; color: #64748b; font-weight: bold; display: block;">Target ROAS</span>
-        <span style="font-size: 16px; font-weight: 900; color: #10b981;" id="printTargetRoas">2.68x</span>
+      <div style="background: #fbf9fe; border: 1px solid #e9d5ff; border-radius: 6px; padding: 8px;">
+        <span style="font-size: 8.5px; text-transform: uppercase; color: #6b7280; font-weight: bold; display: block;">Target ROAS</span>
+        <span style="font-size: 15px; font-weight: 900; color: #059669;" id="printTargetRoas">2.68x</span>
       </div>
-      <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px;">
-        <span style="font-size: 9px; text-transform: uppercase; color: #64748b; font-weight: bold; display: block;">Next Safe Scale</span>
-        <span style="font-size: 16px; font-weight: 900; color: #d97706;" id="printNextScale">+$50.00</span>
+      <div style="background: #fbf9fe; border: 1px solid #e9d5ff; border-radius: 6px; padding: 8px;">
+        <span style="font-size: 8.5px; text-transform: uppercase; color: #6b7280; font-weight: bold; display: block;">Creative Velocity</span>
+        <span style="font-size: 15px; font-weight: 900; color: #b91c1c;" id="printCreativeVelocity">6 Ads / Wk</span>
       </div>
     </div>
 
-    <!-- Unit Economics Breakdown -->
-    <div style="margin-bottom: 16px;">
-      <h3 style="font-size: 12px; font-weight: 800; text-transform: uppercase; margin: 0 0 6px 0; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px;">Unit Economics &amp; Variable Deductions</h3>
-      <table style="width: 100%; font-size: 10px; border-collapse: collapse;">
+    <!-- Unit Economics Table -->
+    <div style="margin-bottom: 14px;">
+      <h3 style="font-size: 11px; font-weight: 800; text-transform: uppercase; margin: 0 0 5px 0; color: #1e1b4b; border-bottom: 1px solid #e5e7eb; padding-bottom: 3px;">Unit Economics Breakdown</h3>
+      <table style="width: 100%; font-size: 9px; border-collapse: collapse;">
         <thead>
-          <tr style="background: #f1f5f9; text-align: left; color: #475569;">
-            <th style="padding: 6px;">Metric</th>
-            <th style="padding: 6px;">Unit Value</th>
-            <th style="padding: 6px;">% of AOV</th>
-            <th style="padding: 6px;">Impact / Role</th>
+          <tr style="background: #f3f4f6; text-align: left; color: #374151;">
+            <th style="padding: 4px 6px;">Metric</th>
+            <th style="padding: 4px 6px;">Unit Value</th>
+            <th style="padding: 4px 6px;">% of AOV</th>
+            <th style="padding: 4px 6px;">Andromeda Impact</th>
           </tr>
         </thead>
         <tbody>
-          <tr style="border-bottom: 1px solid #f1f5f9;">
-            <td style="padding: 5px 6px; font-weight: bold;">Average Order Value (AOV)</td>
-            <td style="padding: 5px 6px;" id="printAov">$85.00</td>
-            <td style="padding: 5px 6px;">100.0%</td>
-            <td style="padding: 5px 6px; color: #64748b;">Topline revenue baseline</td>
+          <tr style="border-bottom: 1px solid #f3f4f6;">
+            <td style="padding: 4px 6px; font-weight: bold;">Average Order Value (AOV)</td>
+            <td style="padding: 4px 6px;" id="printAov">$85.00</td>
+            <td style="padding: 4px 6px;">100.0%</td>
+            <td style="padding: 4px 6px; color: #6b7280;">Gross revenue baseline</td>
           </tr>
-          <tr style="border-bottom: 1px solid #f1f5f9;">
-            <td style="padding: 5px 6px;">Product Cost of Goods (COGS)</td>
-            <td style="padding: 5px 6px;" id="printCogs">-$25.50</td>
-            <td style="padding: 5px 6px;" id="printCogsPct">30.0%</td>
-            <td style="padding: 5px 6px; color: #64748b;">Manufacturing &amp; supplier cost</td>
+          <tr style="border-bottom: 1px solid #f3f4f6;">
+            <td style="padding: 4px 6px;">Product Cost of Goods (COGS)</td>
+            <td style="padding: 4px 6px;" id="printCogs">-$25.50</td>
+            <td style="padding: 4px 6px;" id="printCogsPct">30.0%</td>
+            <td style="padding: 4px 6px; color: #6b7280;">Supplier &amp; inventory cost</td>
           </tr>
-          <tr style="border-bottom: 1px solid #f1f5f9;">
-            <td style="padding: 5px 6px;">Fulfillment &amp; Shipping</td>
-            <td style="padding: 5px 6px;" id="printShipping">-$5.00</td>
-            <td style="padding: 5px 6px;" id="printShippingPct">5.9%</td>
-            <td style="padding: 5px 6px; color: #64748b;">Pick, pack &amp; carrier cost</td>
+          <tr style="border-bottom: 1px solid #f3f4f6;">
+            <td style="padding: 4px 6px;">Shipping &amp; Pick/Pack</td>
+            <td style="padding: 4px 6px;" id="printShipping">-$5.00</td>
+            <td style="padding: 4px 6px;" id="printShippingPct">5.9%</td>
+            <td style="padding: 4px 6px; color: #6b7280;">Carrier fulfillment cost</td>
           </tr>
-          <tr style="border-bottom: 1px solid #f1f5f9;">
-            <td style="padding: 5px 6px;">Payment Processing Fee</td>
-            <td style="padding: 5px 6px;" id="printPayment">-$2.77</td>
-            <td style="padding: 5px 6px;">3.3%</td>
-            <td style="padding: 5px 6px; color: #64748b;">Gateway transaction friction</td>
+          <tr style="border-bottom: 1px solid #f3f4f6;">
+            <td style="padding: 4px 6px;">Payment Gateway Fees</td>
+            <td style="padding: 4px 6px;" id="printPayment">-$2.77</td>
+            <td style="padding: 4px 6px;">3.3%</td>
+            <td style="padding: 4px 6px; color: #6b7280;">Stripe / Shopify transaction friction</td>
           </tr>
-          <tr style="border-bottom: 1px solid #f1f5f9;">
-            <td style="padding: 5px 6px;">Return &amp; Refund Allowance</td>
-            <td style="padding: 5px 6px;" id="printReturns">-$3.40</td>
-            <td style="padding: 5px 6px;">4.0%</td>
-            <td style="padding: 5px 6px; color: #64748b;">Dispute &amp; return buffer</td>
+          <tr style="border-bottom: 1px solid #f3f4f6;">
+            <td style="padding: 4px 6px;">Return &amp; Refund Buffer</td>
+            <td style="padding: 4px 6px;" id="printReturns">-$3.40</td>
+            <td style="padding: 4px 6px;">4.0%</td>
+            <td style="padding: 4px 6px; color: #6b7280;">E-Commerce return allowance</td>
           </tr>
-          <tr style="background: #f8fafc; font-weight: 800; border-top: 2px solid #cbd5e1;">
-            <td style="padding: 6px;">Net Contribution Margin</td>
-            <td style="padding: 6px; color: #0081FB;" id="printNetMargin">$48.33</td>
-            <td style="padding: 6px;" id="printNetPct">56.9%</td>
-            <td style="padding: 6px; color: #0081FB;">Maximum CAC Ceiling</td>
+          <tr style="background: #fbf9fe; font-weight: 800; border-top: 1.5px solid #d1d5db;">
+            <td style="padding: 5px 6px;">Net Contribution Margin</td>
+            <td style="padding: 5px 6px; color: #7C3AED;" id="printNetMargin">$48.33</td>
+            <td style="padding: 5px 6px;" id="printNetPct">56.9%</td>
+            <td style="padding: 5px 6px; color: #7C3AED;">Max Allowable CAC Ceiling</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <!-- 14-Day Scaling Table -->
-    <div style="margin-bottom: 18px;">
-      <h3 style="font-size: 12px; font-weight: 800; text-transform: uppercase; margin: 0 0 6px 0; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px;">Andromeda 14-Day Media Plan (+20% Daily Scaling Steps)</h3>
-      <table style="width: 100%; font-size: 9.5px; border-collapse: collapse;">
+    <!-- 14-Day Scaling Trajectory -->
+    <div style="margin-bottom: 14px;">
+      <h3 style="font-size: 11px; font-weight: 800; text-transform: uppercase; margin: 0 0 5px 0; color: #1e1b4b; border-bottom: 1px solid #e5e7eb; padding-bottom: 3px;">14-Day Compounding Scale Roadmap (&le; +20% Daily Steps)</h3>
+      <table style="width: 100%; font-size: 9px; border-collapse: collapse;">
         <thead>
-          <tr style="background: #0f172a; color: #ffffff; text-align: left;">
-            <th style="padding: 5px 6px;">Milestone</th>
-            <th style="padding: 5px 6px;">Daily Ad Spend</th>
-            <th style="padding: 5px 6px;">70% Core (ASC)</th>
-            <th style="padding: 5px 6px;">20% Testing (DCT)</th>
-            <th style="padding: 5px 6px;">10% Moonshots</th>
-            <th style="padding: 5px 6px; text-align: right;">Target Revenue</th>
+          <tr style="background: #1e1b4b; color: #ffffff; text-align: left;">
+            <th style="padding: 4px 6px;">Milestone</th>
+            <th style="padding: 4px 6px;">Daily Ad Spend</th>
+            <th style="padding: 4px 6px;">70% Core (ASC)</th>
+            <th style="padding: 4px 6px;">20% Testing (DCT)</th>
+            <th style="padding: 4px 6px;">10% Moonshots</th>
+            <th style="padding: 4px 6px; text-align: right;">Target Revenue</th>
           </tr>
         </thead>
         <tbody id="printTrajectoryBody">
@@ -748,26 +743,25 @@
       </table>
     </div>
 
-    <!-- Client Sign-off Block -->
-    <div style="border-top: 1px solid #cbd5e1; padding-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; font-size: 10px;">
+    <!-- Sign-off Block -->
+    <div style="border-top: 1px solid #cbd5e1; padding-top: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 9.5px;">
       <div>
-        <p style="margin: 0 0 4px 0; font-weight: bold; color: #475569;">MEDIA BUYING LEAD APPROVAL:</p>
-        <p style="margin: 0; color: #0f172a; font-weight: 800;">Shahid Akram</p>
-        <p style="margin: 2px 0 0 0; color: #64748b;">Paid Ads Architect &amp; Systems Lead</p>
-        <div style="margin-top: 25px; border-bottom: 1px solid #94a3b8; width: 85%;"></div>
+        <p style="margin: 0 0 3px 0; font-weight: bold; color: #475569;">MEDIA BUYING LEAD APPROVAL:</p>
+        <p style="margin: 0; color: #1e1b4b; font-weight: 800;">Shahid Akram</p>
+        <p style="margin: 1px 0 0 0; color: #64748b;">Paid Ads Architect &amp; Systems Lead</p>
+        <div style="margin-top: 20px; border-bottom: 1px solid #94a3b8; width: 85%;"></div>
       </div>
       <div>
-        <p style="margin: 0 0 4px 0; font-weight: bold; color: #475569;">CLIENT / FOUNDER AUTHORIZATION:</p>
-        <p style="margin: 0; color: #0f172a; font-weight: 800;">Authorized Signatory</p>
-        <p style="margin: 2px 0 0 0; color: #64748b;">Budget Scaling &amp; Target ROAS Confirmed</p>
-        <div style="margin-top: 25px; border-bottom: 1px solid #94a3b8; width: 85%;"></div>
+        <p style="margin: 0 0 3px 0; font-weight: bold; color: #475569;">FOUNDER / CLIENT AUTHORIZATION:</p>
+        <p style="margin: 0; color: #1e1b4b; font-weight: 800;">Authorized Signatory</p>
+        <p style="margin: 1px 0 0 0; color: #64748b;">Budget Scaling &amp; Target ROAS Confirmed</p>
+        <div style="margin-top: 20px; border-bottom: 1px solid #94a3b8; width: 85%;"></div>
       </div>
     </div>
   </div>
 
   <!-- Pure Client-Side JavaScript Logic -->
   <script>
-    // State Variables
     let curr = '$';
 
     function setCogsPreset(val) {
@@ -775,12 +769,11 @@
       document.getElementById('rngCOGS').value = val;
       document.getElementById('dispCogsVal').innerText = val + '%';
       
-      // Update button styling
       document.querySelectorAll('.cogs-btn').forEach(btn => {
         if (btn.getAttribute('data-val') == val) {
-          btn.className = 'cogs-btn py-1.5 px-2 rounded-lg text-xs font-bold bg-meta-500/20 text-meta-300 border border-meta-500/50';
+          btn.className = 'cogs-btn py-1.5 px-2 rounded-lg text-xs font-bold bg-purple-600 text-white border border-purple-600 shadow-sm';
         } else {
-          btn.className = 'cogs-btn py-1.5 px-2 rounded-lg text-xs font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition';
+          btn.className = 'cogs-btn py-1.5 px-2 rounded-lg text-xs font-bold bg-white text-slate-700 border border-purple-200 hover:bg-purple-50 transition shadow-xs';
         }
       });
       calcAll();
@@ -816,7 +809,7 @@
       curr = document.getElementById('selCurrency').value;
       document.querySelectorAll('.curr-symbol').forEach(el => el.innerText = curr);
 
-      // Inputs
+      // Financial Inputs
       const aov = Math.max(1, parseFloat(document.getElementById('inpAOV').value) || 85);
       const dailySpend = Math.max(0, parseFloat(document.getElementById('inpDailySpend').value) || 250);
       const cogsPct = parseFloat(document.getElementById('inpCOGS').value) || 30;
@@ -831,28 +824,32 @@
       const returnsDollar = aov * (returnsPct / 100.0);
       const totalVariableDollar = cogsDollar + shippingDollar + gatewayDollar + returnsDollar;
 
-      // Net Contribution per Order
+      // Net Contribution
       const netContributionDollar = Math.max(0, aov - totalVariableDollar);
       const netMarginPct = (netContributionDollar / aov) * 100.0;
 
-      // Break-Even ROAS = AOV / Net Contribution Dollar
+      // Break-Even ROAS
       const beRoas = netContributionDollar > 0 ? (aov / netContributionDollar) : 99.9;
 
       // Target ROAS at Desired Margin
-      // Selling Price - Variable - (AOV * Desired Margin%) = Max Allowable Ad Spend
       const adSpendAllowance = netContributionDollar - (aov * (desiredMarginPct / 100.0));
       const targetRoas = adSpendAllowance > 0 ? (aov / adSpendAllowance) : (beRoas * 1.5);
 
       // Next Safe Daily Jump (+20%)
       const nextJump = dailySpend * 0.20;
 
-      // Update Top KPI Cards
+      // Confect 2026 Creative Velocity Formula:
+      // Minimum 4 creatives baseline, + 2 creative variants per $100 daily spend
+      const creativeWeekly = Math.max(4, Math.round(4 + (dailySpend / 100) * 1.5));
+
+      // Update Hero KPI Cards
       document.getElementById('dispBeRoas').innerText = beRoas.toFixed(2) + 'x';
       document.getElementById('dispTargetRoas').innerText = targetRoas.toFixed(2) + 'x';
       document.getElementById('dispMaxCac').innerText = formatMoney(netContributionDollar);
       document.getElementById('dispNetMarginPct').innerText = netMarginPct.toFixed(1) + '% AOV';
-      document.getElementById('dispNetProfit').innerText = formatMoney(netContributionDollar);
+      document.getElementById('dispCreativeVelocity').innerText = creativeWeekly + ' Ads / Wk';
       document.getElementById('dispNextScale').innerText = '+' + formatMoney(nextJump);
+      document.getElementById('tickerVelocity').innerText = creativeWeekly + ' Variants / Wk';
 
       // Update 70/20/10 Split
       const core70 = dailySpend * 0.70;
@@ -873,11 +870,8 @@
       // Generate 14-Day Trajectory Table
       renderTrajectory(dailySpend, targetRoas);
 
-      // Update Reverse Simulator
-      calcReverseProfit();
-
       // Populate Print Audit Values
-      populatePrintAudit(aov, cogsDollar, cogsPct, shippingDollar, gatewayDollar, returnsDollar, netContributionDollar, netMarginPct, beRoas, targetRoas, nextJump);
+      populatePrintAudit(aov, cogsDollar, cogsPct, shippingDollar, gatewayDollar, returnsDollar, netContributionDollar, netMarginPct, beRoas, targetRoas, creativeWeekly);
     }
 
     function renderTrajectory(initialSpend, targetRoas) {
@@ -901,66 +895,38 @@
         const moon = spend * 0.10;
         const projectedRev = spend * targetRoas;
 
-        // Web table row
+        // Web table row (Light White + Purple theme)
         const tr = document.createElement('tr');
-        tr.className = idx % 2 === 0 ? 'bg-slate-900/40' : '';
+        tr.className = idx % 2 === 0 ? 'bg-purple-50/50' : 'bg-white';
         tr.innerHTML = `
-          <td class="py-2.5 font-bold text-white">${m.label}</td>
-          <td class="py-2.5 text-meta-400 font-extrabold">${formatMoney(spend)}</td>
-          <td class="py-2.5 text-right font-semibold text-slate-300">${formatMoney(core)}</td>
-          <td class="py-2.5 text-right font-extrabold text-conversion-400">${formatMoney(projectedRev)}</td>
+          <td class="py-2.5 font-bold text-slate-900">${m.label}</td>
+          <td class="py-2.5 text-purple-700 font-extrabold">${formatMoney(spend)}</td>
+          <td class="py-2.5 text-right font-semibold text-slate-600">${formatMoney(core)}</td>
+          <td class="py-2.5 text-right font-black text-emerald-700">${formatMoney(projectedRev)}</td>
         `;
         tbody.appendChild(tr);
 
         // Print table row
         const ptr = document.createElement('tr');
-        ptr.style.borderBottom = '1px solid #e2e8f0';
+        ptr.style.borderBottom = '1px solid #e5e7eb';
         ptr.innerHTML = `
           <td style="padding: 4px 6px; font-weight: bold;">${m.label}</td>
-          <td style="padding: 4px 6px; font-weight: bold; color: #0081FB;">${formatMoney(spend)}</td>
+          <td style="padding: 4px 6px; font-weight: bold; color: #7C3AED;">${formatMoney(spend)}</td>
           <td style="padding: 4px 6px;">${formatMoney(core)}</td>
           <td style="padding: 4px 6px;">${formatMoney(test)}</td>
           <td style="padding: 4px 6px;">${formatMoney(moon)}</td>
-          <td style="padding: 4px 6px; text-align: right; font-weight: bold; color: #10b981;">${formatMoney(projectedRev)}</td>
+          <td style="padding: 4px 6px; text-align: right; font-weight: bold; color: #059669;">${formatMoney(projectedRev)}</td>
         `;
         printTbody.appendChild(ptr);
       });
     }
 
-    function calcReverseProfit() {
-      const targetProfit = parseFloat(document.getElementById('inpTargetProfit').value) || 20000;
-      const achievableRoas = parseFloat(document.getElementById('inpAchievableRoas').value) || 2.8;
-      const aov = parseFloat(document.getElementById('inpAOV').value) || 85;
-
-      // Net margin % from current calculations
-      const beRoas = parseFloat(document.getElementById('dispBeRoas').innerText) || 1.82;
-      const netMarginRatio = 1 / beRoas; // e.g. 0.55
-
-      // Profit = (Spend * ROAS * netMarginRatio) - Spend = Spend * (ROAS * netMarginRatio - 1)
-      const multiplier = (achievableRoas * netMarginRatio) - 1.0;
-      
-      let reqSpend = 0;
-      let reqRevenue = 0;
-      let dailyOrders = 0;
-
-      if (multiplier > 0) {
-        reqSpend = targetProfit / multiplier;
-        reqRevenue = reqSpend * achievableRoas;
-        const totalOrders = reqRevenue / aov;
-        dailyOrders = Math.ceil(totalOrders / 30);
-      }
-
-      document.getElementById('dispReqSpend').innerText = formatMoney(reqSpend);
-      document.getElementById('dispReqRevenue').innerText = formatMoney(reqRevenue);
-      document.getElementById('dispReqOrders').innerText = dailyOrders + ' / day';
-    }
-
-    function populatePrintAudit(aov, cogs, cogsPct, shipping, payment, returns, net, netPct, beRoas, targetRoas, nextJump) {
+    function populatePrintAudit(aov, cogs, cogsPct, shipping, payment, returns, net, netPct, beRoas, targetRoas, creativeWeekly) {
       document.getElementById('printDate').innerText = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
       document.getElementById('printBeRoas').innerText = beRoas.toFixed(2) + 'x';
       document.getElementById('printMaxCac').innerText = formatMoney(net);
       document.getElementById('printTargetRoas').innerText = targetRoas.toFixed(2) + 'x';
-      document.getElementById('printNextScale').innerText = '+' + formatMoney(nextJump);
+      document.getElementById('printCreativeVelocity').innerText = creativeWeekly + ' Ads / Wk';
 
       document.getElementById('printAov').innerText = formatMoney(aov);
       document.getElementById('printCogs').innerText = '-' + formatMoney(cogs);
@@ -983,7 +949,7 @@
         navigator.serviceWorker.getRegistrations().then(regs => {
           for (let r of regs) r.update();
         });
-        navigator.serviceWorker.register('sw.js?v=4', { updateViaCache: 'none' })
+        navigator.serviceWorker.register('sw.js?v=5', { updateViaCache: 'none' })
           .catch(err => console.log('SW registration error:', err));
       });
     }
