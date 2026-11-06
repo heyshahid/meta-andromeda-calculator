@@ -1,12 +1,21 @@
-# Meta Andromeda ROAS & Ad Scaling Calculator
+<div align="center">
+  <a href="https://heyshahid.github.io/meta-andromeda-calculator/">
+    <img src="https://raw.githubusercontent.com/heyshahid/heyshahid/main/andromeda-logo.png" width="90" height="90" alt="Meta Andromeda Logo" />
+  </a>
+  
+  # Meta Andromeda ROAS & Ad Scaling Calculator
+  
+  <p><strong>Professional Meta Ads Manager Cockpit for Media Buyers & E-Commerce Brands</strong></p>
 
-[![Live App](https://img.shields.io/badge/Live_App-heyshahid.github.io%2Fmeta--andromeda--calculator-6366F1?style=for-the-badge&logo=googlechrome&logoColor=white)](https://heyshahid.github.io/meta-andromeda-calculator/)
-[![PWA Ready](https://img.shields.io/badge/PWA-Installable_Offline-10B981?style=for-the-badge&logo=pwa&logoColor=white)](https://heyshahid.github.io/meta-andromeda-calculator/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-F59E0B?style=for-the-badge)](LICENSE)
-[![Author: Shahid Akram](https://img.shields.io/badge/Author-Shahid_Akram-1E293B?style=for-the-badge&logo=github&logoColor=white)](https://github.com/heyshahid)
+  [![Launch Live Web App](https://img.shields.io/badge/LAUNCH_LIVE_WEB_APP-CLICK_HERE_TO_OPEN-0081FB?style=for-the-badge&logo=googlechrome&logoColor=white)](https://heyshahid.github.io/meta-andromeda-calculator/)
+  [![PWA Ready](https://img.shields.io/badge/PWA-Installable_Offline-10B981?style=for-the-badge&logo=pwa&logoColor=white)](https://heyshahid.github.io/meta-andromeda-calculator/)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-F59E0B?style=for-the-badge)](LICENSE)
+  [![Author: Shahid Akram](https://img.shields.io/badge/Author-Shahid_Akram-1E293B?style=for-the-badge&logo=github&logoColor=white)](https://github.com/heyshahid)
 
-> **Precision Break-Even ROAS, Max Allowable CAC, and Meta Machine Learning Scaling Engine.**  
-> A mobile-first Progressive Web App (PWA) built for e-commerce founders, media buyers, performance marketers, and growth agencies to scale ad spend profitably without triggering Meta's algorithmic learning resets.
+</div>
+
+> **Live Interactive Web App:** [https://heyshahid.github.io/meta-andromeda-calculator/](https://heyshahid.github.io/meta-andromeda-calculator/)  
+> Precision Break-Even ROAS, Max Allowable CAC, and Meta Machine Learning Scaling Engine. Operates seamlessly on iOS, Android, and Desktop with zero app store downloads.
 
 ---
 
