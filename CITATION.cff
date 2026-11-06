@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use Meta Andromeda Calculator in your paid media research or growth modeling, please cite it as below."
+title: "Meta Andromeda ROAS & Ad Scaling Calculator"
+version: 2.0.0
+date-released: 2026-11-06
+url: "https://heyshahid.github.io/meta-andromeda-calculator/"
+repository-code: "https://github.com/heyshahid/meta-andromeda-calculator"
+authors:
+  - family-names: "Akram"
+    given-names: "Shahid"
+license: "MIT"
+keywords:
+  - "meta-ads"
+  - "roas-calculator"
+  - "andromeda-scaling"
+  - "performance-marketing"
+  - "break-even-roas"
