@@ -204,14 +204,59 @@
 
       <!-- Header Actions -->
       <div class="flex items-center space-x-2 sm:space-x-3">
-        <!-- Currency Selector -->
-        <select id="selCurrency" onchange="calcAll()" class="bg-slate-900 border border-slate-700/80 text-slate-200 text-xs font-bold rounded-xl px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-meta-500">
-          <option value="$" selected>USD ($)</option>
-          <option value="€">EUR (€)</option>
-          <option value="£">GBP (£)</option>
-          <option value="AED ">AED (AED)</option>
-          <option value="Rs ">PKR (Rs)</option>
-          <option value="C$">CAD (C$)</option>
+        <!-- Currency Selector with Worldwide Currencies (GCC, Asia, Europe, Americas, Africa) -->
+        <select id="selCurrency" onchange="calcAll()" class="bg-slate-900 border border-slate-700/80 text-slate-200 text-xs font-bold rounded-xl px-2.5 py-2 focus:outline-none focus:ring-2 focus:ring-meta-500 max-w-[130px] sm:max-w-none">
+          <optgroup label="Major Currencies">
+            <option value="$" selected>USD ($) - US Dollar</option>
+            <option value="€">EUR (€) - Euro</option>
+            <option value="£">GBP (£) - British Pound</option>
+            <option value="C$">CAD (C$) - Canadian Dollar</option>
+            <option value="A$">AUD (A$) - Australian Dollar</option>
+          </optgroup>
+          <optgroup label="GCC &amp; Middle East">
+            <option value="AED ">AED (United Arab Emirates)</option>
+            <option value="SAR ">SAR (Saudi Arabia)</option>
+            <option value="QAR ">QAR (Qatar)</option>
+            <option value="KWD ">KWD (Kuwait)</option>
+            <option value="BHD ">BHD (Bahrain)</option>
+            <option value="OMR ">OMR (Oman)</option>
+            <option value="JOD ">JOD (Jordan)</option>
+            <option value="E£ ">EGP (Egypt)</option>
+          </optgroup>
+          <optgroup label="Asia &amp; Pacific (APAC)">
+            <option value="Rs ">PKR (Pakistan)</option>
+            <option value="₹">INR (India)</option>
+            <option value="৳">BDT (Bangladesh)</option>
+            <option value="S$">SGD (Singapore)</option>
+            <option value="RM ">MYR (Malaysia)</option>
+            <option value="Rp ">IDR (Indonesia)</option>
+            <option value="₱">PHP (Philippines)</option>
+            <option value="฿">THB (Thailand)</option>
+            <option value="₫">VND (Vietnam)</option>
+            <option value="¥">JPY (Japan)</option>
+            <option value="¥">CNY (China)</option>
+            <option value="HK$">HKD (Hong Kong)</option>
+            <option value="NT$">TWD (Taiwan)</option>
+            <option value="₩">KRW (South Korea)</option>
+          </optgroup>
+          <optgroup label="Europe (Non-Euro)">
+            <option value="CHF ">CHF (Switzerland)</option>
+            <option value="kr ">SEK (Sweden)</option>
+            <option value="kr ">NOK (Norway)</option>
+            <option value="kr ">DKK (Denmark)</option>
+            <option value="zł ">PLN (Poland)</option>
+            <option value="Kč ">CZK (Czech Republic)</option>
+            <option value="Ft ">HUF (Hungary)</option>
+            <option value="₺">TRY (Turkey)</option>
+          </optgroup>
+          <optgroup label="Americas &amp; Africa">
+            <option value="NZ$">NZD (New Zealand)</option>
+            <option value="R$ ">BRL (Brazil)</option>
+            <option value="Mex$ ">MXN (Mexico)</option>
+            <option value="R ">ZAR (South Africa)</option>
+            <option value="₦">NGN (Nigeria)</option>
+            <option value="KSh ">KES (Kenya)</option>
+          </optgroup>
         </select>
 
         <!-- PWA Install Button -->
@@ -932,10 +977,14 @@
       window.print();
     }
 
-    // PWA Service Worker Registration
+    // PWA Service Worker Registration with Immediate Cache Buster
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').catch(err => console.log('SW registration error:', err));
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (let r of regs) r.update();
+        });
+        navigator.serviceWorker.register('sw.js?v=4', { updateViaCache: 'none' })
+          .catch(err => console.log('SW registration error:', err));
       });
     }
 
