@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "andromeda-roas"
+version = "2.0.0"
+authors = [
+  { name = "Shahid Akram", email = "heyshahidakram@gmail.com" },
+]
+description = "Meta Andromeda ROAS, Break-Even CPA & Ad Budget Scaling Engine"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "pydantic>=2.0.0",
+    "rich>=13.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
