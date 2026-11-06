@@ -103,8 +103,9 @@ start index.html # On Windows
 - Portfolio: [byshahid.vercel.app](https://byshahid.vercel.app/)  
 - GitHub: [github.com/heyshahid](https://github.com/heyshahid)  
 - LinkedIn: [linkedin.com/in/shahidakram](https://linkedin.com/in/shahidakram)  
-- Email: [heyshahidakram@gmail.com](mailto:heyshahidakram@gmail.com)  
-- Substack: [byshahidakram.substack.com](https://byshahidakram.substack.com/)
+- Blogger: [byshahid.blogspot.com](https://byshahid.blogspot.com/)  
+- Substack: [byshahidakram.substack.com](https://byshahidakram.substack.com/)  
+- Email: [heyshahidakram@gmail.com](mailto:heyshahidakram@gmail.com)
 
 ---
 
