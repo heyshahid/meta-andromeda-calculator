@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://heyshahid.github.io/meta-andromeda-calculator/sitemap.xml
