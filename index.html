@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Meta Andromeda ROAS & Ad Scaling Calculator – Shahid Akram</title>
+  
+  <!-- PWA & Mobile Web App Meta -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0F172A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AndromedaROAS">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  
+  <!-- SEO & Social Sharing -->
+  <link rel="canonical" href="https://heyshahid.github.io/meta-andromeda-calculator/">
+  <meta name="description" content="Professional Meta Andromeda ROAS, Break-Even CPA & Ad Budget Scaling Calculator. Optimize e-commerce paid acquisition, CAC headroom, and 70/20/10 CBO allocation.">
+  <meta name="keywords" content="Meta ROAS calculator, break even ROAS calculator, Andromeda scaling framework, Facebook ads budget calculator, maximum allowable CPA, e-commerce profit modeler, paid media scaling, MER calculator">
+  <meta name="author" content="Shahid Akram">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="Meta Andromeda ROAS & Ad Scaling Calculator">
+  <meta property="og:description" content="Free tool for media buyers & e-commerce founders to calculate Break-Even ROAS, Max Allowable CAC, and Andromeda budget scaling trajectories.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://heyshahid.github.io/meta-andromeda-calculator/">
+  <meta property="og:site_name" content="Meta Andromeda ROAS Calculator">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Meta Andromeda ROAS & Ad Scaling Calculator">
+  <meta name="twitter:description" content="Calculate Break-Even ROAS, Max CPA, and safe +20% Andromeda scaling steps without resetting machine learning.">
+
+  <!-- JSON-LD Structured Data for Google Search -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Meta Andromeda ROAS & Ad Scaling Calculator",
+    "url": "https://heyshahid.github.io/meta-andromeda-calculator/",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "All (iOS, Android, Windows, macOS, Linux)",
+    "description": "Professional ROAS, Break-Even CPA, and Paid Media Budget Scaling Calculator for Meta Ads and E-Commerce.",
+    "author": {
+      "@type": "Person",
+      "name": "Shahid Akram",
+      "url": "https://byshahid.vercel.app/"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              400: '#818CF8',
+              500: '#6366F1', // Indigo
+              600: '#4F46E5',
+            },
+            accent: {
+              400: '#FBBF24',
+              500: '#F59E0B', // Amber
+              600: '#D97706',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    -webkit-tap-highlight-color: transparent;
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* Print Stylesheet for 1-Page Scaling Audit PDF */
+    @page {
+      margin: 0;
+      size: letter portrait;
+    }
+    @media print {
+      html, body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        height: auto !important;
+        min-height: auto !important;
+        overflow: visible !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .no-print, header, nav, main, #tab-breakeven, #tab-scaling, #tab-reverse, #tab-history {
+        display: none !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        visibility: hidden !important;
+      }
+      .print-only {
+        display: block !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        page-break-before: avoid !important;
+        page-break-after: avoid !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 14mm 16mm !important;
+        margin: 0 !important;
+      }
+    }
+    .print-only {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col pb-24 md:pb-8 selection:bg-brand-500 selection:text-white">
+
+  <!-- Desktop Header -->
+  <header class="no-print sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-md px-4 py-3 sm:px-6">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-purple-600 to-accent-500 flex items-center justify-center shadow-lg shadow-brand-500/20">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="font-black text-lg tracking-tight text-white">Andromeda<span class="text-accent-400">ROAS</span></span>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-brand-500/20 text-brand-300 border border-brand-500/40">v1.0 PWA</span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">Meta Andromeda ROAS &amp; Performance Media Scaler</p>
+        </div>
+      </div>
+
+      <!-- Header Actions -->
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <button id="pwaInstallBtn" class="hidden text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg items-center space-x-1.5 transition font-semibold">
+          <svg class="w-4 h-4 text-accent-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+          </svg>
+          <span>Install App</span>
+        </button>
+        <button onclick="exportAuditPdf()" class="text-xs bg-accent-500 hover:bg-accent-600 text-slate-950 font-extrabold px-4 py-2 rounded-xl flex items-center space-x-1.5 transition shadow-md shadow-accent-500/20">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4H7v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+          </svg>
+          <span>Export Scaling Audit PDF</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Desktop Navigation Tabs -->
+  <nav class="no-print hidden md:block bg-slate-900 border-b border-slate-800 px-4">
+    <div class="max-w-6xl mx-auto flex space-x-2">
+      <button onclick="switchTab('breakeven')" class="tab-btn px-4 py-3 text-sm font-bold border-b-2 border-accent-500 text-accent-400 flex items-center space-x-2 transition" data-target="breakeven">
+        <span>Break-Even ROAS &amp; Unit Economics</span>
+      </button>
+      <button onclick="switchTab('scaling')" class="tab-btn px-4 py-3 text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 transition" data-target="scaling">
+        <span>Andromeda Scaling Trajectory</span>
+      </button>
+      <button onclick="switchTab('reverse')" class="tab-btn px-4 py-3 text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 transition" data-target="reverse">
+        <span>Target Profit Simulator</span>
+      </button>
+      <button onclick="switchTab('history')" class="tab-btn px-4 py-3 text-sm font-bold border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 transition" data-target="history">
+        <span>Saved Audits</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main App Container -->
+  <main class="no-print flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-5 sm:py-6">
+
+    <!-- TAB 1: BREAK-EVEN ROAS & UNIT ECONOMICS -->
+    <div id="tab-breakeven" class="tab-panel">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left: Input Controls -->
+        <div class="lg:col-span-7 bg-slate-900 rounded-2xl border border-slate-800 p-5 sm:p-6 shadow-xl">
+          <div class="flex items-center justify-between mb-5 pb-3 border-b border-slate-800">
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-white flex items-center space-x-2">
+                <span>Unit Economics &amp; Margin Architecture</span>
+              </h2>
+              <p class="text-xs text-slate-400">Calculate minimum viability thresholds before spending ad dollars</p>
+            </div>
+            <span class="text-xs px-2.5 py-1 rounded-md bg-brand-500/10 text-brand-400 border border-brand-500/30 font-bold">Real-Time</span>
+          </div>
+
+          <div class="space-y-4">
+            <!-- Row 1: AOV & Monthly Spend -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1">Average Order Value (AOV) ($)</label>
+                <div class="relative">
+                  <span class="absolute left-3 top-2.5 text-xs text-slate-500 font-bold">$</span>
+                  <input type="number" id="inpAOV" value="85" step="1" min="1" oninput="calcBreakEven()" class="w-full bg-slate-800/80 border border-slate-700 rounded-xl pl-8 pr-3 py-2 text-white font-semibold focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1">Monthly Meta Ad Spend ($)</label>
+                <div class="relative">
+                  <span class="absolute left-3 top-2.5 text-xs text-slate-500 font-bold">$</span>
+                  <input type="number" id="inpSpend" value="7500" step="100" min="0" oninput="calcBreakEven()" class="w-full bg-slate-800/80 border border-slate-700 rounded-xl pl-8 pr-3 py-2 text-white font-semibold focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 2: COGS Percentage with Presets & Custom -->
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">Product COGS (% of Revenue)</label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <select id="selCOGS" onchange="onCogsChange()" class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white font-semibold focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                  <option value="20">20% (High Margin / Digital / Beauty)</option>
+                  <option value="30" selected>30% (Standard DTC E-Commerce)</option>
+                  <option value="40">40% (Apparel / Fashion)</option>
+                  <option value="50">50% (Electronics / Heavy Goods)</option>
+                  <option value="custom">Custom COGS %</option>
+                </select>
+                <div id="boxCogsCustom" class="hidden relative">
+                  <input type="number" id="inpCogsCustom" value="30" min="0" max="95" step="1" oninput="calcBreakEven()" placeholder="Custom COGS %" class="w-full bg-slate-800 border border-accent-500 rounded-xl px-3 py-2 text-xs font-bold text-white focus:ring-2 focus:ring-accent-500 focus:outline-none">
+                  <span class="absolute right-3 top-2 text-xs text-accent-400 font-bold">%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 3: Shipping, Fees, Returns -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1">Shipping Cost %</label>
+                <select id="selShipping" onchange="onShippingChange()" class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-2.5 py-2 text-xs text-white font-semibold focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                  <option value="0">0% (Customer Pays)</option>
+                  <option value="8" selected>8% (Subsidized)</option>
+                  <option value="12">12% (Free Shipping)</option>
+                  <option value="custom">Custom %</option>
+                </select>
+                <div id="boxShippingCustom" class="hidden mt-1.5 relative">
+                  <input type="number" id="inpShippingCustom" value="8" min="0" max="50" step="1" oninput="calcBreakEven()" placeholder="Custom %" class="w-full bg-slate-800 border border-accent-500 rounded-xl px-2.5 py-1.5 text-xs font-bold text-white focus:outline-none">
+                  <span class="absolute right-2 top-1.5 text-xs text-accent-400 font-bold">%</span>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1">Gateway Fee %</label>
+                <select id="selGateway" onchange="onGatewayChange()" class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-2.5 py-2 text-xs text-white font-semibold focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                  <option value="2.9" selected>2.9% (Stripe / Shopify)</option>
+                  <option value="3.5">3.5% (International)</option>
+                  <option value="custom">Custom %</option>
+                </select>
+                <div id="boxGatewayCustom" class="hidden mt-1.5 relative">
+                  <input type="number" id="inpGatewayCustom" value="2.9" min="0" max="15" step="0.1" oninput="calcBreakEven()" placeholder="Custom %" class="w-full bg-slate-800 border border-accent-500 rounded-xl px-2.5 py-1.5 text-xs font-bold text-white focus:outline-none">
+                  <span class="absolute right-2 top-1.5 text-xs text-accent-400 font-bold">%</span>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1">Refund / Return %</label>
+                <select id="selReturns" onchange="onReturnsChange()" class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-2.5 py-2 text-xs text-white font-semibold focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                  <option value="2">2% (Low Return)</option>
+                  <option value="4" selected>4% (Standard DTC)</option>
+                  <option value="8">8% (High Fashion)</option>
+                  <option value="custom">Custom %</option>
+                </select>
+                <div id="boxReturnsCustom" class="hidden mt-1.5 relative">
+                  <input type="number" id="inpReturnsCustom" value="4" min="0" max="30" step="1" oninput="calcBreakEven()" placeholder="Custom %" class="w-full bg-slate-800 border border-accent-500 rounded-xl px-2.5 py-1.5 text-xs font-bold text-white focus:outline-none">
+                  <span class="absolute right-2 top-1.5 text-xs text-accent-400 font-bold">%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row 4: Realized ROAS for Profit Calculations -->
+            <div class="pt-2 border-t border-slate-800">
+              <label class="block text-xs font-bold text-slate-300 mb-1">Current Realized ROAS (e.g. 2.5x)</label>
+              <div class="relative">
+                <input type="number" id="inpCurrentROAS" value="2.65" step="0.05" min="0.1" oninput="calcBreakEven()" class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-3 py-2 text-white font-semibold focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                <span class="absolute right-3 top-2 text-xs text-accent-400 font-bold">x ROAS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Live Output Card -->
+        <div class="lg:col-span-5 bg-gradient-to-b from-slate-900 to-slate-950 rounded-2xl border border-slate-800 p-5 sm:p-6 shadow-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+              <span class="text-xs font-bold text-accent-400 uppercase tracking-wider">Unit Economics Summary</span>
+              <span class="text-[11px] bg-accent-500/20 text-accent-400 px-2.5 py-0.5 rounded-full font-semibold">Live Calculated</span>
+            </div>
+
+            <!-- Primary Metric: Break-Even ROAS -->
+            <div class="bg-slate-800/90 rounded-xl p-4 border border-slate-700/60 mb-4 text-center">
+              <span class="text-xs text-slate-400 uppercase font-semibold">Minimum Break-Even ROAS Target</span>
+              <div class="flex items-baseline justify-center space-x-2 mt-1">
+                <span id="resBreakEvenROAS" class="text-4xl font-black text-white">1.81x</span>
+                <span class="text-accent-400 font-bold text-base">Break-Even</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">Any ad campaign delivering above this figure generates net cash profit.</p>
+            </div>
+
+            <!-- Metric Grid -->
+            <div class="space-y-2.5 text-xs">
+              <div class="flex justify-between py-1.5 border-b border-slate-800 text-slate-300">
+                <span>Net Margin Before Ad Spend:</span>
+                <span id="resNetPreAdMargin" class="font-bold text-emerald-400">55.10%</span>
+              </div>
+              <div class="flex justify-between py-1.5 border-b border-slate-800 text-slate-300">
+                <span>Max Allowable CAC (Break-Even CPA):</span>
+                <span id="resMaxCAC" class="font-bold text-white">$46.84</span>
+              </div>
+              <div class="flex justify-between py-1.5 border-b border-slate-800 text-slate-300">
+                <span>Monthly Generated Revenue:</span>
+                <span id="resMonthlyRev" class="font-bold text-white">$19,875.00</span>
+              </div>
+              <div class="flex justify-between py-1.5 border-b border-slate-800 text-slate-300">
+                <span>Estimated Customer Orders:</span>
+                <span id="resMonthlyOrders" class="font-bold text-white">234 Orders</span>
+              </div>
+              <div class="flex justify-between py-2 text-emerald-400 bg-emerald-500/10 px-3 rounded-lg font-bold">
+                <span>Estimated Net Profit:</span>
+                <span id="resNetProfit">+$3,451.13</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 pt-3 border-t border-slate-800 text-center">
+            <span class="text-[11px] text-slate-500">Engineered by <a href="https://byshahid.vercel.app/" class="text-brand-400 hover:underline font-semibold">Shahid Akram</a> · Andromeda Scaling Framework</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- TAB 2: ANDROMEDA SCALING TRAJECTORY -->
+    <div id="tab-scaling" class="tab-panel hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <div class="lg:col-span-7 bg-slate-900 rounded-2xl border border-slate-800 p-5 sm:p-6 shadow-xl">
+          <div class="flex items-center justify-between mb-5 pb-3 border-b border-slate-800">
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-white">Andromeda Algorithm Safety &amp; Budget Allocation</h2>
+              <p class="text-xs text-slate-400">Avoid machine learning resets while scaling vertically &amp; horizontally</p>
+            </div>
+            <span class="text-xs px-2.5 py-1 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/30 font-bold">Meta AI Rules</span>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">Current Daily Spend Across Account ($/day)</label>
+              <div class="relative">
+                <span class="absolute left-3 top-2.5 text-xs text-slate-500 font-bold">$</span>
+                <input type="number" id="inpDailySpend" value="300" step="25" min="10" oninput="calcScaling()" class="w-full bg-slate-800/80 border border-slate-700 rounded-xl pl-8 pr-3 py-2 text-white font-semibold focus:ring-2 focus:ring-brand-500 focus:outline-none">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">Account Scaling Health Level</label>
+              <select id="selScalePace" onchange="calcScaling()" class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white font-semibold focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                <option value="15" selected>Conservative (+15% every 48h - Lowest Risk of Reset)</option>
+                <option value="20">Standard Andromeda (+20% every 48h - Recommended)</option>
+                <option value="30">Aggressive Surge (+30% - Requires High ROAS Buffer)</option>
+              </select>
+            </div>
+
+            <!-- Algorithm Safety Notice Box -->
+            <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700 text-xs text-slate-300 space-y-2">
+              <div class="flex items-center space-x-2 text-accent-400 font-bold">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                <span>Andromeda Scaling Rules:</span>
+              </div>
+              <p class="leading-relaxed">Meta's delivery model resets ad set learning when budget changes exceed <strong>20% within 24–48 hours</strong>. Always graduate winning creatives from sandbox testing to the core CBO campaign.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: 70/20/10 Budget Allocation Card -->
+        <div class="lg:col-span-5 bg-gradient-to-b from-slate-900 to-slate-950 rounded-2xl border border-slate-800 p-5 sm:p-6 shadow-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+              <span class="text-xs font-bold text-brand-400 uppercase tracking-wider">70 / 20 / 10 Budget Split</span>
+              <span class="text-[11px] bg-brand-500/20 text-brand-300 px-2.5 py-0.5 rounded-full font-semibold">Recommended</span>
+            </div>
+
+            <!-- Safe Next Step -->
+            <div class="bg-slate-800/90 rounded-xl p-4 border border-slate-700/60 mb-4 text-center">
+              <span class="text-xs text-slate-400 uppercase font-semibold">Next Safe Daily Budget Step</span>
+              <div class="flex items-baseline justify-center space-x-1.5 mt-1">
+                <span id="resNextSafeBudget" class="text-4xl font-black text-accent-400">$360</span>
+                <span class="text-xs text-slate-300 font-bold">/ day</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1" id="resSafeIncreaseAmount">+$60/day increase without tripping learning phase</p>
+            </div>
+
+            <!-- Budget Split Breakdowns -->
+            <div class="space-y-3 text-xs">
+              <div class="p-2.5 bg-slate-800/40 rounded-xl border border-slate-800 flex justify-between items-center">
+                <div>
+                  <p class="font-bold text-white">Core Scaling (Advantage+ / CBO)</p>
+                  <p class="text-[10px] text-slate-400">70% to verified winning ads &amp; broad audiences</p>
+                </div>
+                <span id="resSplitCore" class="text-sm font-extrabold text-brand-400">$210/day</span>
+              </div>
+
+              <div class="p-2.5 bg-slate-800/40 rounded-xl border border-slate-800 flex justify-between items-center">
+                <div>
+                  <p class="font-bold text-white">Creative Testing (DCT Sandbox)</p>
+                  <p class="text-[10px] text-slate-400">20% to test new hooks, angles &amp; formats</p>
+                </div>
+                <span id="resSplitTesting" class="text-sm font-extrabold text-amber-400">$60/day</span>
+              </div>
+
+              <div class="p-2.5 bg-slate-800/40 rounded-xl border border-slate-800 flex justify-between items-center">
+                <div>
+                  <p class="font-bold text-white">High-Intent Retargeting &amp; LTV</p>
+                  <p class="text-[10px] text-slate-400">10% for warm cart abandoners &amp; repeat buyers</p>
+                </div>
+                <span id="resSplitRetarget" class="text-sm font-extrabold text-emerald-400">$30/day</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 pt-3 border-t border-slate-800 text-center">
+            <span class="text-[11px] text-slate-500">Monthly Run-Rate: <strong id="resMonthlyRunRate" class="text-slate-300">$9,000 / mo</strong></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- TAB 3: TARGET PROFIT SIMULATOR (REVERSE ROAS) -->
+    <div id="tab-reverse" class="tab-panel hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <div class="lg:col-span-7 bg-slate-900 rounded-2xl border border-slate-800 p-5 sm:p-6 shadow-xl">
+          <div class="flex items-center justify-between mb-5 pb-3 border-b border-slate-800">
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-white">Reverse Target Profit Modeler</h2>
+              <p class="text-xs text-slate-400">Determine ad spend &amp; orders required to reach your net income target</p>
+            </div>
+            <span class="text-xs px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-bold">Goal Oriented</span>
+          </div>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">Desired Monthly Net Profit Goal ($)</label>
+              <div class="relative">
+                <span class="absolute left-3 top-2.5 text-xs text-slate-500 font-bold">$</span>
+                <input type="number" id="inpTargetProfit" value="15000" step="1000" min="500" oninput="calcReverse()" class="w-full bg-slate-800/80 border border-slate-700 rounded-xl pl-8 pr-3 py-2 text-white font-semibold focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-300 mb-1">Expected Realized ROAS (Multiple)</label>
+              <div class="relative">
+                <input type="number" id="inpReverseROAS" value="2.8" step="0.1" min="1.1" oninput="calcReverse()" class="w-full bg-slate-800/80 border border-slate-700 rounded-xl px-3 py-2 text-white font-semibold focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                <span class="absolute right-3 top-2 text-xs text-accent-400 font-bold">x ROAS</span>
+              </div>
+            </div>
+
+            <div class="pt-2 flex items-center justify-between">
+              <button type="button" onclick="saveAuditToHistory()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold px-4 py-2.5 rounded-xl border border-slate-700 transition flex items-center space-x-1.5 shadow-sm">
+                <svg class="w-4 h-4 text-accent-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
+                <span>Save Audit to Device</span>
+              </button>
+
+              <button type="button" onclick="exportAuditPdf()" class="text-xs bg-accent-500 hover:bg-accent-600 text-slate-950 font-extrabold px-5 py-2.5 rounded-xl shadow-md transition flex items-center space-x-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4H7v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                <span>Export 1-Page Audit PDF</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Required Numbers Card -->
+        <div class="lg:col-span-5 bg-gradient-to-b from-slate-900 to-slate-950 rounded-2xl border border-slate-800 p-5 sm:p-6 shadow-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+              <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Required Target Execution</span>
+              <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2.5 py-0.5 rounded-full font-semibold">Targets</span>
+            </div>
+
+            <!-- Primary Target Ad Spend -->
+            <div class="bg-slate-800/90 rounded-xl p-4 border border-slate-700/60 mb-4 text-center">
+              <span class="text-xs text-slate-400 uppercase font-semibold">Required Monthly Ad Spend</span>
+              <div class="flex items-baseline justify-center space-x-1.5 mt-1">
+                <span id="resReqAdSpend" class="text-4xl font-black text-emerald-400">$27,622</span>
+                <span class="text-xs text-slate-300 font-bold">/ month</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1" id="resReqDailySpend">Requires ~$920/day ad spend at 2.80x ROAS</p>
+            </div>
+
+            <div class="space-y-2.5 text-xs">
+              <div class="flex justify-between py-1.5 border-b border-slate-800 text-slate-300">
+                <span>Required Gross Revenue:</span>
+                <span id="resReqRevenue" class="font-bold text-white">$77,341</span>
+              </div>
+              <div class="flex justify-between py-1.5 border-b border-slate-800 text-slate-300">
+                <span>Monthly Orders Needed:</span>
+                <span id="resReqOrders" class="font-bold text-white">910 Orders (~30/day)</span>
+              </div>
+              <div class="flex justify-between py-1.5 border-b border-slate-800 text-slate-300">
+                <span>Maximum Allowable CPA:</span>
+                <span id="resReqCPA" class="font-bold text-accent-400">$30.35</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 pt-3 border-t border-slate-800 text-center">
+            <span class="text-[11px] text-slate-500">Based on your Current Unit Economics settings</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- TAB 4: SAVED AUDITS & HISTORY -->
+    <div id="tab-history" class="tab-panel hidden">
+      <div class="bg-slate-900 rounded-2xl border border-slate-800 p-5 sm:p-6 shadow-xl">
+        <div class="flex items-center justify-between mb-5 pb-3 border-b border-slate-800">
+          <div>
+            <h2 class="text-base sm:text-lg font-bold text-white">Saved Performance Audits</h2>
+            <p class="text-xs text-slate-400">Client scaling blueprints stored locally on this device</p>
+          </div>
+          <button onclick="clearHistory()" class="text-xs text-rose-400 hover:text-rose-300 font-semibold px-3 py-1.5 rounded-lg border border-rose-500/30 hover:bg-rose-500/10 transition">
+            Clear All
+          </button>
+        </div>
+
+        <div id="historyList" class="space-y-3">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+
+  <!-- PRINTABLE AUDIT PROPOSAL SHEET (Strictly 1-Page PDF Fit without margin clutter) -->
+  <div class="print-only max-w-3xl mx-auto text-black">
+    <div class="flex justify-between items-start border-b-2 border-black pb-3 mb-4">
+      <div>
+        <h1 class="text-xl font-black uppercase tracking-tight">Meta Andromeda Media Audit &amp; Scaling Plan</h1>
+        <p class="text-[11px] text-gray-600">Performance Marketing Protocol &amp; Break-Even Economics</p>
+      </div>
+      <div class="text-right text-[11px]">
+        <p><strong>Date:</strong> <span id="printDate"></span></p>
+        <p><strong>Plan Ref:</strong> #MED-<span id="printRef"></span></p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3 mb-4 text-xs">
+      <div class="p-2.5 border border-gray-300 rounded bg-gray-50">
+        <p class="font-bold text-gray-500 uppercase text-[9px]">Client / E-Commerce Brand</p>
+        <p class="text-xs font-bold text-black mt-0.5">DTC Brand Scaling Candidate</p>
+      </div>
+      <div class="p-2.5 border border-gray-300 rounded bg-gray-50">
+        <p class="font-bold text-gray-500 uppercase text-[9px]">Primary Optimization Objective</p>
+        <p class="text-xs font-bold text-black mt-0.5">Andromeda AI Scaling &amp; ROAS Protection</p>
+      </div>
+    </div>
+
+    <table class="w-full text-xs text-left border-collapse mb-5">
+      <thead>
+        <tr class="border-b-2 border-black bg-gray-100">
+          <th class="py-1.5 px-3">Performance Metric</th>
+          <th class="py-1.5 px-3 text-right">Value / Target</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <tr>
+          <td class="py-1.5 px-3">Average Order Value (AOV)</td>
+          <td class="py-1.5 px-3 text-right font-medium" id="printAOV">$85.00</td>
+        </tr>
+        <tr>
+          <td class="py-1.5 px-3">Gross Margin Before Ad Spend</td>
+          <td class="py-1.5 px-3 text-right font-medium" id="printMargin">55.10%</td>
+        </tr>
+        <tr class="bg-amber-50/60 font-bold">
+          <td class="py-1.5 px-3">Minimum Break-Even ROAS Target</td>
+          <td class="py-1.5 px-3 text-right font-bold text-amber-900" id="printBreakEven">1.81x</td>
+        </tr>
+        <tr>
+          <td class="py-1.5 px-3">Maximum Allowable CPA (Break-Even CAC)</td>
+          <td class="py-1.5 px-3 text-right font-medium" id="printMaxCPA">$46.84</td>
+        </tr>
+        <tr>
+          <td class="py-1.5 px-3">Next Safe Daily Budget Scale (+20% Step)</td>
+          <td class="py-1.5 px-3 text-right font-medium" id="printNextBudget">$360.00 / day</td>
+        </tr>
+        <tr>
+          <td class="py-1.5 px-3">Core Advantage+ / CBO Budget (70%)</td>
+          <td class="py-1.5 px-3 text-right font-medium" id="printCore">$210.00 / day</td>
+        </tr>
+        <tr>
+          <td class="py-1.5 px-3">Creative Sandbox Testing (20%)</td>
+          <td class="py-1.5 px-3 text-right font-medium" id="printSandbox">$60.00 / day</td>
+        </tr>
+        <tr class="border-t-2 border-black font-extrabold text-sm bg-gray-100">
+          <td class="py-2.5 px-3">PROJECTED MONTHLY REVENUE RUN-RATE</td>
+          <td class="py-2.5 px-3 text-right text-sm font-black" id="printProjRev">$19,875.00</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Signature Block -->
+    <div class="mt-6 pt-4 border-t border-gray-300 flex justify-between items-end text-xs text-gray-700">
+      <div>
+        <p class="text-[10px] uppercase font-bold text-gray-500">Prepared by:</p>
+        <p class="font-extrabold text-black text-sm mt-0.5">Shahid Akram</p>
+        <p class="text-[11px] text-gray-600">Paid Media Architect &amp; Systems Lead</p>
+        <p class="text-[11px] text-gray-600">Email: heyshahidakram@gmail.com</p>
+      </div>
+      <div class="text-right">
+        <p class="text-[10px] uppercase font-bold text-gray-500">Client Authorization &amp; Scaling Sign-Off:</p>
+        <div class="w-48 border-b border-black mt-6"></div>
+        <p class="mt-1 text-[10px] text-gray-500">Date / Authorized Signature</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Mobile Bottom App Bar -->
+  <nav class="no-print md:hidden fixed bottom-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-lg border-t border-slate-800 px-2 py-1.5 flex justify-around items-center shadow-lg">
+    <button onclick="switchTab('breakeven')" class="mobile-tab-btn flex flex-col items-center justify-center py-1 px-2 text-accent-400 font-bold" data-target="breakeven">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+      <span class="text-[10px]">Break-Even</span>
+    </button>
+    <button onclick="switchTab('scaling')" class="mobile-tab-btn flex flex-col items-center justify-center py-1 px-2 text-slate-400 font-medium" data-target="scaling">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+      <span class="text-[10px]">Scaling</span>
+    </button>
+    <button onclick="switchTab('reverse')" class="mobile-tab-btn flex flex-col items-center justify-center py-1 px-2 text-slate-400 font-medium" data-target="reverse">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <span class="text-[10px]">Targets</span>
+    </button>
+    <button onclick="switchTab('history')" class="mobile-tab-btn flex flex-col items-center justify-center py-1 px-2 text-slate-400 font-medium" data-target="history">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <span class="text-[10px]">Saved</span>
+    </button>
+  </nav>
+
+  <!-- JavaScript Reactive Engine -->
+  <script>
+    // Tab Switching Logic
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-panel').forEach(el => el.classList.add('hidden'));
+      const target = document.getElementById(`tab-${tabId}`);
+      if (target) target.classList.remove('hidden');
+
+      // Update Desktop Nav
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        if (btn.getAttribute('data-target') === tabId) {
+          btn.classList.add('border-accent-500', 'text-accent-400');
+          btn.classList.remove('border-transparent', 'text-slate-400');
+        } else {
+          btn.classList.remove('border-accent-500', 'text-accent-400');
+          btn.classList.add('border-transparent', 'text-slate-400');
+        }
+      });
+
+      // Update Mobile Nav
+      document.querySelectorAll('.mobile-tab-btn').forEach(btn => {
+        if (btn.getAttribute('data-target') === tabId) {
+          btn.classList.add('text-accent-400', 'font-bold');
+          btn.classList.remove('text-slate-400', 'font-medium');
+        } else {
+          btn.classList.remove('text-accent-400', 'font-bold');
+          btn.classList.add('text-slate-400', 'font-medium');
+        }
+      });
+
+      if (tabId === 'history') renderHistory();
+    }
+
+    // Custom Input Toggles
+    function onCogsChange() {
+      const sel = document.getElementById('selCOGS');
+      const box = document.getElementById('boxCogsCustom');
+      if (sel.value === 'custom') {
+        box.classList.remove('hidden');
+        document.getElementById('inpCogsCustom').focus();
+      } else {
+        box.classList.add('hidden');
+      }
+      calcBreakEven();
+    }
+
+    function onShippingChange() {
+      const sel = document.getElementById('selShipping');
+      const box = document.getElementById('boxShippingCustom');
+      if (sel.value === 'custom') {
+        box.classList.remove('hidden');
+        document.getElementById('inpShippingCustom').focus();
+      } else {
+        box.classList.add('hidden');
+      }
+      calcBreakEven();
+    }
+
+    function onGatewayChange() {
+      const sel = document.getElementById('selGateway');
+      const box = document.getElementById('boxGatewayCustom');
+      if (sel.value === 'custom') {
+        box.classList.remove('hidden');
+        document.getElementById('inpGatewayCustom').focus();
+      } else {
+        box.classList.add('hidden');
+      }
+      calcBreakEven();
+    }
+
+    function onReturnsChange() {
+      const sel = document.getElementById('selReturns');
+      const box = document.getElementById('boxReturnsCustom');
+      if (sel.value === 'custom') {
+        box.classList.remove('hidden');
+        document.getElementById('inpReturnsCustom').focus();
+      } else {
+        box.classList.add('hidden');
+      }
+      calcBreakEven();
+    }
+
+    // Calculations State
+    let currentAudit = {};
+
+    function calcBreakEven() {
+      let aov = parseFloat(document.getElementById('inpAOV').value) || 1;
+      let spend = parseFloat(document.getElementById('inpSpend').value) || 0;
+      let cogsPct = document.getElementById('selCOGS').value === 'custom'
+        ? (parseFloat(document.getElementById('inpCogsCustom').value) || 0)
+        : (parseFloat(document.getElementById('selCOGS').value) || 0);
+      let shipPct = document.getElementById('selShipping').value === 'custom'
+        ? (parseFloat(document.getElementById('inpShippingCustom').value) || 0)
+        : (parseFloat(document.getElementById('selShipping').value) || 0);
+      let gatePct = document.getElementById('selGateway').value === 'custom'
+        ? (parseFloat(document.getElementById('inpGatewayCustom').value) || 0)
+        : (parseFloat(document.getElementById('selGateway').value) || 0);
+      let retPct = document.getElementById('selReturns').value === 'custom'
+        ? (parseFloat(document.getElementById('inpReturnsCustom').value) || 0)
+        : (parseFloat(document.getElementById('selReturns').value) || 0);
+      let currentROAS = parseFloat(document.getElementById('inpCurrentROAS').value) || 1;
+
+      let netMarginPreAdPct = 100 - (cogsPct + shipPct + gatePct + retPct);
+      if (netMarginPreAdPct <= 0) netMarginPreAdPct = 1;
+
+      let breakEvenROAS = (100 / netMarginPreAdPct);
+      let maxCAC = aov * (netMarginPreAdPct / 100);
+
+      let projectedRevenue = spend * currentROAS;
+      let projectedOrders = Math.round(projectedRevenue / aov);
+      let grossProfitDollars = projectedRevenue * (netMarginPreAdPct / 100);
+      let netProfitDollars = grossProfitDollars - spend;
+
+      document.getElementById('resBreakEvenROAS').innerText = `${breakEvenROAS.toFixed(2)}x`;
+      document.getElementById('resNetPreAdMargin').innerText = `${netMarginPreAdPct.toFixed(2)}%`;
+      document.getElementById('resMaxCAC').innerText = `$${maxCAC.toFixed(2)}`;
+      document.getElementById('resMonthlyRev').innerText = `$${projectedRevenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+      document.getElementById('resMonthlyOrders').innerText = `${projectedOrders.toLocaleString()} Orders`;
+      document.getElementById('resNetProfit').innerText = `${netProfitDollars >= 0 ? '+' : ''}$${netProfitDollars.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+      // Populate Print Audit Values
+      document.getElementById('printDate').innerText = new Date().toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'});
+      document.getElementById('printRef').innerText = Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('printAOV').innerText = `$${aov.toFixed(2)}`;
+      document.getElementById('printMargin').innerText = `${netMarginPreAdPct.toFixed(2)}%`;
+      document.getElementById('printBreakEven').innerText = `${breakEvenROAS.toFixed(2)}x`;
+      document.getElementById('printMaxCPA').innerText = `$${maxCAC.toFixed(2)}`;
+      document.getElementById('printProjRev').innerText = `$${projectedRevenue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+
+      currentAudit = {
+        date: new Date().toISOString(),
+        aov: aov,
+        spend: spend,
+        roas: currentROAS,
+        breakEvenROAS: breakEvenROAS,
+        maxCAC: maxCAC,
+        revenue: projectedRevenue,
+        netProfit: netProfitDollars
+      };
+    }
+
+    function calcScaling() {
+      let dailySpend = parseFloat(document.getElementById('inpDailySpend').value) || 0;
+      let pacePct = parseFloat(document.getElementById('selScalePace').value) || 20;
+
+      let increaseAmt = dailySpend * (pacePct / 100);
+      let nextBudget = dailySpend + increaseAmt;
+
+      let coreBudget = Math.round(dailySpend * 0.70);
+      let testingBudget = Math.round(dailySpend * 0.20);
+      let retargetBudget = Math.round(dailySpend * 0.10);
+      let monthlyRunRate = dailySpend * 30;
+
+      document.getElementById('resNextSafeBudget').innerText = `$${Math.round(nextBudget)}`;
+      document.getElementById('resSafeIncreaseAmount').innerText = `+$${Math.round(increaseAmt)}/day (+${pacePct}%) without tripping learning phase`;
+      document.getElementById('resSplitCore').innerText = `$${coreBudget}/day`;
+      document.getElementById('resSplitTesting').innerText = `$${testingBudget}/day`;
+      document.getElementById('resSplitRetarget').innerText = `$${retargetBudget}/day`;
+      document.getElementById('resMonthlyRunRate').innerText = `$${monthlyRunRate.toLocaleString()}/mo`;
+
+      document.getElementById('printNextBudget').innerText = `$${Math.round(nextBudget)}.00 / day (+${pacePct}%)`;
+      document.getElementById('printCore').innerText = `$${coreBudget}.00 / day`;
+      document.getElementById('printSandbox').innerText = `$${testingBudget}.00 / day`;
+    }
+
+    function calcReverse() {
+      let targetProfit = parseFloat(document.getElementById('inpTargetProfit').value) || 0;
+      let expROAS = parseFloat(document.getElementById('inpReverseROAS').value) || 2.5;
+      let aov = parseFloat(document.getElementById('inpAOV').value) || 85;
+
+      let cogsPct = document.getElementById('selCOGS').value === 'custom'
+        ? (parseFloat(document.getElementById('inpCogsCustom').value) || 0)
+        : (parseFloat(document.getElementById('selCOGS').value) || 0);
+      let shipPct = document.getElementById('selShipping').value === 'custom'
+        ? (parseFloat(document.getElementById('inpShippingCustom').value) || 0)
+        : (parseFloat(document.getElementById('selShipping').value) || 0);
+      let gatePct = document.getElementById('selGateway').value === 'custom'
+        ? (parseFloat(document.getElementById('inpGatewayCustom').value) || 0)
+        : (parseFloat(document.getElementById('selGateway').value) || 0);
+      let retPct = document.getElementById('selReturns').value === 'custom'
+        ? (parseFloat(document.getElementById('inpReturnsCustom').value) || 0)
+        : (parseFloat(document.getElementById('selReturns').value) || 0);
+
+      let netMarginPreAd = (100 - (cogsPct + shipPct + gatePct + retPct)) / 100;
+      if (netMarginPreAd <= 0) netMarginPreAd = 0.1;
+
+      // Net Profit = (Spend * ROAS * Margin) - Spend = Spend * (ROAS * Margin - 1)
+      let profitMultiplier = (expROAS * netMarginPreAd) - 1;
+      let reqSpend = profitMultiplier > 0 ? (targetProfit / profitMultiplier) : 0;
+      let reqRev = reqSpend * expROAS;
+      let reqOrders = Math.round(reqRev / aov);
+      let dailyOrders = Math.round(reqOrders / 30);
+      let reqCPA = reqOrders > 0 ? (reqSpend / reqOrders) : 0;
+
+      document.getElementById('resReqAdSpend').innerText = `$${Math.round(reqSpend).toLocaleString()}`;
+      document.getElementById('resReqDailySpend').innerText = `Requires ~$${Math.round(reqSpend / 30)}/day ad spend at ${expROAS.toFixed(2)}x ROAS`;
+      document.getElementById('resReqRevenue').innerText = `$${Math.round(reqRev).toLocaleString()}`;
+      document.getElementById('resReqOrders').innerText = `${reqOrders.toLocaleString()} Orders (~${dailyOrders}/day)`;
+      document.getElementById('resReqCPA').innerText = `$${reqCPA.toFixed(2)}`;
+    }
+
+    function exportAuditPdf() {
+      calcBreakEven();
+      calcScaling();
+      calcReverse();
+      window.print();
+    }
+
+    // Local Storage Audit History
+    function saveAuditToHistory() {
+      let history = JSON.parse(localStorage.getItem('andromeda_audits') || '[]');
+      history.unshift(currentAudit);
+      if (history.length > 20) history = history.slice(0, 20);
+      localStorage.setItem('andromeda_audits', JSON.stringify(history));
+      alert('Audit successfully saved to device history!');
+    }
+
+    function renderHistory() {
+      const listEl = document.getElementById('historyList');
+      const history = JSON.parse(localStorage.getItem('andromeda_audits') || '[]');
+      if (history.length === 0) {
+        listEl.innerHTML = `<div class="text-center py-12 text-slate-500 text-sm">No saved audits found. Go to the "Targets" tab and click "Save Audit to Device" to store one here!</div>`;
+        return;
+      }
+      listEl.innerHTML = history.map((item, idx) => `
+        <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h4 class="font-bold text-white text-base">Meta Scale Audit (AOV: $${item.aov})</h4>
+            <p class="text-xs text-slate-400">${new Date(item.date).toLocaleDateString()} · Break-Even: ${item.breakEvenROAS.toFixed(2)}x · Realized: ${item.roas}x</p>
+          </div>
+          <div class="flex items-center space-x-3">
+            <span class="text-lg font-black text-emerald-400">+$${Math.round(item.netProfit).toLocaleString()}</span>
+            <button onclick="deleteHistoryItem(${idx})" class="text-slate-400 hover:text-rose-400 p-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function deleteHistoryItem(idx) {
+      let history = JSON.parse(localStorage.getItem('andromeda_audits') || '[]');
+      history.splice(idx, 1);
+      localStorage.setItem('andromeda_audits', JSON.stringify(history));
+      renderHistory();
+    }
+
+    function clearHistory() {
+      if (confirm('Clear all saved audits from this device?')) {
+        localStorage.removeItem('andromeda_audits');
+        renderHistory();
+      }
+    }
+
+    // PWA Service Worker Registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then(reg => {
+          console.log('Andromeda SW registered:', reg.scope);
+        }).catch(err => console.log('SW registration error:', err));
+      });
+    }
+
+    // PWA Install Prompt
+    let deferredPrompt;
+    const installBtn = document.getElementById('pwaInstallBtn');
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      if (installBtn) {
+        installBtn.classList.remove('hidden');
+        installBtn.classList.add('flex');
+      }
+    });
+
+    if (installBtn) {
+      installBtn.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log('Install outcome:', outcome);
+        deferredPrompt = null;
+        installBtn.classList.add('hidden');
+      });
+    }
+
+    // Initialize On Load
+    window.addEventListener('DOMContentLoaded', () => {
+      calcBreakEven();
+      calcScaling();
+      calcReverse();
+    });
+  </script>
+</body>
+</html>
