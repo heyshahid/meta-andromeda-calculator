@@ -1,7 +1,8 @@
-const CACHE_NAME = 'andromeda-roas-v9';
+const CACHE_NAME = 'andromeda-roas-v10';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
+  './meta-andromeda-cover.webp',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
