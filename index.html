@@ -54,10 +54,10 @@
   }
   </script>
 
-  <!-- Google Fonts: Inter & Poppins -->
+  <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -67,18 +67,21 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'Poppins', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
           },
           colors: {
+            royal: {
+              DEFAULT: '#0064E0',
+              deep: '#0047AB',
+              light: '#EBF4FF',
+              dark: '#003380'
+            },
             meta: {
               blue: '#0064E0',
               deep: '#070A14',
               surface: '#0E1322',
               card: '#13192B',
               border: '#1E2640',
-              hover: '#252F4E',
-              accent: '#7E22CE',
-              glow: '#A855F7',
             }
           }
         }
@@ -89,7 +92,7 @@
   <style>
     -webkit-tap-highlight-color: transparent;
     
-    /* Disable default number input spin buttons to avoid overlap */
+    /* Disable default number input spin buttons */
     input[type=number]::-webkit-inner-spin-button, 
     input[type=number]::-webkit-outer-spin-button { 
       -webkit-appearance: none; 
@@ -101,7 +104,7 @@
     }
 
     body {
-      font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       letter-spacing: -0.01em;
       background-color: #070A14;
       color: #F1F5F9;
@@ -137,6 +140,34 @@
       box-shadow: 0 8px 30px -4px rgba(126, 34, 206, 0.18);
     }
 
+    /* White Glass KPI Metric Card */
+    .kpi-card-white {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      transition: all 0.25s ease;
+    }
+    .kpi-card-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px -4px rgba(0, 100, 224, 0.15);
+      border-color: #BFDBFE;
+    }
+
+    /* Clean Light Gray Input Box */
+    .meta-input-light {
+      background-color: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      color: #0F172A;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+    .meta-input-light:focus {
+      background-color: #FFFFFF;
+      border-color: #0064E0;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 100, 224, 0.18);
+    }
+
     /* Active Side Menu Item */
     .side-menu-active {
       background: rgba(0, 100, 224, 0.15) !important;
@@ -144,17 +175,22 @@
       color: #FFFFFF !important;
     }
 
-    /* Subtle Animated Meta Background Watermark */
-    @keyframes metaFloatSlow {
-      0%, 100% {
-        transform: translateY(0px) rotate(-8deg) scale(1);
-      }
-      50% {
-        transform: translateY(-20px) rotate(-4deg) scale(1.03);
-      }
+    /* Checkbox & Tick Styling */
+    .checklist-circle {
+      transition: all 0.2s ease;
     }
-    .animate-meta-float {
-      animation: metaFloatSlow 14s ease-in-out infinite;
+    .checklist-checked {
+      background-color: #10B981 !important;
+      color: #FFFFFF !important;
+      border-color: #059669 !important;
+    }
+
+    /* Smooth Scrolling for Sections */
+    html {
+      scroll-behavior: smooth;
+    }
+    .scroll-target {
+      scroll-margin-top: 5.5rem;
     }
 
     /* META LOGO FLOW ON START CLICK ANIMATION */
@@ -180,18 +216,12 @@
         filter: blur(16px);
       }
     }
-
     .meta-flow-active {
       display: flex !important;
       animation: metaFlowFly 1.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
-    /* Smooth Scrolling for Sections */
-    html {
-      scroll-behavior: smooth;
-    }
-
-    /* Print Stylesheet for 1-Page Official Audit PDF */
+    /* Print Stylesheet */
     @page {
       margin: 0;
       size: letter portrait;
@@ -233,22 +263,6 @@
 </head>
 <body class="cosmic-space-bg min-h-screen flex flex-col selection:bg-purple-600 selection:text-white relative">
 
-  <!-- BACKGROUND ANIMATED META INFINITY WATERMARK -->
-  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden flex items-center justify-center select-none" aria-hidden="true">
-    <div class="relative w-[500px] h-[500px] md:w-[760px] md:h-[760px] opacity-[0.04] transform -rotate-12 animate-meta-float">
-      <svg viewBox="0 0 100 100" fill="url(#metaGradientAmbient)" class="w-full h-full filter blur-[1px]">
-        <defs>
-          <linearGradient id="metaGradientAmbient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#0064E0" />
-            <stop offset="50%" stop-color="#7E22CE" />
-            <stop offset="100%" stop-color="#E1306C" />
-          </linearGradient>
-        </defs>
-        <path d="M50 49c-4.2-6.5-9.6-11.5-16.1-11.5-11.2 0-20.9 9.8-20.9 22.3 0 12.8 9.3 22.7 20.9 22.7 7.2 0 13.2-4.8 17.6-11.7l1.5-2.4 1.5 2.4c4.4 6.9 10.4 11.7 17.6 11.7 11.6 0 20.9-9.9 20.9-22.7 0-12.5-9.7-22.3-20.9-22.3-6.5 0-11.9 5-16.1 11.5L50 51l-1.5-2zM21.5 59.8c0-7.7 5.7-13.8 12.4-13.8 4.2 0 8.1 3.5 11.1 9.2-3 5.7-6.9 9.2-11.1 9.2-6.7 0-12.4-6.1-12.4-13.8zm57 0c0 7.7-5.7 13.8-12.4 13.8-4.2 0-8.1-3.5-11.1-9.2 3-5.7 6.9-9.2 11.1-9.2 6.7 0 12.4 6.1 12.4 13.8z"/>
-      </svg>
-    </div>
-  </div>
-
   <!-- DYNAMIC META FLOW OVERLAY (Appears on Start click) -->
   <div id="meta-flow-container" class="fixed inset-0 pointer-events-none z-50 overflow-hidden hidden items-center justify-center select-none" aria-hidden="true">
     <div id="meta-flow-logo" class="relative w-64 h-64 sm:w-96 sm:h-96">
@@ -267,11 +281,11 @@
     </div>
   </div>
 
-  <!-- Top App Bar (Meta Ads Manager Style) -->
+  <!-- Top App Bar -->
   <header class="no-print sticky top-0 z-40 bg-slate-950/90 backdrop-blur-md border-b border-slate-800 px-4 py-2.5 sm:px-6">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       
-      <!-- Brand & Campaign Name Inline -->
+      <!-- Brand & Campaign Name Inline (Without "In Draft" badge) -->
       <div class="flex items-center space-x-3 min-w-0">
         <div class="cursor-pointer shrink-0" onclick="triggerMetaFlowAnimation()">
           <img src="icons/icon-192.png" alt="Meta Logo" class="w-9 h-9 object-contain rounded-xl bg-slate-900 p-1 border border-slate-700 shadow-sm">
@@ -279,8 +293,7 @@
         <div class="min-w-0">
           <div class="flex items-center space-x-2">
             <span class="font-extrabold text-sm sm:text-base text-white tracking-tight truncate">New Sales Campaign</span>
-            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-800 text-slate-300 border border-slate-700">In draft</span>
-            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-900/40 text-purple-300 border border-purple-700/50">Andromeda 2026 AI</span>
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-900/40 text-blue-300 border border-blue-700/50">Meta Andromeda 2026 AI</span>
           </div>
           <p class="text-[11px] text-slate-400 truncate hidden sm:block">Meta Ads Manager Cockpit &bull; Advantage+ Liquidity &bull; Poster vs Reel</p>
         </div>
@@ -290,7 +303,7 @@
       <div class="flex items-center space-x-2 sm:space-x-3 shrink-0">
         
         <!-- Worldwide Currency Dropdown -->
-        <select id="selCurrency" onchange="calcAll()" class="bg-slate-900 border border-slate-700 text-slate-200 text-xs font-bold rounded-xl px-2.5 py-1.5 focus:outline-none focus:border-purple-500 cursor-pointer">
+        <select id="selCurrency" onchange="calcAll()" class="bg-slate-900 border border-slate-700 text-slate-200 text-xs font-bold rounded-xl px-2.5 py-1.5 focus:outline-none focus:border-royal cursor-pointer">
           <optgroup label="Major Currencies">
             <option value="$" selected>USD ($)</option>
             <option value="€">EUR (€)</option>
@@ -339,20 +352,20 @@
 
         <!-- Install PWA Button -->
         <button id="pwaInstallBtn" class="hidden text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-xl items-center space-x-1.5 transition font-bold">
-          <svg class="w-3.5 h-3.5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-3.5 h-3.5 text-royal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
           </svg>
           <span class="hidden md:inline">Install</span>
         </button>
 
         <!-- Start Simulation Button -->
-        <button onclick="triggerMetaFlowAnimation()" class="text-xs bg-purple-900/40 hover:bg-purple-800/50 text-purple-300 border border-purple-700/60 font-bold px-3 py-1.5 rounded-xl items-center space-x-1.5 transition flex cursor-pointer">
+        <button onclick="triggerMetaFlowAnimation()" class="text-xs bg-royal hover:bg-royal-deep text-white font-bold px-3 py-1.5 rounded-xl items-center space-x-1.5 transition flex cursor-pointer shadow-sm">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span>Simulate</span>
         </button>
 
         <!-- Export 1-Page Audit PDF -->
-        <button onclick="exportAuditPdf()" class="text-xs bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold px-3.5 py-1.5 rounded-xl flex items-center space-x-1.5 transition shadow-sm cursor-pointer">
+        <button onclick="exportAuditPdf()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold px-3.5 py-1.5 rounded-xl flex items-center space-x-1.5 transition cursor-pointer">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4H7v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
           </svg>
@@ -364,205 +377,214 @@
   </header>
 
   <!-- Main Container -->
-  <main class="no-print flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-4 relative z-10">
+  <main class="no-print flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-4 relative z-10 pb-48">
 
-    <!-- FULL-WIDTH COSMIC COVER BANNER (Like BuildEstimate Cover, with Andromeda Galaxy Background) -->
-    <div id="meta-andromeda-cover" class="mb-5 rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-800 relative bg-slate-950 shadow-2xl group">
+    <!-- REFINED TOP COVER BANNER (Clean Space Gradient with Small Corner Logo Card - No Huge Clashing Text) -->
+    <div id="meta-andromeda-cover" class="mb-5 rounded-2xl sm:rounded-3xl border border-slate-800 relative bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-5 sm:p-7 shadow-2xl overflow-hidden">
       
-      <!-- Background Image -->
-      <div class="relative w-full h-44 sm:h-56 md:h-64 overflow-hidden">
-        <img src="meta-andromeda-cover.webp" alt="Meta Andromeda Updates" class="w-full h-full object-cover object-center transform group-hover:scale-105 transition duration-700 opacity-80">
-        <!-- Overlay Gradient for Crisp Text Readability -->
-        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-transparent flex items-center px-5 sm:px-8">
+      <!-- Subtle Ambient Glow Spheres Behind Banner -->
+      <div class="absolute -top-16 -left-16 w-80 h-80 bg-royal/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-16 -right-16 w-80 h-80 bg-purple-600/15 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 relative z-10">
+        
+        <!-- Left Content: Clean, Inline, Semi-Bold Headline, Zero Overlap -->
+        <div class="max-w-2xl space-y-2">
           
-          <!-- Content Over Cover (Simple, Clean, Inline, Zero Overlap) -->
-          <div class="max-w-2xl text-white space-y-2 sm:space-y-3">
-            
-            <!-- Inline Badges -->
-            <div class="flex items-center space-x-2 flex-wrap gap-y-1">
-              <span class="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-purple-900/60 text-purple-200 border border-purple-600/50">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>Meta Andromeda 2026</span>
-              </span>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-800/80 text-slate-300 border border-slate-700">
-                Deep Candidate Retrieval
-              </span>
+          <div class="flex items-center space-x-2 flex-wrap gap-y-1">
+            <span class="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-royal/20 text-blue-300 border border-royal/40">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Meta Andromeda 2026</span>
+            </span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-normal bg-slate-800 text-slate-300 border border-slate-700">
+              Deep Candidate Retrieval Architecture
+            </span>
+          </div>
+
+          <!-- Headline Semi-Bold -->
+          <h1 class="text-xl sm:text-2xl md:text-3xl font-semibold text-white tracking-tight leading-snug">
+            Meta <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 font-bold">Andromeda Updates</span> & Ad Scaling Cockpit
+          </h1>
+
+          <!-- Normal Text -->
+          <p class="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed">
+            In 2026, creative is the targeting. Evaluate millions of candidate creatives with multimodal deep neural networks, balance Posters vs Reels, and scale with +20% safe daily budget increments.
+          </p>
+
+          <!-- 3 Benchmark Pills Inline -->
+          <div class="flex items-center space-x-2 sm:space-x-3 pt-1 text-[11px] font-semibold text-slate-200 flex-wrap gap-y-1">
+            <div class="inline-flex items-center space-x-1.5 bg-slate-900/90 px-2.5 py-1 rounded-lg border border-slate-700">
+              <span class="text-royal font-bold">+6%</span>
+              <span class="text-slate-300 font-normal text-[10px]">Retrieval Recall</span>
             </div>
-
-            <!-- Title -->
-            <h1 class="text-xl sm:text-3xl font-black text-white tracking-tight leading-snug">
-              Meta <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400">Andromeda Updates</span> & Scaling Cockpit
-            </h1>
-
-            <!-- Subtitle -->
-            <p class="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed line-clamp-2 sm:line-clamp-none">
-              In 2026, creative is the targeting. Evaluate millions of candidates with deep neural embeddings, balance Posters vs Reels, and scale with +20% safe daily budget increments.
-            </p>
-
-            <!-- 3 Benchmark Pills Inline -->
-            <div class="flex items-center space-x-2 sm:space-x-3 pt-1 text-[11px] font-bold text-slate-200 flex-wrap gap-y-1">
-              <div class="inline-flex items-center space-x-1.5 bg-slate-900/80 px-2.5 py-1 rounded-lg border border-purple-800/50">
-                <span class="text-purple-400 font-extrabold">+6%</span>
-                <span class="text-slate-300 text-[10px]">Retrieval Recall</span>
-              </div>
-              <div class="inline-flex items-center space-x-1.5 bg-slate-900/80 px-2.5 py-1 rounded-lg border border-indigo-800/50">
-                <span class="text-indigo-400 font-extrabold">+8%</span>
-                <span class="text-slate-300 text-[10px]">Ad Quality Score</span>
-              </div>
-              <div class="inline-flex items-center space-x-1.5 bg-slate-900/80 px-2.5 py-1 rounded-lg border border-emerald-800/50">
-                <span class="text-emerald-400 font-extrabold">+22%</span>
-                <span class="text-slate-300 text-[10px]">Net AI ROAS</span>
-              </div>
+            <div class="inline-flex items-center space-x-1.5 bg-slate-900/90 px-2.5 py-1 rounded-lg border border-slate-700">
+              <span class="text-purple-400 font-bold">+8%</span>
+              <span class="text-slate-300 font-normal text-[10px]">Ad Quality Score</span>
             </div>
-
+            <div class="inline-flex items-center space-x-1.5 bg-slate-900/90 px-2.5 py-1 rounded-lg border border-slate-700">
+              <span class="text-emerald-400 font-bold">+22%</span>
+              <span class="text-slate-300 font-normal text-[10px]">Net AI ROAS</span>
+            </div>
           </div>
 
         </div>
+
+        <!-- Right Side: Small Elegant Corner Card for the Meta Andromeda Graphic -->
+        <div class="shrink-0 self-center md:self-auto">
+          <div class="w-36 h-24 sm:w-44 sm:h-28 rounded-2xl overflow-hidden border border-slate-700/80 bg-slate-900/90 shadow-xl relative group hover:border-royal transition cursor-pointer" onclick="triggerMetaFlowAnimation()" title="Click to trigger Meta Flow">
+            <img src="meta-andromeda-cover.webp" alt="Meta Andromeda updates" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-2 justify-between">
+              <span class="text-[9px] font-semibold text-white bg-slate-900/90 px-1.5 py-0.5 rounded border border-slate-700">AI Engine</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            </div>
+          </div>
+        </div>
+
       </div>
 
     </div>
 
-    <!-- 4 HERO KPI METRIC CARDS (High Readability, Zero Overlap, Inline Alignment) -->
-    <div id="calculatorWorkspace" class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-5">
+    <!-- 4 PROMINENT WHITE KPI METRIC BOXES (Royal Blue & Black Typography, Semi-Bold Headline, Normal Details) -->
+    <div id="calculatorWorkspace" class="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 mb-6">
       
       <!-- Card 1: Break-Even ROAS -->
-      <div class="meta-manager-card rounded-2xl p-4">
-        <div class="flex items-center justify-between text-xs font-bold text-slate-400 mb-1">
-          <span>Break-Even ROAS</span>
-          <span class="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-purple-950/70 text-purple-300 border border-purple-700/50">Survival</span>
+      <div class="kpi-card-white rounded-2xl p-4 sm:p-5">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-xs font-semibold text-slate-600">Break-Even ROAS</span>
+          <span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-blue-50 text-royal border border-blue-200">Survival Floor</span>
         </div>
-        <div class="text-2xl sm:text-3xl font-black text-white tracking-tight" id="dispBeRoas">1.82x</div>
-        <div class="mt-2 flex items-center justify-between text-[11px] border-t border-slate-800 pt-2 font-medium">
-          <span class="text-slate-400">Target Net ROAS:</span>
-          <span class="font-bold text-purple-400" id="dispTargetRoas">2.68x</span>
+        <div class="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight" id="dispBeRoas">1.82x</div>
+        <div class="mt-2.5 flex items-center justify-between text-xs border-t border-slate-100 pt-2 font-normal text-slate-500">
+          <span>Target Net ROAS:</span>
+          <span class="font-bold text-royal" id="dispTargetRoas">2.68x</span>
         </div>
       </div>
 
       <!-- Card 2: Max Allowable CAC -->
-      <div class="meta-manager-card rounded-2xl p-4">
-        <div class="flex items-center justify-between text-xs font-bold text-slate-400 mb-1">
-          <span>Max Allowable CAC</span>
-          <span class="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-indigo-950/70 text-indigo-300 border border-indigo-700/50">Ceiling</span>
+      <div class="kpi-card-white rounded-2xl p-4 sm:p-5">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-xs font-semibold text-slate-600">Max Allowable CAC</span>
+          <span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-800 border border-slate-200">Ceiling</span>
         </div>
-        <div class="text-2xl sm:text-3xl font-black text-white tracking-tight" id="dispMaxCac">$46.75</div>
-        <div class="mt-2 flex items-center justify-between text-[11px] border-t border-slate-800 pt-2 font-medium">
-          <span class="text-slate-400">Net Margin Pre-Ads:</span>
-          <span class="font-bold text-indigo-400" id="dispNetMarginPct">55.0%</span>
+        <div class="text-2xl sm:text-3xl font-extrabold text-royal tracking-tight" id="dispMaxCac">$48.63</div>
+        <div class="mt-2.5 flex items-center justify-between text-xs border-t border-slate-100 pt-2 font-normal text-slate-500">
+          <span>Net Margin Pre-Ads:</span>
+          <span class="font-bold text-slate-900" id="dispNetMarginPct">57.2%</span>
         </div>
       </div>
 
       <!-- Card 3: Creative Velocity Required -->
-      <div class="meta-manager-card rounded-2xl p-4">
-        <div class="flex items-center justify-between text-xs font-bold text-slate-400 mb-1">
-          <span>Required Velocity</span>
-          <span class="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-pink-950/70 text-pink-300 border border-pink-700/50">Fatigue</span>
+      <div class="kpi-card-white rounded-2xl p-4 sm:p-5">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-xs font-semibold text-slate-600">Creative Velocity</span>
+          <span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-purple-50 text-purple-700 border border-purple-200">Anti-Fatigue</span>
         </div>
-        <div class="text-2xl sm:text-3xl font-black text-pink-400 tracking-tight" id="dispCreativeVelocity">6 Ads / Wk</div>
-        <div class="mt-2 flex items-center justify-between text-[11px] border-t border-slate-800 pt-2 font-medium">
-          <span class="text-slate-400">Fatigue Lifespan:</span>
-          <span class="font-bold text-slate-300" id="dispFatigueWindow">7-10 Days</span>
+        <div class="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight" id="dispCreativeVelocity">6 Ads / Wk</div>
+        <div class="mt-2.5 flex items-center justify-between text-xs border-t border-slate-100 pt-2 font-normal text-slate-500">
+          <span>Fatigue Lifespan:</span>
+          <span class="font-bold text-slate-900" id="dispFatigueWindow">14-21 Days</span>
         </div>
       </div>
 
       <!-- Card 4: Safe Scaling Increment -->
-      <div class="meta-manager-card rounded-2xl p-4">
-        <div class="flex items-center justify-between text-xs font-bold text-slate-400 mb-1">
-          <span>Safe Scaling Step</span>
-          <span class="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-emerald-950/70 text-emerald-300 border border-emerald-700/50">&le; +20%/Day</span>
+      <div class="kpi-card-white rounded-2xl p-4 sm:p-5">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-xs font-semibold text-slate-600">Safe Daily Scale Step</span>
+          <span class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">&le; +20%/Day</span>
         </div>
-        <div class="text-2xl sm:text-3xl font-black text-emerald-400 tracking-tight" id="dispNextScale">+$50.00</div>
-        <div class="mt-2 flex items-center justify-between text-[11px] border-t border-slate-800 pt-2 font-medium">
-          <span class="text-slate-400">Learning Reset:</span>
-          <span class="font-bold text-emerald-400">Protected</span>
+        <div class="text-2xl sm:text-3xl font-extrabold text-royal tracking-tight" id="dispNextScale">+$50.00</div>
+        <div class="mt-2.5 flex items-center justify-between text-xs border-t border-slate-100 pt-2 font-normal text-slate-500">
+          <span>Learning State:</span>
+          <span class="font-bold text-emerald-600">Protected</span>
         </div>
       </div>
 
     </div>
 
-    <!-- META ADS MANAGER MAIN WORKSPACE (SIDE MENU BAR + DETAILS CARDS + AD PREVIEW) -->
+    <!-- MAIN WORKSPACE: SIDE MENU CHECKLIST + FORM CARDS (LIGHT GRAY INPUTS) + AD PREVIEW -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
       
-      <!-- LEFT COLUMN: SIDE MENU BAR (Meta Ads Manager Navigation) -->
+      <!-- LEFT COLUMN: SIDE MENU CHECKLIST (Meta Ads Manager Stepper) -->
       <div class="lg:col-span-3 space-y-3 sticky top-16">
         
         <div class="meta-manager-card rounded-2xl p-3 border border-slate-800">
           <div class="px-2 py-1.5 border-b border-slate-800 mb-2 flex items-center justify-between">
-            <span class="text-xs font-black uppercase tracking-wider text-slate-400">Campaign Structure</span>
-            <span class="text-[10px] font-extrabold px-1.5 py-0.5 rounded bg-blue-900/40 text-blue-300 border border-blue-700/50">Advantage+</span>
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-300">Campaign Stepper</span>
+            <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-royal/20 text-blue-300 border border-royal/40">Checklist</span>
           </div>
 
-          <!-- Side Navigation Menu Items -->
-          <nav class="space-y-1 text-xs font-bold" id="sideNavMenu">
+          <!-- Side Navigation Menu Items: Numbered neutral circles that turn into GREEN TICKS on completion -->
+          <nav class="space-y-1 text-xs" id="sideNavMenu">
             
-            <!-- Item 1: Campaign Name & Details -->
-            <a href="#sec-campaign" onclick="setActiveNav('campaign')" id="nav-campaign" class="side-menu-item side-menu-active flex items-center space-x-2.5 px-3 py-2.5 rounded-xl border border-transparent transition text-slate-200 hover:bg-slate-800">
-              <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] shrink-0 font-black"><svg class="w-2.5 h-2.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>
+            <!-- Item 1: Campaign Details -->
+            <a href="#sec-campaign" onclick="setActiveNav('campaign')" id="nav-campaign" class="side-menu-item side-menu-active flex items-center space-x-2.5 px-3 py-2.5 rounded-xl border border-transparent transition text-slate-200 hover:bg-slate-800 font-semibold">
+              <span id="chk-campaign" class="checklist-circle w-5 h-5 rounded-full bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center text-[10px] shrink-0 font-bold">1</span>
               <div class="min-w-0 flex-1">
                 <span class="block truncate">Campaign Details</span>
-                <span class="text-[10px] text-slate-400 font-normal block truncate">Objective: Sales</span>
+                <span class="text-[10px] text-slate-400 font-normal block truncate" id="sub-campaign">Objective & Type</span>
               </div>
             </a>
 
             <!-- Item 2: Budget & Schedule -->
-            <a href="#sec-budget" onclick="setActiveNav('budget')" id="nav-budget" class="side-menu-item flex items-center space-x-2.5 px-3 py-2.5 rounded-xl border border-transparent transition text-slate-300 hover:bg-slate-800">
-              <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] shrink-0 font-black"><svg class="w-2.5 h-2.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>
+            <a href="#sec-budget" onclick="setActiveNav('budget')" id="nav-budget" class="side-menu-item flex items-center space-x-2.5 px-3 py-2.5 rounded-xl border border-transparent transition text-slate-300 hover:bg-slate-800 font-semibold">
+              <span id="chk-budget" class="checklist-circle w-5 h-5 rounded-full bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center text-[10px] shrink-0 font-bold">2</span>
               <div class="min-w-0 flex-1">
                 <span class="block truncate">Budget & Scaling</span>
-                <span class="text-[10px] text-slate-400 font-normal block truncate">70/20/10 +20% Step</span>
+                <span class="text-[10px] text-slate-400 font-normal block truncate" id="sub-budget">+20% Safe Rule</span>
               </div>
             </a>
 
             <!-- Item 3: Conversion & Unit Economics -->
-            <a href="#sec-economics" onclick="setActiveNav('economics')" id="nav-economics" class="side-menu-item flex items-center space-x-2.5 px-3 py-2.5 rounded-xl border border-transparent transition text-slate-300 hover:bg-slate-800">
-              <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] shrink-0 font-black"><svg class="w-2.5 h-2.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>
+            <a href="#sec-economics" onclick="setActiveNav('economics')" id="nav-economics" class="side-menu-item flex items-center space-x-2.5 px-3 py-2.5 rounded-xl border border-transparent transition text-slate-300 hover:bg-slate-800 font-semibold">
+              <span id="chk-economics" class="checklist-circle w-5 h-5 rounded-full bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center text-[10px] shrink-0 font-bold">3</span>
               <div class="min-w-0 flex-1">
-                <span class="block truncate">Conversion & COGS</span>
-                <span class="text-[10px] text-slate-400 font-normal block truncate">Margin Waterfall</span>
+                <span class="block truncate">Conversion & Margin</span>
+                <span class="text-[10px] text-slate-400 font-normal block truncate" id="sub-economics">AOV, COGS & Waterfall</span>
               </div>
             </a>
 
-            <!-- Item 4: Bid Strategy & ROAS Goals -->
-            <a href="#sec-bid" onclick="setActiveNav('bid')" id="nav-bid" class="side-menu-item flex items-center space-x-2.5 px-3 py-2.5 rounded-xl border border-transparent transition text-slate-300 hover:bg-slate-800">
-              <span class="w-4 h-4 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-[10px] shrink-0 font-black"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span></span>
+            <!-- Item 4: Bid Strategy & ROAS Target -->
+            <a href="#sec-bid" onclick="setActiveNav('bid')" id="nav-bid" class="side-menu-item flex items-center space-x-2.5 px-3 py-2.5 rounded-xl border border-transparent transition text-slate-300 hover:bg-slate-800 font-semibold">
+              <span id="chk-bid" class="checklist-circle w-5 h-5 rounded-full bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center text-[10px] shrink-0 font-bold">4</span>
               <div class="min-w-0 flex-1">
                 <span class="block truncate">Bid Strategy & Target</span>
-                <span class="text-[10px] text-slate-400 font-normal block truncate">Highest Volume & ROAS</span>
+                <span class="text-[10px] text-slate-400 font-normal block truncate" id="sub-bid">Highest Volume / ROAS</span>
               </div>
             </a>
 
-            <!-- Item 5: Audience & Advantage+ -->
-            <a href="#sec-audience" onclick="setActiveNav('audience')" id="nav-audience" class="side-menu-item flex items-center space-x-2.5 px-3 py-2.5 rounded-xl border border-transparent transition text-slate-300 hover:bg-slate-800">
-              <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] shrink-0 font-black"><svg class="w-2.5 h-2.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>
+            <!-- Item 5: Audience Advantage+ -->
+            <a href="#sec-audience" onclick="setActiveNav('audience')" id="nav-audience" class="side-menu-item flex items-center space-x-2.5 px-3 py-2.5 rounded-xl border border-transparent transition text-slate-300 hover:bg-slate-800 font-semibold">
+              <span id="chk-audience" class="checklist-circle w-5 h-5 rounded-full bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center text-[10px] shrink-0 font-bold">5</span>
               <div class="min-w-0 flex-1">
-                <span class="block truncate">Audience Advantage+</span>
-                <span class="text-[10px] text-slate-400 font-normal block truncate">Candidate Retrieval</span>
+                <span class="block truncate">Audience (Advantage+)</span>
+                <span class="text-[10px] text-slate-400 font-normal block truncate" id="sub-audience">Candidate Generation</span>
               </div>
             </a>
 
             <!-- Item 6: Placements & Liquidity -->
-            <a href="#sec-placements" onclick="setActiveNav('placements')" id="nav-placements" class="side-menu-item flex items-center space-x-2.5 px-3 py-2.5 rounded-xl border border-transparent transition text-slate-300 hover:bg-slate-800">
-              <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] shrink-0 font-black"><svg class="w-2.5 h-2.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>
+            <a href="#sec-placements" onclick="setActiveNav('placements')" id="nav-placements" class="side-menu-item flex items-center space-x-2.5 px-3 py-2.5 rounded-xl border border-transparent transition text-slate-300 hover:bg-slate-800 font-semibold">
+              <span id="chk-placements" class="checklist-circle w-5 h-5 rounded-full bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center text-[10px] shrink-0 font-bold">6</span>
               <div class="min-w-0 flex-1">
-                <span class="block truncate">Placements & Liquidity</span>
-                <span class="text-[10px] text-slate-400 font-normal block truncate">FB, IG, WhatsApp</span>
+                <span class="block truncate">Placements & Delivery</span>
+                <span class="text-[10px] text-slate-400 font-normal block truncate" id="sub-placements">FB, IG, WhatsApp, Threads</span>
               </div>
             </a>
 
             <!-- Item 7: Ad Creative (Poster vs Reel) -->
-            <a href="#sec-creative" onclick="setActiveNav('creative')" id="nav-creative" class="side-menu-item flex items-center space-x-2.5 px-3 py-2.5 rounded-xl border border-transparent transition text-slate-300 hover:bg-slate-800">
-              <span class="w-4 h-4 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center text-[10px] shrink-0 font-black"><svg class="w-2.5 h-2.5 text-purple-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></span>
+            <a href="#sec-creative" onclick="setActiveNav('creative')" id="nav-creative" class="side-menu-item flex items-center space-x-2.5 px-3 py-2.5 rounded-xl border border-transparent transition text-slate-300 hover:bg-slate-800 font-semibold">
+              <span id="chk-creative" class="checklist-circle w-5 h-5 rounded-full bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center text-[10px] shrink-0 font-bold">7</span>
               <div class="min-w-0 flex-1">
                 <span class="block truncate">Creative Studio</span>
-                <span class="text-[10px] text-slate-400 font-normal block truncate">Poster vs. Reel Matrix</span>
+                <span class="text-[10px] text-slate-400 font-normal block truncate" id="sub-creative">Poster vs Reel Evaluator</span>
               </div>
             </a>
 
             <!-- Item 8: Simple Ads vs Andromeda AI -->
-            <a href="#sec-comparison" onclick="setActiveNav('comparison')" id="nav-comparison" class="side-menu-item flex items-center space-x-2.5 px-3 py-2.5 rounded-xl border border-transparent transition text-slate-300 hover:bg-slate-800">
-              <span class="w-4 h-4 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-[10px] shrink-0 font-black"><svg class="w-2.5 h-2.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></span>
+            <a href="#sec-comparison" onclick="setActiveNav('comparison')" id="nav-comparison" class="side-menu-item flex items-center space-x-2.5 px-3 py-2.5 rounded-xl border border-transparent transition text-slate-300 hover:bg-slate-800 font-semibold">
+              <span id="chk-comparison" class="checklist-circle w-5 h-5 rounded-full bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center text-[10px] shrink-0 font-bold">8</span>
               <div class="min-w-0 flex-1">
-                <span class="block truncate">Simple vs. Andromeda</span>
-                <span class="text-[10px] text-slate-400 font-normal block truncate">Strategic Differences</span>
+                <span class="block truncate">Simple vs Andromeda</span>
+                <span class="text-[10px] text-slate-400 font-normal block truncate" id="sub-comparison">Strategic Differences</span>
               </div>
             </a>
 
@@ -572,377 +594,453 @@
         <!-- Quick Summary Box under Menu -->
         <div class="meta-manager-card rounded-2xl p-3 border border-slate-800 text-[11px] space-y-1.5 hidden sm:block">
           <div class="flex justify-between text-slate-400">
-            <span>Andromeda Health:</span>
-            <span class="text-emerald-400 font-bold">Optimal (9.4/10)</span>
+            <span class="font-normal">Completed Steps:</span>
+            <span class="text-emerald-400 font-bold" id="dispChecklistProgress">0 / 8 Complete</span>
           </div>
           <div class="flex justify-between text-slate-400">
-            <span>Auction Pre-Score:</span>
-            <span class="text-purple-400 font-bold">+8% Quality</span>
-          </div>
-          <div class="flex justify-between text-slate-400">
-            <span>Targeting Mode:</span>
-            <span class="text-slate-200 font-bold">Broad / Creative-Led</span>
+            <span class="font-normal">Andromeda Status:</span>
+            <span class="text-royal font-bold">Advantage+ Active</span>
           </div>
         </div>
 
       </div>
 
-      <!-- CENTER COLUMN: MAIN DETAILS CARDS (Full Meta Ads Manager Form Sections) -->
+      <!-- CENTER COLUMN: FORM CARDS (CLEAN LIGHT GRAY INPUTS & SELECTS) -->
       <div class="lg:col-span-5 space-y-5">
         
-        <!-- SECTION 1: CAMPAIGN DETAILS -->
-        <div id="sec-campaign" class="meta-manager-card rounded-2xl p-5 border border-slate-800 space-y-3">
+        <!-- SECTION 1: CAMPAIGN DETAILS (Full Interactive Dropdowns) -->
+        <div id="sec-campaign" class="meta-manager-card rounded-2xl p-5 border border-slate-800 space-y-3.5 scroll-target">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
-            <div class="flex items-center space-x-2">
-              <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] font-black"><svg class="w-2.5 h-2.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>
-              <h2 class="text-sm font-bold text-white">Campaign Details</h2>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-300">Active</span>
+            <h2 class="text-sm font-semibold text-white">Campaign Details</h2>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-800 text-slate-300">Required</span>
           </div>
 
           <div class="space-y-3 text-xs">
             <div>
-              <label class="block text-slate-400 font-bold mb-1">Campaign Name</label>
-              <input type="text" value="New Sales Campaign — Andromeda 2026 AI" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-white font-bold focus:border-purple-500 focus:outline-none">
+              <label class="block text-slate-300 font-semibold mb-1">Campaign Name</label>
+              <input type="text" id="inpCampaignName" value="New Sales Campaign — Andromeda 2026 AI" oninput="markStepDone('campaign'); calcAll();" class="meta-input-light w-full rounded-xl px-3 py-2">
             </div>
-            <div class="grid grid-cols-2 gap-3">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label class="block text-slate-400 font-bold mb-1">Campaign Objective</label>
-                <div class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-slate-200 font-semibold">Sales (Purchases)</div>
+                <label class="block text-slate-300 font-semibold mb-1">Campaign Objective</label>
+                <select id="selCampaignObjective" onchange="markStepDone('campaign'); onObjectiveChange(this.value);" class="meta-input-light w-full rounded-xl px-3 py-2 cursor-pointer">
+                  <option value="sales" selected>Sales (Purchases, Conversions)</option>
+                  <option value="leads">Leads (Instant Forms, Calls)</option>
+                  <option value="traffic">Traffic (Website Link Clicks)</option>
+                  <option value="engagement">Engagement (Video Views)</option>
+                  <option value="awareness">Awareness (Reach & Recall)</option>
+                  <option value="app">App Promotion (Installs)</option>
+                </select>
               </div>
+
               <div>
-                <label class="block text-slate-400 font-bold mb-1">Buying Type</label>
-                <div class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-slate-200 font-semibold">Auction (Advantage+)</div>
+                <label class="block text-slate-300 font-semibold mb-1">Buying Type</label>
+                <select id="selBuyingType" onchange="markStepDone('campaign');" class="meta-input-light w-full rounded-xl px-3 py-2 cursor-pointer">
+                  <option value="auction" selected>Auction (Advantage+ Liquidity)</option>
+                  <option value="reservation">Reservation (Fixed Reach/CPM)</option>
+                </select>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- SECTION 2: BUDGET & SCHEDULE (+20% SAFE SCALER & 70/20/10 FRAMEWORK) -->
-        <div id="sec-budget" class="meta-manager-card rounded-2xl p-5 border border-slate-800 space-y-4">
+        <!-- SECTION 2: BUDGET & SCALING (+20% SAFE SCALER & 70/20/10 FRAMEWORK) -->
+        <div id="sec-budget" class="meta-manager-card rounded-2xl p-5 border border-slate-800 space-y-3.5 scroll-target">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
-            <div class="flex items-center space-x-2">
-              <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] font-black"><svg class="w-2.5 h-2.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>
-              <h2 class="text-sm font-bold text-white">Budget & Scaling</h2>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-900/40 text-emerald-300 border border-emerald-700/50">+20% Safe Rule</span>
+            <h2 class="text-sm font-semibold text-white">Budget & Scaling</h2>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-emerald-900/40 text-emerald-300 border border-emerald-700/50">+20% Safe Rule</span>
           </div>
 
           <div class="space-y-3 text-xs">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label class="block text-slate-400 font-bold mb-1">Current Daily Ad Spend</label>
+                <label class="block text-slate-300 font-semibold mb-1">Current Daily Ad Spend</label>
                 <div class="relative">
                   <span class="curr-symbol absolute left-3 top-2 text-slate-500 font-bold">$</span>
-                  <input type="number" id="inpDailySpend" value="250" step="10" min="0" oninput="calcAll()" class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-8 pr-3 py-2 text-white font-bold focus:border-purple-500 focus:outline-none">
+                  <input type="number" id="inpDailySpend" value="250" step="10" min="0" oninput="markStepDone('budget'); calcAll();" class="meta-input-light w-full rounded-xl pl-8 pr-3 py-2">
                 </div>
               </div>
               <div>
-                <label class="block text-slate-400 font-bold mb-1">Next Day Safe Budget Step</label>
-                <div class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-emerald-400 font-extrabold flex justify-between items-center">
+                <label class="block text-slate-300 font-semibold mb-1">Next Day Safe Budget Step</label>
+                <div class="meta-input-light w-full rounded-xl px-3 py-2 text-emerald-700 font-bold flex justify-between items-center">
                   <span id="dispNextScaleBox">+$50.00</span>
-                  <span class="text-[10px] text-slate-400 font-medium">Safe from Reset</span>
+                  <span class="text-[10px] text-slate-500 font-normal">Safe from Reset</span>
                 </div>
               </div>
             </div>
 
             <!-- 70/20/10 Liquidity Budget Allocation -->
-            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2">
-              <div class="flex justify-between items-center">
-                <span class="font-bold text-slate-300">70 / 20 / 10 Liquidity Split</span>
-                <span class="text-[10px] text-purple-400 font-bold">Andromeda Portfolio</span>
+            <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+              <div class="flex justify-between items-center text-xs">
+                <span class="font-semibold text-slate-300">70 / 20 / 10 Liquidity Allocation</span>
+                <span class="text-[10px] text-royal font-bold">Andromeda Portfolio</span>
               </div>
               <div class="grid grid-cols-3 gap-2 text-center pt-1">
-                <div class="p-2 rounded-lg bg-slate-800/60 border border-slate-700">
-                  <span class="block text-[9px] uppercase font-bold text-purple-300">Core ASC (70%)</span>
-                  <span class="text-sm font-black text-white block mt-0.5" id="resBudgetAsc">$175.00</span>
-                  <span class="text-[8px] text-slate-400">Winners</span>
+                <div class="p-2 rounded-lg bg-slate-800 border border-slate-700">
+                  <span class="block text-[9px] uppercase font-semibold text-purple-300">Core ASC (70%)</span>
+                  <span class="text-sm font-bold text-white block mt-0.5" id="resBudgetAsc">$175.00</span>
+                  <span class="text-[8px] text-slate-400 font-normal">Winners</span>
                 </div>
-                <div class="p-2 rounded-lg bg-slate-800/60 border border-slate-700">
-                  <span class="block text-[9px] uppercase font-bold text-indigo-300">Test (20%)</span>
-                  <span class="text-sm font-black text-white block mt-0.5" id="resBudgetTest">$50.00</span>
-                  <span class="text-[8px] text-slate-400">Posters/Reels</span>
+                <div class="p-2 rounded-lg bg-slate-800 border border-slate-700">
+                  <span class="block text-[9px] uppercase font-semibold text-blue-300">Test (20%)</span>
+                  <span class="text-sm font-bold text-white block mt-0.5" id="resBudgetTest">$50.00</span>
+                  <span class="text-[8px] text-slate-400 font-normal">Posters/Reels</span>
                 </div>
-                <div class="p-2 rounded-lg bg-slate-800/60 border border-slate-700">
-                  <span class="block text-[9px] uppercase font-bold text-pink-300">Moon (10%)</span>
-                  <span class="text-sm font-black text-white block mt-0.5" id="resBudgetMoon">$25.00</span>
-                  <span class="text-[8px] text-slate-400">New Angles</span>
+                <div class="p-2 rounded-lg bg-slate-800 border border-slate-700">
+                  <span class="block text-[9px] uppercase font-semibold text-pink-300">Moon (10%)</span>
+                  <span class="text-sm font-bold text-white block mt-0.5" id="resBudgetMoon">$25.00</span>
+                  <span class="text-[8px] text-slate-400 font-normal">New Angles</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- SECTION 3: CONVERSION & UNIT ECONOMICS (AOV, COGS, WATERFALL) -->
-        <div id="sec-economics" class="meta-manager-card rounded-2xl p-5 border border-slate-800 space-y-4">
+        <!-- SECTION 3: CONVERSION LOCATION, DATASET & UNIT ECONOMICS -->
+        <div id="sec-economics" class="meta-manager-card rounded-2xl p-5 border border-slate-800 space-y-3.5 scroll-target">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
-            <div class="flex items-center space-x-2">
-              <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] font-black"><svg class="w-2.5 h-2.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>
-              <h2 class="text-sm font-bold text-white">Conversion & Financials</h2>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-900/40 text-purple-300 border border-purple-700/50">Unit Margin</span>
+            <h2 class="text-sm font-semibold text-white">Conversion & Financial Margins</h2>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-blue-900/40 text-blue-300 border border-blue-700/50">Unit Waterfall</span>
           </div>
 
-          <!-- AOV Input -->
           <div class="space-y-3 text-xs">
-            <div>
-              <label class="block text-slate-400 font-bold mb-1">Average Order Value (AOV)</label>
-              <div class="relative">
-                <span class="curr-symbol absolute left-3 top-2 text-slate-500 font-bold">$</span>
-                <input type="number" id="inpAOV" value="85" step="1" min="1" oninput="calcAll()" class="w-full bg-slate-900 border border-slate-700 rounded-xl pl-8 pr-3 py-2 text-white font-bold focus:border-purple-500 focus:outline-none">
+            
+            <!-- Conversion Setup Dropdowns -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-slate-300 font-semibold mb-1">Conversion Location</label>
+                <select id="selConvLocation" onchange="markStepDone('economics');" class="meta-input-light w-full rounded-xl px-3 py-2 cursor-pointer">
+                  <option value="website" selected>Website</option>
+                  <option value="app_web">Website & App</option>
+                  <option value="messaging">Messenger & WhatsApp</option>
+                  <option value="calls">Phone Calls</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-slate-300 font-semibold mb-1">Performance Goal</label>
+                <select id="selPerfGoal" onchange="markStepDone('economics');" class="meta-input-light w-full rounded-xl px-3 py-2 cursor-pointer">
+                  <option value="conversions" selected>Maximise Number of Conversions</option>
+                  <option value="value">Maximise Conversion Value (ROAS)</option>
+                  <option value="landing_pages">Maximise Landing Page Views</option>
+                  <option value="clicks">Maximise Number of Clicks</option>
+                </select>
               </div>
             </div>
 
-            <!-- COGS Slider & Presets -->
-            <div class="space-y-1.5">
-              <div class="flex justify-between items-center text-slate-300 font-bold">
-                <span>Cost of Goods Sold (COGS %)</span>
-                <span id="dispCogsVal" class="text-purple-400 font-black">30%</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label class="block text-slate-300 font-semibold mb-1">Dataset (Pixel)</label>
+                <select id="selDataset" onchange="markStepDone('economics');" class="meta-input-light w-full rounded-xl px-3 py-2 cursor-pointer">
+                  <option value="primary" selected>byshahid-portfolio (Active Dataset)</option>
+                  <option value="create">+ Connect New Dataset</option>
+                </select>
               </div>
-              <div class="flex items-center space-x-2">
-                <input type="range" id="rngCOGS" min="5" max="80" value="30" step="1" oninput="onCogsSlider(this.value)" class="w-full accent-purple-500 cursor-pointer">
-                <input type="number" id="inpCOGS" value="30" min="0" max="95" oninput="onCogsInput(this.value)" class="w-14 text-center bg-slate-900 border border-slate-700 rounded-lg py-1 text-white font-bold">
-              </div>
-              <div class="grid grid-cols-4 gap-1.5 pt-1 text-[10px]">
-                <button type="button" onclick="setCogsPreset(15)" class="cogs-btn py-1 px-1.5 rounded-lg font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700" data-val="15">15% (Digital)</button>
-                <button type="button" onclick="setCogsPreset(30)" class="cogs-btn py-1 px-1.5 rounded-lg font-bold bg-purple-600 text-white border border-purple-400" data-val="30">30% (Brand)</button>
-                <button type="button" onclick="setCogsPreset(45)" class="cogs-btn py-1 px-1.5 rounded-lg font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700" data-val="45">45% (Drop)</button>
-                <button type="button" onclick="setCogsPreset(60)" class="cogs-btn py-1 px-1.5 rounded-lg font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700" data-val="60">60% (Wholesale)</button>
+
+              <div>
+                <label class="block text-slate-300 font-semibold mb-1">Attribution Setting</label>
+                <select id="selAttribution" onchange="markStepDone('economics');" class="meta-input-light w-full rounded-xl px-3 py-2 cursor-pointer">
+                  <option value="7d_1d" selected>7-Day Click or 1-Day View (Standard)</option>
+                  <option value="1d_click_view">1-Day Click or 1-Day View</option>
+                  <option value="7d_click">7-Day Click Only</option>
+                  <option value="1d_click">1-Day Click Only</option>
+                </select>
               </div>
             </div>
 
-            <!-- Other Variable Costs Inline -->
-            <div class="grid grid-cols-3 gap-2 pt-1">
+            <!-- Financial Inputs with Light Gray Inputs -->
+            <div class="border-t border-slate-800 pt-3 space-y-3">
               <div>
-                <label class="block text-slate-400 font-bold mb-1">Pick/Pack/Ship</label>
+                <label class="block text-slate-300 font-semibold mb-1">Average Order Value (AOV)</label>
                 <div class="relative">
-                  <span class="curr-symbol absolute left-2.5 top-1.5 text-slate-500 font-bold">$</span>
-                  <input type="number" id="inpShipping" value="5.00" step="0.5" min="0" oninput="calcAll()" class="w-full bg-slate-900 border border-slate-700 rounded-lg pl-6 pr-1.5 py-1.5 text-white font-bold">
+                  <span class="curr-symbol absolute left-3 top-2 text-slate-500 font-bold">$</span>
+                  <input type="number" id="inpAOV" value="85" step="1" min="0" oninput="markStepDone('economics'); calcAll();" class="meta-input-light w-full rounded-xl pl-8 pr-3 py-2">
                 </div>
               </div>
-              <div>
-                <label class="block text-slate-400 font-bold mb-1">Gateway %</label>
-                <div class="relative">
-                  <input type="number" id="inpGatewayPct" value="2.9" step="0.1" min="0" oninput="calcAll()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5 text-white font-bold">
-                  <span class="absolute right-2 top-1.5 text-slate-500 font-bold">%</span>
+
+              <!-- COGS Slider & Presets -->
+              <div class="space-y-1.5">
+                <div class="flex justify-between items-center text-slate-300 font-semibold">
+                  <span>Cost of Goods Sold (COGS %)</span>
+                  <span id="dispCogsVal" class="text-royal font-bold">30%</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <input type="range" id="rngCOGS" min="5" max="80" value="30" step="1" oninput="onCogsSlider(this.value); markStepDone('economics');" class="w-full accent-royal cursor-pointer">
+                  <input type="number" id="inpCOGS" value="30" min="0" max="95" oninput="onCogsInput(this.value); markStepDone('economics');" class="meta-input-light w-16 text-center rounded-lg py-1">
+                </div>
+                <div class="grid grid-cols-4 gap-1.5 pt-1 text-[10px]">
+                  <button type="button" onclick="setCogsPreset(15); markStepDone('economics');" class="cogs-btn py-1 px-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700" data-val="15">15% (Digital)</button>
+                  <button type="button" onclick="setCogsPreset(30); markStepDone('economics');" class="cogs-btn py-1 px-1.5 rounded-lg font-semibold bg-royal text-white border border-blue-400" data-val="30">30% (Brand)</button>
+                  <button type="button" onclick="setCogsPreset(45); markStepDone('economics');" class="cogs-btn py-1 px-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700" data-val="45">45% (Drop)</button>
+                  <button type="button" onclick="setCogsPreset(60); markStepDone('economics');" class="cogs-btn py-1 px-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700" data-val="60">60% (Wholesale)</button>
                 </div>
               </div>
-              <div>
-                <label class="block text-slate-400 font-bold mb-1">Returns %</label>
-                <div class="relative">
-                  <input type="number" id="inpReturns" value="4.0" step="0.5" min="0" oninput="calcAll()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1.5 text-white font-bold">
-                  <span class="absolute right-2 top-1.5 text-slate-500 font-bold">%</span>
+
+              <!-- Other Variable Costs -->
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <label class="block text-slate-400 font-semibold mb-1 text-[11px]">Pick/Pack/Ship</label>
+                  <div class="relative">
+                    <span class="curr-symbol absolute left-2.5 top-1.5 text-slate-500 font-bold">$</span>
+                    <input type="number" id="inpShipping" value="5.00" step="0.5" min="0" oninput="markStepDone('economics'); calcAll();" class="meta-input-light w-full rounded-lg pl-6 pr-1.5 py-1.5">
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-slate-400 font-semibold mb-1 text-[11px]">Gateway %</label>
+                  <div class="relative">
+                    <input type="number" id="inpGatewayPct" value="2.9" step="0.1" min="0" oninput="markStepDone('economics'); calcAll();" class="meta-input-light w-full rounded-lg px-2 py-1.5">
+                    <span class="absolute right-2 top-1.5 text-slate-500 font-bold">%</span>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-slate-400 font-semibold mb-1 text-[11px]">Returns %</label>
+                  <div class="relative">
+                    <input type="number" id="inpReturns" value="4.0" step="0.5" min="0" oninput="markStepDone('economics'); calcAll();" class="meta-input-light w-full rounded-lg px-2 py-1.5">
+                    <span class="absolute right-2 top-1.5 text-slate-500 font-bold">%</span>
+                  </div>
                 </div>
               </div>
+
+              <!-- Margin Waterfall -->
+              <div class="space-y-1.5 pt-2 border-t border-slate-800 text-[11px]">
+                <div class="flex justify-between text-slate-300 font-normal">
+                  <span>Revenue (AOV):</span>
+                  <span class="text-white font-semibold" id="resWaterfallAov">$85.00</span>
+                </div>
+                <div class="flex justify-between text-slate-400 font-normal">
+                  <span>Cost of Goods (COGS):</span>
+                  <span class="text-rose-400 font-semibold" id="resWaterfallCogs">-$25.50</span>
+                </div>
+                <div class="flex justify-between text-slate-400 font-normal">
+                  <span>Shipping & Merchant Fees:</span>
+                  <span class="text-rose-400 font-semibold" id="resWaterfallFees">-$10.87</span>
+                </div>
+                <div class="flex justify-between text-blue-200 bg-blue-950/60 p-2 rounded-lg border border-blue-800/60 mt-1 font-semibold">
+                  <span>Net Margin for Ads (Max Allowable CAC):</span>
+                  <span class="text-white font-bold" id="resWaterfallNet">$48.63</span>
+                </div>
+              </div>
+
             </div>
 
-            <!-- Waterfall Margin Summary -->
-            <div class="space-y-1.5 pt-2 border-t border-slate-800 text-[11px] font-bold">
-              <div class="flex justify-between text-slate-300">
-                <span>Revenue (AOV):</span>
-                <span class="text-white" id="resWaterfallAov">$85.00</span>
-              </div>
-              <div class="flex justify-between text-slate-400">
-                <span>Cost of Goods (COGS):</span>
-                <span class="text-rose-400" id="resWaterfallCogs">-$25.50</span>
-              </div>
-              <div class="flex justify-between text-slate-400">
-                <span>Shipping & Merchant Fees:</span>
-                <span class="text-rose-400" id="resWaterfallFees">-$10.87</span>
-              </div>
-              <div class="flex justify-between text-purple-300 bg-purple-950/60 p-2 rounded-lg border border-purple-800/60 mt-1">
-                <span>Net Margin for Ads (Max Allowable CAC):</span>
-                <span class="text-purple-200 font-black" id="resWaterfallNet">$48.63</span>
-              </div>
-            </div>
           </div>
         </div>
 
         <!-- SECTION 4: BID STRATEGY & TARGET ROAS -->
-        <div id="sec-bid" class="meta-manager-card rounded-2xl p-5 border border-slate-800 space-y-4">
+        <div id="sec-bid" class="meta-manager-card rounded-2xl p-5 border border-slate-800 space-y-3.5 scroll-target">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
-            <div class="flex items-center space-x-2">
-              <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] font-black"><svg class="w-2.5 h-2.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>
-              <h2 class="text-sm font-bold text-white">Bid Strategy & ROAS Target</h2>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-900/40 text-blue-300 border border-blue-700/50">Highest Volume</span>
+            <h2 class="text-sm font-semibold text-white">Bid Strategy & ROAS Floor</h2>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-blue-900/40 text-blue-300 border border-blue-700/50">Auction Strategy</span>
           </div>
 
           <div class="space-y-3 text-xs">
-            <div class="grid grid-cols-2 gap-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label class="block text-slate-400 font-bold mb-1">Bidding Strategy</label>
-                <div class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-slate-200 font-semibold">Highest Volume (Max CVR)</div>
+                <label class="block text-slate-300 font-semibold mb-1">Bid Strategy</label>
+                <select id="selBidStrategy" onchange="markStepDone('bid');" class="meta-input-light w-full rounded-xl px-3 py-2 cursor-pointer">
+                  <option value="highest_volume" selected>Highest Volume (Spend Full Budget)</option>
+                  <option value="roas_goal">ROAS Goal (Floor Constraint)</option>
+                  <option value="cost_cap">Cost Per Result Goal (Max CAC)</option>
+                </select>
               </div>
+
               <div>
-                <label class="block text-slate-400 font-bold mb-1">ROAS Floor Target</label>
-                <div class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-purple-400 font-black" id="dispTargetRoasCard">2.68x Target</div>
+                <label class="block text-slate-300 font-semibold mb-1">Target Net Profit Margin</label>
+                <div class="meta-input-light w-full rounded-xl px-3 py-2 text-royal font-bold flex justify-between items-center">
+                  <span id="dispDesiredMargin">20% Net Target</span>
+                  <span class="text-[10px] text-slate-500 font-normal" id="dispTargetRoasCard">2.68x ROAS</span>
+                </div>
               </div>
             </div>
 
             <!-- Desired Margin Slider -->
             <div class="space-y-1.5 pt-1">
-              <div class="flex justify-between items-center text-slate-300 font-bold">
-                <span>Desired Net Profit Margin (After Ads)</span>
-                <span id="dispDesiredMargin" class="text-emerald-400 font-black">20% Net Target</span>
+              <div class="flex justify-between items-center text-slate-300 font-normal">
+                <span>Adjust Desired Net Profit Margin (After Ad Spend):</span>
               </div>
               <div class="flex items-center space-x-2">
-                <input type="range" id="rngDesiredMargin" min="5" max="45" value="20" step="1" oninput="onDesiredMarginChange(this.value)" class="w-full accent-emerald-500 cursor-pointer">
-                <input type="number" id="inpDesiredMargin" value="20" min="0" max="60" oninput="onDesiredMarginChange(this.value)" class="w-14 text-center bg-slate-900 border border-slate-700 rounded-lg py-1 text-white font-bold">
+                <input type="range" id="rngDesiredMargin" min="5" max="45" value="20" step="1" oninput="onDesiredMarginChange(this.value); markStepDone('bid');" class="w-full accent-royal cursor-pointer">
+                <input type="number" id="inpDesiredMargin" value="20" min="0" max="60" oninput="onDesiredMarginChange(this.value); markStepDone('bid');" class="meta-input-light w-16 text-center rounded-lg py-1">
               </div>
             </div>
           </div>
         </div>
 
         <!-- SECTION 5: AUDIENCE (ADVANTAGE+ ON) -->
-        <div id="sec-audience" class="meta-manager-card rounded-2xl p-5 border border-slate-800 space-y-4">
+        <div id="sec-audience" class="meta-manager-card rounded-2xl p-5 border border-slate-800 space-y-3.5 scroll-target">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
-            <div class="flex items-center space-x-2">
-              <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] font-black"><svg class="w-2.5 h-2.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>
-              <h2 class="text-sm font-bold text-white">Audience & Candidate Retrieval</h2>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-900/40 text-emerald-300 border border-emerald-700/50">Advantage+ On</span>
+            <h2 class="text-sm font-semibold text-white">Audience & Candidate Retrieval</h2>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-emerald-900/40 text-emerald-300 border border-emerald-700/50">Advantage+ On</span>
           </div>
 
-          <div class="space-y-2 text-xs">
-            <div class="grid grid-cols-2 gap-2 text-[11px]">
-              <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
-                <span class="text-slate-400 block text-[10px]">Locations</span>
-                <span class="font-bold text-slate-200">Worldwide / Broad Liquidity</span>
+          <div class="space-y-3 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div>
+                <label class="block text-slate-300 font-semibold mb-1 text-[11px]">Location</label>
+                <select id="selAudienceLocation" onchange="markStepDone('audience');" class="meta-input-light w-full rounded-xl px-2.5 py-1.5 cursor-pointer text-xs">
+                  <option value="worldwide" selected>Worldwide (Broad)</option>
+                  <option value="uae">United Arab Emirates</option>
+                  <option value="usa">United States</option>
+                  <option value="saudi">Saudi Arabia</option>
+                  <option value="pakistan">Pakistan</option>
+                  <option value="uk">United Kingdom</option>
+                  <option value="canada">Canada</option>
+                  <option value="australia">Australia</option>
+                </select>
               </div>
-              <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
-                <span class="text-slate-400 block text-[10px]">Age & Gender</span>
-                <span class="font-bold text-slate-200">18 - 65+ &bull; All Genders</span>
+
+              <div>
+                <label class="block text-slate-300 font-semibold mb-1 text-[11px]">Age</label>
+                <select id="selAudienceAge" onchange="markStepDone('audience');" class="meta-input-light w-full rounded-xl px-2.5 py-1.5 cursor-pointer text-xs">
+                  <option value="18_65" selected>18 - 65+ (Default)</option>
+                  <option value="21_55">21 - 55</option>
+                  <option value="25_45">25 - 45</option>
+                  <option value="18_35">18 - 35</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-slate-300 font-semibold mb-1 text-[11px]">Gender</label>
+                <select id="selAudienceGender" onchange="markStepDone('audience');" class="meta-input-light w-full rounded-xl px-2.5 py-1.5 cursor-pointer text-xs">
+                  <option value="all" selected>All Genders</option>
+                  <option value="men">Men Only</option>
+                  <option value="women">Women Only</option>
+                </select>
               </div>
             </div>
+
             <div class="p-3 rounded-xl bg-purple-950/40 border border-purple-800/40 text-purple-200">
-              <span class="font-black block text-[11px] mb-1">Andromeda AI Retrieval Rule:</span>
-              <p class="text-[10px] text-slate-300 leading-relaxed">No manual interest stacking. Multimodal neural networks pre-screen candidate ads, achieving <strong>+6% Retrieval Recall</strong> and <strong>+8% Ad Quality</strong> directly from creative visual & text vectors.</p>
+              <span class="font-semibold block text-[11px] mb-1">Andromeda AI Candidate Generation:</span>
+              <p class="text-[10px] text-slate-300 font-normal leading-relaxed">
+                No manual interest stacking. Multimodal neural networks pre-screen candidate ads, achieving <strong>+6% Retrieval Recall</strong> and <strong>+8% Ad Quality</strong> directly from creative visual & text vectors.
+              </p>
             </div>
           </div>
         </div>
 
         <!-- SECTION 6: PLACEMENTS & LIQUIDITY -->
-        <div id="sec-placements" class="meta-manager-card rounded-2xl p-5 border border-slate-800 space-y-3">
+        <div id="sec-placements" class="meta-manager-card rounded-2xl p-5 border border-slate-800 space-y-3.5 scroll-target">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
-            <div class="flex items-center space-x-2">
-              <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] font-black"><svg class="w-2.5 h-2.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>
-              <h2 class="text-sm font-bold text-white">Placements & Liquidity</h2>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-900/40 text-emerald-300 border border-emerald-700/50">Advantage+ Placements</span>
+            <h2 class="text-sm font-semibold text-white">Placements & Liquidity</h2>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-emerald-900/40 text-emerald-300 border border-emerald-700/50">Advantage+ Placements</span>
           </div>
 
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
-            <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
-              <span class="font-bold text-white block">Facebook</span>
-              <span class="text-[10px] text-purple-400 font-semibold">Feed & Reels</span>
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="block text-slate-300 font-semibold mb-1">Placement Mode</label>
+              <select id="selPlacementMode" onchange="markStepDone('placements');" class="meta-input-light w-full rounded-xl px-3 py-2 cursor-pointer">
+                <option value="advantage_plus" selected>Advantage+ Placements (Recommended by Meta)</option>
+                <option value="manual">Manual Placements (Custom Selection)</option>
+              </select>
             </div>
-            <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
-              <span class="font-bold text-white block">Instagram</span>
-              <span class="text-[10px] text-pink-400 font-semibold">Feed, Story & Reels</span>
-            </div>
-            <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
-              <span class="font-bold text-white block">WhatsApp</span>
-              <span class="text-[10px] text-emerald-400 font-semibold">Direct Click-to-Chat</span>
-            </div>
-            <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
-              <span class="font-bold text-white block">Threads</span>
-              <span class="text-[10px] text-indigo-400 font-semibold">Conversational</span>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
+              <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                <span class="font-semibold text-white block">Facebook</span>
+                <span class="text-[10px] text-blue-400 font-normal">Feed & Reels</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                <span class="font-semibold text-white block">Instagram</span>
+                <span class="text-[10px] text-pink-400 font-normal">Feed, Story & Reels</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                <span class="font-semibold text-white block">WhatsApp</span>
+                <span class="text-[10px] text-emerald-400 font-normal">Click-to-Chat</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                <span class="font-semibold text-white block">Threads</span>
+                <span class="text-[10px] text-purple-400 font-normal">Feed Sponsored</span>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- SECTION 7: AD CREATIVE STUDIO (POSTER VS REEL EVALUATOR) -->
-        <div id="sec-creative" class="meta-manager-card rounded-2xl p-5 border border-slate-800 space-y-4">
+        <div id="sec-creative" class="meta-manager-card rounded-2xl p-5 border border-slate-800 space-y-3.5 scroll-target">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
-            <div class="flex items-center space-x-2">
-              <span class="w-4 h-4 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center text-[10px] font-black"><svg class="w-2.5 h-2.5 text-purple-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg></span>
-              <h2 class="text-sm font-bold text-white">Creative Studio: Poster vs Reel</h2>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-900/40 text-purple-300 border border-purple-700/50">Multi-Format</span>
+            <h2 class="text-sm font-semibold text-white">Creative Studio: Poster vs Reel</h2>
+            <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-purple-900/40 text-purple-300 border border-purple-700/50">Multi-Format</span>
           </div>
 
           <!-- Format Selection Buttons -->
           <div class="grid grid-cols-2 gap-2 text-xs">
-            <button type="button" onclick="selectCreativeFormat('poster')" id="fmtBtn-poster" class="fmt-btn p-3 rounded-xl border border-slate-700 bg-slate-900 text-left transition hover:border-purple-500 cursor-pointer">
-              <span class="block font-bold text-white">Static Poster (100%)</span>
-              <span class="text-[10px] text-slate-400">Lifespan: 21-30+ Days (Resilient)</span>
+            <button type="button" onclick="selectCreativeFormat('poster'); markStepDone('creative');" id="fmtBtn-poster" class="fmt-btn p-3 rounded-xl border border-slate-700 bg-slate-900 text-left transition hover:border-royal cursor-pointer">
+              <span class="block font-semibold text-white">Static Poster (100%)</span>
+              <span class="text-[10px] text-slate-400 font-normal">Lifespan: 21-30+ Days</span>
             </button>
-            <button type="button" onclick="selectCreativeFormat('reel')" id="fmtBtn-reel" class="fmt-btn p-3 rounded-xl border border-slate-700 bg-slate-900 text-left transition hover:border-purple-500 cursor-pointer">
-              <span class="block font-bold text-white">Vertical Reel (100%)</span>
-              <span class="text-[10px] text-rose-400">Lifespan: 7-10 Days (Fast Burn)</span>
+            <button type="button" onclick="selectCreativeFormat('reel'); markStepDone('creative');" id="fmtBtn-reel" class="fmt-btn p-3 rounded-xl border border-slate-700 bg-slate-900 text-left transition hover:border-royal cursor-pointer">
+              <span class="block font-semibold text-white">Vertical Reel (100%)</span>
+              <span class="text-[10px] text-rose-400 font-normal">Lifespan: 7-10 Days (Fast)</span>
             </button>
-            <button type="button" onclick="selectCreativeFormat('hybrid')" id="fmtBtn-hybrid" class="fmt-btn p-3 rounded-xl border-2 border-purple-500 bg-purple-950/40 text-left transition cursor-pointer">
+            <button type="button" onclick="selectCreativeFormat('hybrid'); markStepDone('creative');" id="fmtBtn-hybrid" class="fmt-btn p-3 rounded-xl border-2 border-royal bg-royal/20 text-left transition cursor-pointer">
               <div class="flex justify-between items-center">
-                <span class="font-bold text-white">Hybrid (70/30)</span>
-                <span class="text-[9px] bg-purple-600 text-white px-1.5 py-0.2 rounded font-extrabold">Optimal</span>
+                <span class="font-semibold text-white">Hybrid (70/30)</span>
+                <span class="text-[9px] bg-royal text-white px-1.5 py-0.2 rounded font-bold">Optimal</span>
               </div>
-              <span class="text-[10px] text-purple-300">70% Posters / 30% Reels</span>
+              <span class="text-[10px] text-blue-200 font-normal">70% Posters / 30% Reels</span>
             </button>
-            <button type="button" onclick="selectCreativeFormat('custom')" id="fmtBtn-custom" class="fmt-btn p-3 rounded-xl border border-slate-700 bg-slate-900 text-left transition hover:border-purple-500 cursor-pointer">
-              <span class="block font-bold text-white">Custom Ratio</span>
-              <span class="text-[10px] text-slate-400">Interactive Split Slider</span>
+            <button type="button" onclick="selectCreativeFormat('custom'); markStepDone('creative');" id="fmtBtn-custom" class="fmt-btn p-3 rounded-xl border border-slate-700 bg-slate-900 text-left transition hover:border-royal cursor-pointer">
+              <span class="block font-semibold text-white">Custom Ratio</span>
+              <span class="text-[10px] text-slate-400 font-normal">Split Slider</span>
             </button>
           </div>
 
           <!-- Custom Split Ratio Slider -->
           <div id="boxCustomFormatSplit" class="hidden p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs">
-            <div class="flex justify-between font-bold mb-1.5">
+            <div class="flex justify-between font-semibold mb-1.5">
               <span class="text-slate-300">Poster vs Reel Split:</span>
-              <div class="space-x-1.5 text-purple-400">
+              <div class="space-x-1.5 text-royal font-bold">
                 <span id="lblPosterRatio">70% Posters</span>
                 <span class="text-slate-600">/</span>
                 <span id="lblReelRatio">30% Reels</span>
               </div>
             </div>
-            <input type="range" min="0" max="100" value="70" step="5" oninput="onCustomFormatSlider(this.value)" class="w-full accent-purple-500 cursor-pointer">
+            <input type="range" min="0" max="100" value="70" step="5" oninput="onCustomFormatSlider(this.value); markStepDone('creative');" class="w-full accent-royal cursor-pointer">
           </div>
 
           <!-- Format Matrix Comparison Table -->
           <div class="rounded-xl border border-slate-800 overflow-hidden text-xs">
             <table class="w-full text-left">
-              <thead class="bg-slate-900/90 text-slate-400 uppercase text-[9px] font-bold">
+              <thead class="bg-slate-900 text-slate-400 uppercase text-[9px] font-semibold">
                 <tr>
-                  <th class="py-2 px-3">Metric</th>
+                  <th class="py-2 px-3">Dimension</th>
                   <th class="py-2 px-3">Static Poster</th>
                   <th class="py-2 px-3">Short Reel</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-slate-800 text-[11px] text-slate-300 bg-slate-900/40 font-medium">
+              <tbody class="divide-y divide-slate-800 text-[11px] text-slate-300 bg-slate-900/40 font-normal">
                 <tr>
-                  <td class="py-2 px-3 font-bold text-white">Cost per Creative</td>
-                  <td class="py-2 px-3 text-emerald-400">$15 - $40 (Light)</td>
-                  <td class="py-2 px-3 text-rose-400">$150 - $450 (Heavy)</td>
+                  <td class="py-2 px-3 font-semibold text-white">Cost per Creative</td>
+                  <td class="py-2 px-3 text-emerald-400 font-medium">$15 - $40 (Light)</td>
+                  <td class="py-2 px-3 text-rose-400 font-medium">$150 - $450 (Heavy)</td>
                 </tr>
                 <tr>
-                  <td class="py-2 px-3 font-bold text-white">Fatigue Lifespan</td>
-                  <td class="py-2 px-3 text-emerald-400">21-30+ Days</td>
-                  <td class="py-2 px-3 text-rose-400">7-10 Days</td>
+                  <td class="py-2 px-3 font-semibold text-white">Fatigue Lifespan</td>
+                  <td class="py-2 px-3 text-emerald-400 font-medium">21-30+ Days</td>
+                  <td class="py-2 px-3 text-rose-400 font-medium">7-10 Days</td>
                 </tr>
                 <tr>
-                  <td class="py-2 px-3 font-bold text-white">Retrieval Role</td>
-                  <td class="py-2 px-3 text-purple-300">Conversion Clarity</td>
-                  <td class="py-2 px-3 text-indigo-300">Hook Discovery</td>
+                  <td class="py-2 px-3 font-semibold text-white">Retrieval Role</td>
+                  <td class="py-2 px-3 text-blue-300">Conversion Clarity</td>
+                  <td class="py-2 px-3 text-purple-300">Hook Discovery</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
 
-        <!-- SECTION 8: SIMPLE ADS VS ANDROMEDA AI COMPARISON -->
-        <div id="sec-comparison" class="meta-manager-card rounded-2xl p-5 border border-slate-800 space-y-4">
+        <!-- SECTION 8: SIMPLE ADS VS ANDROMEDA AI COMPARISON (Smooth Scroll Target) -->
+        <div id="sec-comparison" class="meta-manager-card rounded-2xl p-5 border border-slate-800 space-y-3.5 scroll-target">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
-            <div class="flex items-center space-x-2">
-              <span class="w-4 h-4 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-[10px] font-black"><svg class="w-2.5 h-2.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></span>
-              <h2 class="text-sm font-bold text-white">Simple Ads vs. Meta Andromeda AI</h2>
-            </div>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-900/40 text-indigo-300 border border-indigo-700/50">Strategic Breakdown</span>
+            <h2 class="text-sm font-semibold text-white">Simple Ads vs. Meta Andromeda AI</h2>
+            <button onclick="markStepDone('comparison')" class="text-[10px] font-medium px-2 py-0.5 rounded bg-blue-900/40 text-blue-300 border border-blue-700/50 hover:bg-blue-800/60 cursor-pointer">Mark Reviewed</button>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
             <!-- Simple Ads -->
             <div class="p-3.5 rounded-xl bg-rose-950/30 border border-rose-900/50 space-y-2">
-              <span class="font-extrabold text-rose-300 block text-xs">Conventional Simple Ads</span>
+              <span class="font-semibold text-rose-300 block text-xs">Conventional Simple Ads</span>
               <ul class="space-y-1.5 text-[11px] text-slate-300 font-normal">
                 <li>&bull; Fragile interest stacking (rapid exhaustion)</li>
                 <li>&bull; Single ad fatigue in 5-7 days</li>
@@ -953,7 +1051,7 @@
 
             <!-- Andromeda AI -->
             <div class="p-3.5 rounded-xl bg-purple-950/40 border border-purple-800/50 space-y-2">
-              <span class="font-extrabold text-purple-300 block text-xs">Meta Andromeda 2026 AI</span>
+              <span class="font-semibold text-purple-300 block text-xs">Meta Andromeda 2026 AI</span>
               <ul class="space-y-1.5 text-[11px] text-slate-200 font-normal">
                 <li>&bull; <strong>+6% Retrieval Recall</strong> across broad liquidity</li>
                 <li>&bull; <strong>+8% Ad Quality</strong> via multimodal vector matching</li>
@@ -966,7 +1064,7 @@
 
       </div>
 
-      <!-- RIGHT COLUMN: STICKY AD PREVIEW & LIVE SIMULATOR COCKPIT (Just like Meta Ads Manager Screenshots) -->
+      <!-- RIGHT COLUMN: STICKY AD PREVIEW & LIVE SIMULATOR COCKPIT -->
       <div class="lg:col-span-4 space-y-4 sticky top-16">
         
         <!-- AD PREVIEW PANE -->
@@ -974,10 +1072,8 @@
           
           <!-- Ad Preview Header -->
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
-            <span class="text-xs font-black uppercase tracking-wider text-slate-300">Ad Preview</span>
-            <div class="flex items-center space-x-1.5 text-[11px] font-bold text-slate-400">
-              <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300">Review defaults</span>
-            </div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-300">Ad Preview</span>
+            <span class="text-[11px] font-medium text-slate-400">Review defaults</span>
           </div>
 
           <!-- Realistic Mock Meta Feed / Reel Ad Card -->
@@ -987,36 +1083,36 @@
             <div class="flex items-center space-x-2">
               <img src="icons/icon-192.png" alt="Meta Profile" class="w-7 h-7 rounded-full bg-slate-800 border border-slate-700">
               <div class="min-w-0 flex-1">
-                <span class="block text-xs font-bold text-white truncate">Meta Andromeda Campaign</span>
-                <span class="block text-[9px] text-slate-400">Sponsored &bull; AI Matched</span>
+                <span class="block text-xs font-semibold text-white truncate">Meta Andromeda Campaign</span>
+                <span class="block text-[9px] text-slate-400 font-normal">Sponsored &bull; AI Matched</span>
               </div>
-              <span class="text-[9px] font-black px-1.5 py-0.5 rounded bg-emerald-950/70 text-emerald-400 border border-emerald-800/50">9.4 Quality</span>
+              <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-950/70 text-emerald-400 border border-emerald-800/50">9.4 Quality</span>
             </div>
 
             <!-- Ad Primary Text -->
-            <p class="text-[11px] text-slate-300 font-medium leading-relaxed" id="adPrimaryText">
+            <p class="text-[11px] text-slate-300 font-normal leading-relaxed" id="adPrimaryText">
               Scale your e-commerce revenue with Meta Andromeda's 2026 AI candidate retrieval engine. +22% AI ROAS advantage unlocked.
             </p>
 
-            <!-- Creative Media Box (Mockup with Andromeda Cover Visual) -->
+            <!-- Creative Media Box -->
             <div class="relative rounded-lg overflow-hidden border border-slate-800 bg-slate-950 h-36 flex items-center justify-center group cursor-pointer" onclick="triggerMetaFlowAnimation()">
               <img src="meta-andromeda-cover.webp" alt="Ad Creative Media" class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500 opacity-90">
               <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent flex items-end p-2.5 justify-between">
                 <div>
-                  <span class="text-[9px] font-extrabold uppercase bg-purple-600 text-white px-2 py-0.5 rounded">Candidate Selected</span>
-                  <p class="text-[10px] font-bold text-white mt-0.5" id="adFormatBadge">Hybrid Multi-Format</p>
+                  <span class="text-[9px] font-bold uppercase bg-royal text-white px-2 py-0.5 rounded">Candidate Selected</span>
+                  <p class="text-[10px] font-semibold text-white mt-0.5" id="adFormatBadge">Hybrid Multi-Format</p>
                 </div>
-                <span class="text-[10px] font-black text-emerald-400 bg-slate-900/90 px-2 py-0.5 rounded border border-emerald-800">-18% eCPM</span>
+                <span class="text-[10px] font-bold text-emerald-400 bg-slate-900/90 px-2 py-0.5 rounded border border-emerald-800">-18% eCPM</span>
               </div>
             </div>
 
             <!-- Ad CTA Bar -->
             <div class="flex items-center justify-between pt-1">
               <div>
-                <span class="block text-[9px] text-slate-400 uppercase">byshahid.vercel.app</span>
-                <span class="block text-xs font-bold text-white">Scale With Andromeda 2026</span>
+                <span class="block text-[9px] text-slate-400 uppercase font-normal">byshahid.vercel.app</span>
+                <span class="block text-xs font-semibold text-white">Scale With Andromeda 2026</span>
               </div>
-              <button onclick="triggerMetaFlowAnimation()" class="px-3 py-1.5 rounded-lg bg-meta-blue hover:bg-blue-600 text-white text-xs font-extrabold shadow-sm transition cursor-pointer">
+              <button onclick="triggerMetaFlowAnimation()" class="px-3 py-1.5 rounded-lg bg-royal hover:bg-royal-deep text-white text-xs font-bold shadow-sm transition cursor-pointer">
                 Shop Now
               </button>
             </div>
@@ -1025,34 +1121,34 @@
 
           <!-- Live Cockpit Performance Summary -->
           <div class="p-3 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2 text-xs">
-            <div class="flex justify-between items-center text-slate-400">
+            <div class="flex justify-between items-center text-slate-400 font-normal">
               <span>Break-Even ROAS:</span>
-              <span class="text-white font-extrabold" id="dispSideBeRoas">1.82x</span>
+              <span class="text-white font-bold" id="dispSideBeRoas">1.82x</span>
             </div>
-            <div class="flex justify-between items-center text-slate-400">
-              <span>Target ROAS:</span>
-              <span class="text-purple-400 font-extrabold" id="dispSideTargetRoas">2.68x</span>
+            <div class="flex justify-between items-center text-slate-400 font-normal">
+              <span>Target Net ROAS:</span>
+              <span class="text-royal font-bold" id="dispSideTargetRoas">2.68x</span>
             </div>
-            <div class="flex justify-between items-center text-slate-400">
+            <div class="flex justify-between items-center text-slate-400 font-normal">
               <span>Max Allowable CAC:</span>
-              <span class="text-indigo-400 font-extrabold" id="dispSideMaxCac">$46.75</span>
+              <span class="text-slate-200 font-bold" id="dispSideMaxCac">$48.63</span>
             </div>
-            <div class="flex justify-between items-center text-slate-400">
+            <div class="flex justify-between items-center text-slate-400 font-normal">
               <span>Safe Scaling (+20%):</span>
-              <span class="text-emerald-400 font-extrabold" id="dispSideNextScale">+$50.00</span>
+              <span class="text-emerald-400 font-bold" id="dispSideNextScale">+$50.00</span>
             </div>
-            <div class="flex justify-between items-center text-slate-400">
+            <div class="flex justify-between items-center text-slate-400 font-normal">
               <span>Creative Velocity:</span>
-              <span class="text-pink-400 font-extrabold" id="dispSideVelocity">6 Ads/Wk</span>
+              <span class="text-pink-400 font-bold" id="dispSideVelocity">6 Ads/Wk</span>
             </div>
           </div>
 
           <!-- Action Buttons in Preview Pane -->
           <div class="pt-1 flex space-x-2">
-            <button onclick="triggerMetaFlowAnimation()" class="flex-1 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs transition flex items-center justify-center space-x-1 cursor-pointer">
+            <button onclick="triggerMetaFlowAnimation()" class="flex-1 py-2 rounded-xl bg-royal hover:bg-royal-deep text-white font-semibold text-xs transition flex items-center justify-center space-x-1 cursor-pointer">
               <span>Run Simulation</span>
             </button>
-            <button onclick="exportAuditPdf()" class="py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-700 transition flex items-center justify-center cursor-pointer">
+            <button onclick="exportAuditPdf()" class="py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs border border-slate-700 transition flex items-center justify-center cursor-pointer">
               <span>Audit PDF</span>
             </button>
           </div>
@@ -1069,7 +1165,7 @@
   <div class="print-only max-w-3xl mx-auto text-slate-900 font-sans">
     <div class="flex justify-between items-start border-b-2 border-black pb-3 mb-4">
       <div>
-        <h1 class="text-xl font-black uppercase tracking-tight">Meta Andromeda AI Media Audit Proposal</h1>
+        <h1 class="text-xl font-bold uppercase tracking-tight">Meta Andromeda AI Media Audit Proposal</h1>
         <p class="text-[11px] text-gray-700">Andromeda 2026 Paid Acquisition Strategy & Scaling Framework</p>
       </div>
       <div class="text-right text-[11px] text-gray-800">
@@ -1081,16 +1177,16 @@
 
     <div class="grid grid-cols-3 gap-3 mb-4 text-xs">
       <div class="p-2.5 border border-gray-300 rounded bg-gray-50">
-        <p class="font-bold text-gray-500 uppercase text-[9px]">Break-Even ROAS</p>
-        <p class="text-sm font-black text-black mt-0.5" id="printBeRoas">1.82x</p>
+        <p class="font-semibold text-gray-500 uppercase text-[9px]">Break-Even ROAS</p>
+        <p class="text-sm font-bold text-black mt-0.5" id="printBeRoas">1.82x</p>
       </div>
       <div class="p-2.5 border border-gray-300 rounded bg-gray-50">
-        <p class="font-bold text-gray-500 uppercase text-[9px]">Max Allowable CAC</p>
-        <p class="text-sm font-black text-black mt-0.5" id="printMaxCac">$46.75</p>
+        <p class="font-semibold text-gray-500 uppercase text-[9px]">Max Allowable CAC</p>
+        <p class="text-sm font-bold text-black mt-0.5" id="printMaxCac">$48.63</p>
       </div>
       <div class="p-2.5 border border-gray-300 rounded bg-gray-50">
-        <p class="font-bold text-gray-500 uppercase text-[9px]">Target Net ROAS</p>
-        <p class="text-sm font-black text-black mt-0.5" id="printTargetRoas">2.68x</p>
+        <p class="font-semibold text-gray-500 uppercase text-[9px]">Target Net ROAS</p>
+        <p class="text-sm font-bold text-black mt-0.5" id="printTargetRoas">2.68x</p>
       </div>
     </div>
 
@@ -1139,6 +1235,42 @@
   <script>
     let currentFormat = 'hybrid';
     let customPosterRatio = 70;
+    const completedSteps = new Set();
+
+    // Safe Numeric Parser (Handles 0 correctly without defaulting to 250)
+    function parseNum(id, fallback = 0) {
+      const el = document.getElementById(id);
+      if (!el) return fallback;
+      const val = parseFloat(el.value);
+      return isNaN(val) ? fallback : val;
+    }
+
+    function markStepDone(stepKey) {
+      completedSteps.add(stepKey);
+      const chk = document.getElementById(`chk-${stepKey}`);
+      if (chk) {
+        chk.innerHTML = '<svg class="w-2.5 h-2.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>';
+        chk.classList.add('checklist-checked');
+      }
+      const progressEl = document.getElementById('dispChecklistProgress');
+      if (progressEl) {
+        progressEl.innerText = `${completedSteps.size} / 8 Complete`;
+      }
+    }
+
+    function onObjectiveChange(val) {
+      const p = document.getElementById('adPrimaryText');
+      if (!p) return;
+      if (val === 'sales') {
+        p.innerText = "Scale your e-commerce revenue with Meta Andromeda's 2026 AI candidate retrieval engine. +22% AI ROAS advantage unlocked.";
+      } else if (val === 'leads') {
+        p.innerText = "Generate high-intent qualified leads directly from Meta feeds and stories with AI vector matching.";
+      } else if (val === 'traffic') {
+        p.innerText = "Drive verified high-intent store visitors to your landing page with optimized eCPM bidding.";
+      } else {
+        p.innerText = "Maximize candidate creative resonance with multimodal deep neural network evaluation.";
+      }
+    }
 
     function triggerMetaFlowAnimation() {
       const container = document.getElementById('meta-flow-container');
@@ -1169,6 +1301,7 @@
       if (activeEl) {
         activeEl.classList.add('side-menu-active');
       }
+      markStepDone(secId);
     }
 
     function selectCreativeFormat(fmt) {
@@ -1178,9 +1311,9 @@
         const el = document.getElementById(`fmtBtn-${b}`);
         if (!el) return;
         if (b === fmt) {
-          el.className = "fmt-btn p-3 rounded-xl border-2 border-purple-500 bg-purple-950/40 text-left transition cursor-pointer";
+          el.className = "fmt-btn p-3 rounded-xl border-2 border-royal bg-royal/20 text-left transition cursor-pointer";
         } else {
-          el.className = "fmt-btn p-3 rounded-xl border border-slate-700 bg-slate-900 text-left transition hover:border-purple-500 cursor-pointer";
+          el.className = "fmt-btn p-3 rounded-xl border border-slate-700 bg-slate-900 text-left transition hover:border-royal cursor-pointer";
         }
       });
 
@@ -1217,9 +1350,9 @@
       document.getElementById('dispCogsVal').innerText = val + '%';
       document.querySelectorAll('.cogs-btn').forEach(btn => {
         if (parseInt(btn.getAttribute('data-val'), 10) === val) {
-          btn.className = 'cogs-btn py-1 px-1.5 rounded-lg font-bold bg-purple-600 text-white border border-purple-400';
+          btn.className = 'cogs-btn py-1 px-1.5 rounded-lg font-semibold bg-royal text-white border border-blue-400';
         } else {
-          btn.className = 'cogs-btn py-1 px-1.5 rounded-lg font-bold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700';
+          btn.className = 'cogs-btn py-1 px-1.5 rounded-lg font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700';
         }
       });
       calcAll();
@@ -1255,29 +1388,29 @@
       const sym = document.getElementById('selCurrency').value || '$';
       document.querySelectorAll('.curr-symbol').forEach(el => el.innerText = sym.trim());
 
-      const aov = Math.max(1, parseFloat(document.getElementById('inpAOV').value) || 85);
-      const dailySpend = Math.max(0, parseFloat(document.getElementById('inpDailySpend').value) || 250);
-      const cogsPct = Math.max(0, parseFloat(document.getElementById('inpCOGS').value) || 30) / 100;
-      const gatewayPct = Math.max(0, parseFloat(document.getElementById('inpGatewayPct').value) || 2.9) / 100;
-      const shipping = Math.max(0, parseFloat(document.getElementById('inpShipping').value) || 5);
-      const returnPct = Math.max(0, parseFloat(document.getElementById('inpReturns').value) || 4) / 100;
-      const targetMarginPct = Math.max(0, parseFloat(document.getElementById('inpDesiredMargin').value) || 20) / 100;
+      const aov = Math.max(0, parseNum('inpAOV', 85));
+      const dailySpend = Math.max(0, parseNum('inpDailySpend', 250));
+      const cogsPct = Math.max(0, parseNum('inpCOGS', 30)) / 100;
+      const gatewayPct = Math.max(0, parseNum('inpGatewayPct', 2.9)) / 100;
+      const shipping = Math.max(0, parseNum('inpShipping', 5));
+      const returnPct = Math.max(0, parseNum('inpReturns', 4)) / 100;
+      const targetMarginPct = Math.max(0, parseNum('inpDesiredMargin', 20)) / 100;
 
       // Unit Economics per order
       const cogsAmt = aov * cogsPct;
       const gatewayAmt = aov * gatewayPct;
       const returnAmt = aov * returnPct;
       const totalVariableCost = cogsAmt + shipping + gatewayAmt + returnAmt;
-      const netMarginBeforeAds = Math.max(0.01, aov - totalVariableCost);
-      const netMarginPct = (netMarginBeforeAds / aov) * 100;
+      const netMarginBeforeAds = Math.max(0, aov - totalVariableCost);
+      const netMarginPct = aov > 0 ? ((netMarginBeforeAds / aov) * 100) : 0;
 
       // Break-Even ROAS & Max Allowable CAC
-      const beRoas = aov / netMarginBeforeAds;
+      const beRoas = netMarginBeforeAds > 0 ? (aov / netMarginBeforeAds) : 0;
       const maxCac = netMarginBeforeAds;
 
       // Target Margin ROAS
       const targetDenominator = netMarginBeforeAds - (aov * targetMarginPct);
-      let targetRoas = targetDenominator > 0 ? (aov / targetDenominator) : (beRoas * 1.5);
+      let targetRoas = targetDenominator > 0 ? (aov / targetDenominator) : (beRoas > 0 ? beRoas * 1.5 : 0);
 
       // Creative Velocity needed
       let velocityMultiplier = 1.0;
@@ -1289,11 +1422,11 @@
         velocityMultiplier = 0.7 + (reelShare * 0.9);
       }
 
-      let weeklyAds = Math.max(2, Math.round((dailySpend / 45) * velocityMultiplier));
+      let weeklyAds = dailySpend > 0 ? Math.max(2, Math.round((dailySpend / 45) * velocityMultiplier)) : 0;
 
-      // Update Hero KPI Cards
-      document.getElementById('dispBeRoas').innerText = beRoas.toFixed(2) + 'x';
-      document.getElementById('dispTargetRoas').innerText = targetRoas.toFixed(2) + 'x';
+      // Update Prominent White KPI Cards
+      document.getElementById('dispBeRoas').innerText = beRoas > 0 ? beRoas.toFixed(2) + 'x' : '0.00x';
+      document.getElementById('dispTargetRoas').innerText = targetRoas > 0 ? targetRoas.toFixed(2) + 'x' : '0.00x';
       document.getElementById('dispMaxCac').innerText = formatMoney(maxCac);
       document.getElementById('dispNetMarginPct').innerText = netMarginPct.toFixed(1) + '%';
       document.getElementById('dispCreativeVelocity').innerText = weeklyAds + ' Ads / Wk';
@@ -1303,12 +1436,12 @@
       document.getElementById('dispNextScaleBox').innerText = nextScaleVal;
 
       // Side Cockpit values
-      document.getElementById('dispSideBeRoas').innerText = beRoas.toFixed(2) + 'x';
-      document.getElementById('dispSideTargetRoas').innerText = targetRoas.toFixed(2) + 'x';
+      document.getElementById('dispSideBeRoas').innerText = beRoas > 0 ? beRoas.toFixed(2) + 'x' : '0.00x';
+      document.getElementById('dispSideTargetRoas').innerText = targetRoas > 0 ? targetRoas.toFixed(2) + 'x' : '0.00x';
       document.getElementById('dispSideMaxCac').innerText = formatMoney(maxCac);
       document.getElementById('dispSideNextScale').innerText = nextScaleVal;
       document.getElementById('dispSideVelocity').innerText = weeklyAds + ' Ads/Wk';
-      document.getElementById('dispTargetRoasCard').innerText = targetRoas.toFixed(2) + 'x Target';
+      document.getElementById('dispTargetRoasCard').innerText = (targetRoas > 0 ? targetRoas.toFixed(2) + 'x' : '0.00x') + ' ROAS';
 
       // Lifespan text
       let lifespanText = '14 - 21 Days';
@@ -1335,7 +1468,7 @@
       document.getElementById('printBeRoas').innerText = document.getElementById('dispBeRoas').innerText;
       document.getElementById('printMaxCac').innerText = document.getElementById('dispMaxCac').innerText;
       document.getElementById('printTargetRoas').innerText = document.getElementById('dispTargetRoas').innerText;
-      document.getElementById('printDailySpend').innerText = formatMoney(parseFloat(document.getElementById('inpDailySpend').value) || 250);
+      document.getElementById('printDailySpend').innerText = formatMoney(parseNum('inpDailySpend', 250));
       document.getElementById('printNextScale').innerText = document.getElementById('dispNextScale').innerText + ' / day';
       document.getElementById('printAscBudget').innerText = document.getElementById('resBudgetAsc').innerText;
       document.getElementById('printTestBudget').innerText = document.getElementById('resBudgetTest').innerText;
@@ -1348,7 +1481,7 @@
     // PWA Service Worker Registration
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=10').then(reg => {
+        navigator.serviceWorker.register('./sw.js?v=11').then(reg => {
           console.log('Andromeda SW registered:', reg.scope);
         }).catch(err => {
           console.log('SW error:', err);
@@ -1387,12 +1520,14 @@
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const id = entry.target.id.replace('sec-', '');
-            setActiveNav(id);
+            document.querySelectorAll('.side-menu-item').forEach(el => el.classList.remove('side-menu-active'));
+            const activeEl = document.getElementById(`nav-${id}`);
+            if (activeEl) activeEl.classList.add('side-menu-active');
           }
         });
-      }, { rootMargin: '-20% 0px -70% 0px' });
+      }, { rootMargin: '-15% 0px -60% 0px' });
 
-      document.querySelectorAll('[id^="sec-"]').forEach(sec => {
+      document.querySelectorAll('.scroll-target').forEach(sec => {
         observer.observe(sec);
       });
     });
