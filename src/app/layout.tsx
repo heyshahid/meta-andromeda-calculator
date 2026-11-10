@@ -17,6 +17,31 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Unregister legacy Service Workers & purge legacy caches
+              if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                  for (var i = 0; i < registrations.length; i++) {
+                    registrations[i].unregister();
+                  }
+                });
+                if ('caches' in window) {
+                  caches.keys().then(function(keys) {
+                    keys.forEach(function(key) {
+                      if (key.indexOf('andromeda-roas') !== -1) {
+                        caches.delete(key);
+                      }
+                    });
+                  });
+                }
+              }
+            `,
+          }}
+        />
+      </head>
       <body className="bg-[#F7F9FC] text-[#172033] antialiased min-h-screen flex">
         <Sidebar />
         <div className="flex-1 flex flex-col min-w-0 min-h-screen">
@@ -26,4 +51,3 @@ export default function RootLayout({
     </html>
   );
 }
-

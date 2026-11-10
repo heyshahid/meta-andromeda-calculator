@@ -8,7 +8,7 @@ import { PerformanceCharts } from "@/components/dashboard/PerformanceCharts";
 import { CSVImportWizard } from "@/components/csv/CSVImportWizard";
 import { AddCampaignModal } from "@/components/campaigns/AddCampaignModal";
 import { StorageService } from "@/lib/storage";
-import { Campaign, CurrencyCode, DailyInsight, AdvertisingAccount } from "@/lib/types";
+import { Campaign, CurrencyCode, DailyInsight, AdvertisingAccount, ActivityLog, SavedCalculation } from "@/lib/types";
 import { formatCurrency, formatPercent } from "@/lib/calculator-engine";
 import {
   DollarSign,
@@ -24,7 +24,12 @@ import {
   ArrowUpRight,
   RotateCcw,
   Calendar,
-  Building2
+  Building2,
+  Activity,
+  Calculator,
+  FileText,
+  Clock,
+  Sparkles
 } from "lucide-react";
 import Link from "next/link";
 
@@ -32,9 +37,11 @@ export default function DashboardPage() {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [accounts, setAccounts] = useState<AdvertisingAccount[]>([]);
   const [insights, setInsights] = useState<DailyInsight[]>([]);
+  const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
+  const [savedCalculations, setSavedCalculations] = useState<SavedCalculation[]>([]);
   const [currency, setCurrency] = useState<CurrencyCode>("USD");
   
-  // 5 Functional Filters as required by Section 1
+  // 5 Functional Filters as required by Section 1 & Section 3.A
   const [platformFilter, setPlatformFilter] = useState<string>("ALL");
   const [accountFilter, setAccountFilter] = useState<string>("ALL");
   const [campaignFilter, setCampaignFilter] = useState<string>("ALL");
@@ -47,10 +54,14 @@ export default function DashboardPage() {
     const loadedCampaigns = StorageService.getCampaigns();
     const loadedAccounts = StorageService.getAccounts();
     const loadedInsights = StorageService.getDailyInsights();
+    const loadedLogs = StorageService.getActivityLogs();
+    const loadedCalcs = StorageService.getSavedCalculations();
     const settings = StorageService.getSettings();
     setCampaigns(loadedCampaigns);
     setAccounts(loadedAccounts);
     setInsights(loadedInsights);
+    setActivityLogs(loadedLogs);
+    setSavedCalculations(loadedCalcs);
     setCurrency(settings.currency);
   };
 
@@ -117,6 +128,17 @@ export default function DashboardPage() {
   const aov = totalConversions > 0 ? totalRevenue / totalConversions : 0;
   const netROI = totalSpend > 0 ? ((totalRevenue - totalSpend) / totalSpend) * 100 : 0;
 
+  // Platform comparisons rollup
+  const platformSummary = filteredCampaigns.reduce((acc, c) => {
+    if (!acc[c.platform]) {
+      acc[c.platform] = { spend: 0, revenue: 0, conversions: 0 };
+    }
+    acc[c.platform].spend += c.spend;
+    acc[c.platform].revenue += c.revenue;
+    acc[c.platform].conversions += c.conversions;
+    return acc;
+  }, {} as Record<string, { spend: number; revenue: number; conversions: number }>);
+
   // Top performers vs Attention required
   const topCampaigns = [...filteredCampaigns].sort((a, b) => b.roas - a.roas).slice(0, 3);
   const attentionCampaigns = [...filteredCampaigns].filter((c) => c.roas < 2.0 && c.spend > 100);
@@ -155,13 +177,10 @@ export default function DashboardPage() {
 
             {/* 2. Platform Filter */}
             <div className="flex items-center space-x-1 border border-[#E2E8F0] rounded-lg bg-white px-2 py-1.5 text-xs shadow-xs">
-              <Filter className="w-3.5 h-3.5 text-[#64748B]" />
+              <Layers className="w-3.5 h-3.5 text-[#64748B]" />
               <select
                 value={platformFilter}
-                onChange={(e) => {
-                  setPlatformFilter(e.target.value);
-                  setCampaignFilter("ALL"); // Reset campaign if platform changes
-                }}
+                onChange={(e) => setPlatformFilter(e.target.value)}
                 className="bg-transparent font-medium text-[#172033] focus:outline-none cursor-pointer"
               >
                 <option value="ALL">All Platforms</option>
@@ -177,7 +196,7 @@ export default function DashboardPage() {
               <select
                 value={accountFilter}
                 onChange={(e) => setAccountFilter(e.target.value)}
-                className="bg-transparent font-medium text-[#172033] focus:outline-none cursor-pointer max-w-[140px] truncate"
+                className="bg-transparent font-medium text-[#172033] focus:outline-none cursor-pointer max-w-[130px] truncate"
               >
                 <option value="ALL">All Accounts</option>
                 {accounts.map((acc) => (
@@ -190,13 +209,13 @@ export default function DashboardPage() {
 
             {/* 4. Campaign Filter */}
             <div className="flex items-center space-x-1 border border-[#E2E8F0] rounded-lg bg-white px-2 py-1.5 text-xs shadow-xs">
-              <Layers className="w-3.5 h-3.5 text-[#64748B]" />
+              <Target className="w-3.5 h-3.5 text-[#64748B]" />
               <select
                 value={campaignFilter}
                 onChange={(e) => setCampaignFilter(e.target.value)}
-                className="bg-transparent font-medium text-[#172033] focus:outline-none cursor-pointer max-w-[150px] truncate"
+                className="bg-transparent font-medium text-[#172033] focus:outline-none cursor-pointer max-w-[130px] truncate"
               >
-                <option value="ALL">All Campaigns ({campaigns.length})</option>
+                <option value="ALL">All Campaigns</option>
                 {campaigns.map((c) => (
                   <option key={c.id} value={c.id}>
                     {c.name}
@@ -343,6 +362,30 @@ export default function DashboardPage() {
               />
             </div>
 
+            {/* Platform Performance Comparison Cards (Section 3.A) */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {["Meta Ads", "Google Ads", "TikTok Ads"].map((plat) => {
+                const data = platformSummary[plat] || { spend: 0, revenue: 0, conversions: 0 };
+                const roas = data.spend > 0 ? data.revenue / data.spend : 0;
+                return (
+                  <div key={plat} className="bg-white rounded-xl border border-[#E2E8F0] p-4 shadow-card">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs font-bold text-[#172033]">{plat}</span>
+                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${
+                        roas >= 3.0 ? "bg-[#DCFCE7] text-[#16A34A]" : roas >= 2.0 ? "bg-[#EFF6FF] text-[#2563EB]" : "bg-[#F1F5F9] text-[#64748B]"
+                      }`}>
+                        {roas > 0 ? `${roas.toFixed(2)}x ROAS` : "No Activity"}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs pt-1 border-t border-[#F1F5F9]">
+                      <span className="text-[#64748B]">Spend: <strong>{formatCurrency(data.spend, currency)}</strong></span>
+                      <span className="text-[#16A34A] font-semibold">Rev: <strong>{formatCurrency(data.revenue, currency)}</strong></span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
             {/* Dynamic Performance Charts with all 5 visualization modes */}
             <PerformanceCharts
               insights={filteredInsights}
@@ -414,6 +457,69 @@ export default function DashboardPage() {
                     ))}
                   </div>
                 )}
+              </div>
+            </div>
+
+            {/* Bottom Row: Recent Activity & Saved Calculations / Reports */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Recent Activity Log */}
+              <div className="bg-white rounded-xl border border-[#E2E8F0] p-5 shadow-card">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-2">
+                    <Activity className="w-4 h-4 text-[#2563EB]" />
+                    <h4 className="text-sm font-bold text-[#172033]">Recent Workspace Activity</h4>
+                  </div>
+                  <span className="text-[11px] text-[#64748B]">Audit Trail</span>
+                </div>
+
+                <div className="space-y-2.5">
+                  {activityLogs.slice(0, 4).map((log) => (
+                    <div key={log.id} className="flex items-start space-x-3 text-xs p-2.5 rounded-lg bg-[#F8FAFC]">
+                      <Clock className="w-3.5 h-3.5 text-[#64748B] mt-0.5 shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <span className="font-semibold text-[#172033] block truncate">{log.description}</span>
+                        <span className="text-[10px] text-[#64748B]">Actor: {log.actor} • {new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Saved Calculations & Quick Reports */}
+              <div className="bg-white rounded-xl border border-[#E2E8F0] p-5 shadow-card">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-2">
+                    <Calculator className="w-4 h-4 text-[#2563EB]" />
+                    <h4 className="text-sm font-bold text-[#172033]">Saved Calculations & Reports</h4>
+                  </div>
+                  <Link href="/calculators" className="text-xs font-semibold text-[#2563EB] hover:underline flex items-center">
+                    <span>Calculators</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 ml-0.5" />
+                  </Link>
+                </div>
+
+                <div className="space-y-2.5">
+                  {savedCalculations.slice(0, 3).map((calc) => (
+                    <div key={calc.id} className="flex items-center justify-between p-2.5 rounded-lg bg-[#F8FAFC] text-xs">
+                      <div className="min-w-0 pr-2">
+                        <span className="font-semibold text-[#172033] block truncate">{calc.title}</span>
+                        <span className="text-[10px] text-[#64748B]">{calc.calculatorType} • {new Date(calc.createdAt).toLocaleDateString()}</span>
+                      </div>
+                      <span className="font-bold text-[#16A34A] shrink-0 text-xs">
+                        {calc.outputs ? Object.values(calc.outputs)[0] ?? 'Saved' : 'Saved'}
+                      </span>
+                    </div>
+                  ))}
+                  <div className="pt-2 flex items-center justify-between text-xs border-t border-[#F1F5F9]">
+                    <Link href="/reports" className="flex items-center space-x-1.5 text-[#475569] hover:text-[#2563EB]">
+                      <FileText className="w-3.5 h-3.5" />
+                      <span>Executive PDF Audit Report</span>
+                    </Link>
+                    <Link href="/reports" className="font-semibold text-[#2563EB] hover:underline">
+                      Generate Report →
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </>

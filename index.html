@@ -7,6 +7,25 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    // Unregister legacy Service Workers & purge legacy caches
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (var i = 0; i < registrations.length; i++) {
+          registrations[i].unregister();
+        }
+      });
+      if ('caches' in window) {
+        caches.keys().then(function(keys) {
+          keys.forEach(function(key) {
+            if (key.indexOf('andromeda-roas') !== -1) {
+              caches.delete(key);
+            }
+          });
+        });
+      }
+    }
+  </script>
   <style>
     :root {
       --bg: #F7F9FC;
@@ -160,8 +179,8 @@
       line-height: 1.5;
     }
     .banner {
-      background: #FEF3C7;
-      border: 1px solid #FCD34D;
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
       border-radius: 12px;
       padding: 16px 20px;
       margin-bottom: 30px;
@@ -169,17 +188,7 @@
       align-items: center;
       gap: 12px;
       font-size: 13px;
-      color: #92400E;
-    }
-    .code-box {
-      background: #0F172A;
-      color: #E2E8F0;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      padding: 16px 20px;
-      border-radius: 10px;
-      margin: 16px 0;
-      overflow-x: auto;
+      color: #1E40AF;
     }
   </style>
 </head>
@@ -209,7 +218,7 @@
     <div class="container">
 
       <div class="banner">
-        <strong>💡 Pro-Tip:</strong> The real Next.js application runs live at <strong><a href="https://heyshahid.github.io/open-marketingops/" style="color:#B45309; text-decoration:underline;">heyshahid.github.io/open-marketingops/</a></strong> or locally on <strong>http://localhost:3000</strong>.
+        <strong>💡 Direct Launch:</strong> Open MarketingOps is live on GitHub Pages at <strong><a href="https://heyshahid.github.io/open-marketingops/" style="color:#1D4ED8; text-decoration:underline;">heyshahid.github.io/open-marketingops/</a></strong> or locally on <strong><a href="http://localhost:3000" style="color:#1D4ED8; text-decoration:underline;">http://localhost:3000</a></strong>.
       </div>
 
       <h2 class="section-title">Core Production Modules & Features</h2>
@@ -253,7 +262,7 @@
         <div class="card">
           <div class="card-icon">🔍</div>
           <h3>7. Analytics Data Explorer</h3>
-          <p>Granular performance tables with 17 marketing metrics, search filters, column sorting, and instant CSV export capabilities.</p>
+          <p>Granular performance tables across campaigns, ad sets, and ads with 17 marketing metrics, search filters, column sorting, and instant CSV export capabilities.</p>
         </div>
 
         <div class="card">

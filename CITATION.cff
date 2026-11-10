@@ -1,17 +1,21 @@
 cff-version: 1.2.0
-message: "If you use Meta Andromeda Calculator in your paid media research or growth modeling, please cite it as below."
-title: "Meta Andromeda ROAS & Ad Scaling Calculator"
-version: 2.0.0
-date-released: 2026-11-06
-url: "https://heyshahid.github.io/meta-andromeda-calculator/"
-repository-code: "https://github.com/heyshahid/meta-andromeda-calculator"
+message: "If you use Open MarketingOps in your paid media research or growth modeling, please cite it as below."
 authors:
   - family-names: "Akram"
     given-names: "Shahid"
-license: "MIT"
+    orcid: "https://orcid.org/0009-0008-0131-0000"
+title: "Open MarketingOps - Understand Performance. Make Better Decisions. Scale Smarter."
+version: 1.0.0
+date-released: 2026-11-10
+url: "https://heyshahid.github.io/open-marketingops/"
+repository-code: "https://github.com/heyshahid/open-marketingops"
+license: MIT
 keywords:
-  - "meta-ads"
-  - "roas-calculator"
-  - "andromeda-scaling"
-  - "performance-marketing"
-  - "break-even-roas"
+  - marketing-analytics
+  - campaign-optimization
+  - roas-calculator
+  - budget-planner
+  - performance-marketing
+  - meta-ads
+  - google-ads
+  - tiktok-ads

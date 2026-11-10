@@ -1,12 +1,12 @@
 {
-  "name": "Meta Andromeda ROAS & Ad Scaling Calculator",
-  "short_name": "AndromedaROAS",
-  "description": "Professional ROAS, Break-Even CPA, and Paid Media Budget Scaling Calculator for Meta Ads, TikTok & Google Performance Max.",
+  "name": "Open MarketingOps - Marketing Analytics & Campaign Optimization",
+  "short_name": "MarketingOps",
+  "description": "Open-source marketing analytics and campaign optimization platform. Understand Performance. Make Better Decisions. Scale Smarter.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0B0F19",
-  "theme_color": "#0F172A",
-  "orientation": "portrait-primary",
+  "background_color": "#F7F9FC",
+  "theme_color": "#14213D",
+  "orientation": "any",
   "icons": [
     {
       "src": "icons/icon-192.png",

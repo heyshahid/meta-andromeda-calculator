@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://heyshahid.github.io/meta-andromeda-calculator/sitemap.xml
+Sitemap: https://heyshahid.github.io/open-marketingops/sitemap.xml
