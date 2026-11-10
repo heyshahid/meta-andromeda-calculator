@@ -1,4 +1,4 @@
-const CACHE_NAME = 'andromeda-roas-v11';
+const CACHE_NAME = 'andromeda-roas-v12';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
