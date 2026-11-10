@@ -19,7 +19,6 @@
   <link rel="canonical" href="https://heyshahid.github.io/meta-andromeda-calculator/">
   <meta name="description" content="Meta Andromeda Updates & Ad Scaling Cockpit. Plan, calculate, and scale your Meta Ads with data, not guesswork. Scaling Calculator, Budget Planner, ROAS Calculator & Break-even Calculator.">
   <meta name="keywords" content="Meta Andromeda, scaling calculator, budget planner, ROAS calculator, break even calculator, Meta ads cockpit, 2026 AI scaling">
-  <meta name="author" content="Shahid Akram">
 
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,7 +63,9 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
   <style>
-    -webkit-tap-highlight-color: transparent;
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
     
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -79,100 +80,107 @@
       -webkit-appearance: none; 
       margin: 0; 
     }
-    input[type=number] { 
+    input[type=number] {
       -moz-appearance: textfield;
-      appearance: textfield;
     }
 
-    /* White SaaS Elevation Cards */
-    .saas-card {
-      background: #FFFFFF;
-      border: 1px solid #E2E8F0;
-      border-radius: 1rem;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
-      transition: all 0.2s ease;
+    /* Clean subtle scrollbars */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
     }
-    .saas-card:hover {
-      box-shadow: 0 6px 20px -4px rgba(11, 95, 255, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
-      border-color: #CBD5E1;
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
     }
 
-    /* Active Sidebar Navigation Item */
+    /* Active Sidebar Item Style */
     .sidebar-active {
       background-color: #0B5FFF !important;
       color: #FFFFFF !important;
       font-weight: 600 !important;
+      box-shadow: 0 4px 12px rgba(11, 95, 255, 0.25);
     }
     .sidebar-active svg {
       color: #FFFFFF !important;
     }
 
-    /* Input Field Styling matching Design System */
-    .saas-input {
-      background-color: #F8FAFC;
-      border: 1px solid #CBD5E1;
-      border-radius: 0.75rem;
-      color: #0F172A;
-      font-weight: 600;
-      transition: all 0.15s ease;
-    }
-    .saas-input:focus {
+    /* SaaS Dashboard Card Utility */
+    .saas-card {
       background-color: #FFFFFF;
-      border-color: #0B5FFF;
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(11, 95, 255, 0.15);
+      border-radius: 1rem;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+      transition: all 0.2s ease;
+    }
+    .saas-card:hover {
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
     }
 
-    /* Smooth Scroll */
-    html {
-      scroll-behavior: smooth;
+    /* Highlight Pulse Animation for Jump Links */
+    @keyframes cardPulse {
+      0% { box-shadow: 0 0 0 0 rgba(11, 95, 255, 0.5); }
+      70% { box-shadow: 0 0 0 8px rgba(11, 95, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(11, 95, 255, 0); }
     }
-    .scroll-target {
-      scroll-margin-top: 5.5rem;
+    .card-highlight {
+      animation: cardPulse 1.2s ease-out 2;
+      border-color: #0B5FFF !important;
     }
 
-    /* Print Stylesheet */
-    @page {
-      margin: 0;
-      size: letter portrait;
-    }
+    /* Print Stylesheet for 1-Page Official Audit PDF */
     @media print {
       html, body {
         background: #ffffff !important;
         color: #000000 !important;
         padding: 0 !important;
         margin: 0 !important;
+        height: auto !important;
+        min-height: auto !important;
+        overflow: visible !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
-      .no-print {
+      .no-print, header, nav, aside, main, #savedPlansModal, #andromedaUpdatesModal, #campaignsModal, #reportsModal, #settingsModal, #toastNotification {
         display: none !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        visibility: hidden !important;
       }
       .print-only {
         display: block !important;
-        padding: 15mm !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 24px !important;
       }
     }
-    .print-only {
-      display: none;
+    @media screen {
+      .print-only {
+        display: none !important;
+      }
     }
   </style>
 </head>
-<body class="min-h-screen bg-[#F5F7FA] text-slate-900 flex flex-col antialiased">
+<body class="bg-surface-bg text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
-  <div class="flex-1 flex w-full">
-    
-    <!-- LEFT SIDEBAR NAVIGATION (Matching Image Exactly) -->
-    <aside class="no-print w-64 shrink-0 bg-white border-r border-slate-200 hidden md:flex flex-col justify-between p-4 sticky top-0 h-screen overflow-y-auto">
+  <!-- APP CONTAINER (Flex Layout with Sidebar and Main Content) -->
+  <div class="flex-1 flex flex-col md:flex-row min-h-screen no-print">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="w-full md:w-64 bg-white border-r border-slate-200 shrink-0 flex flex-col justify-between p-4 space-y-6">
       
       <div class="space-y-6">
         
         <!-- App Brand Header -->
         <div class="flex items-center space-x-3 px-2 py-1">
-          <!-- Meta Blue Infinity Logo -->
-          <div class="w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-brand-primary shrink-0">
-            <svg class="w-6 h-6" viewBox="0 0 100 100" fill="#0B5FFF">
-              <path d="M50 49c-4.2-6.5-9.6-11.5-16.1-11.5-11.2 0-20.9 9.8-20.9 22.3 0 12.8 9.3 22.7 20.9 22.7 7.2 0 13.2-4.8 17.6-11.7l1.5-2.4 1.5 2.4c4.4 6.9 10.4 11.7 17.6 11.7 11.6 0 20.9-9.9 20.9-22.7 0-12.5-9.7-22.3-20.9-22.3-6.5 0-11.9 5-16.1 11.5L50 51l-1.5-2zM21.5 59.8c0-7.7 5.7-13.8 12.4-13.8 4.2 0 8.1 3.5 11.1 9.2-3 5.7-6.9 9.2-11.1 9.2-6.7 0-12.4-6.1-12.4-13.8zm57 0c0 7.7-5.7 13.8-12.4 13.8-4.2 0-8.1-3.5-11.1-9.2 3-5.7 6.9-9.2 11.1-9.2 6.7 0 12.4 6.1 12.4 13.8z"/>
-            </svg>
-          </div>
+          <!-- App Logo: Real Andromeda Logo -->
+          <img src="icons/icon-192.png" alt="Meta Andromeda Logo" class="w-9 h-9 rounded-xl object-contain shadow-xs border border-slate-200 shrink-0">
           <div>
             <span class="block font-bold text-sm text-slate-900 tracking-tight leading-none">Meta Andromeda</span>
             <span class="text-[11px] font-medium text-slate-400">Ad Scaling Cockpit</span>
@@ -180,10 +188,10 @@
         </div>
 
         <!-- Navigation Menu -->
-        <nav class="space-y-1 text-xs">
+        <nav class="space-y-1 text-xs" id="sidebarNav">
           
           <!-- 1. Dashboard (Active) -->
-          <a href="#view-dashboard" onclick="switchNav('dashboard')" id="nav-dashboard" class="sidebar-item sidebar-active flex items-center space-x-3 px-3 py-2.5 rounded-xl transition text-white">
+          <a href="#view-dashboard" onclick="navTo('dashboard')" id="nav-dashboard" class="sidebar-item sidebar-active flex items-center space-x-3 px-3 py-2.5 rounded-xl transition text-white">
             <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
             </svg>
@@ -192,7 +200,7 @@
 
           <!-- 2. Calculators Group -->
           <div class="pt-1">
-            <div class="flex items-center justify-between px-3 py-2 text-slate-600 hover:text-slate-900 font-medium cursor-pointer" onclick="toggleCalcMenu()">
+            <div class="flex items-center justify-between px-3 py-2 text-slate-600 hover:text-slate-900 font-medium cursor-pointer rounded-xl hover:bg-slate-50 transition" onclick="toggleCalcMenu()">
               <div class="flex items-center space-x-3">
                 <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
@@ -206,86 +214,87 @@
 
             <!-- Sub Items -->
             <div id="calcSubMenu" class="pl-9 pr-2 space-y-1 mt-0.5 text-[11px] text-slate-500 font-medium">
-              <a href="#calc-scaling" class="block py-1.5 hover:text-brand-primary transition">Scaling Calculator</a>
-              <a href="#calc-budget" class="block py-1.5 hover:text-brand-primary transition">Budget Planner</a>
-              <a href="#calc-roas" class="block py-1.5 hover:text-brand-primary transition">ROAS Calculator</a>
-              <a href="#calc-breakeven" class="block py-1.5 hover:text-brand-primary transition">Break-even Calculator</a>
+              <a href="#calc-scaling" onclick="scrollToCalc('calc-scaling')" class="block py-1.5 hover:text-brand-primary transition">Scaling Calculator</a>
+              <a href="#calc-budget" onclick="scrollToCalc('calc-budget')" class="block py-1.5 hover:text-brand-primary transition">Budget Planner</a>
+              <a href="#calc-roas" onclick="scrollToCalc('calc-roas')" class="block py-1.5 hover:text-brand-primary transition">ROAS Calculator</a>
+              <a href="#calc-breakeven" onclick="scrollToCalc('calc-breakeven')" class="block py-1.5 hover:text-brand-primary transition">Break-even Calculator</a>
             </div>
           </div>
 
           <!-- 3. Andromeda Updates -->
-          <a href="#view-updates" onclick="switchNav('updates')" id="nav-updates" class="sidebar-item flex items-center space-x-3 px-3 py-2.5 rounded-xl transition text-slate-600 hover:bg-slate-100 hover:text-slate-900 font-medium">
+          <button type="button" onclick="openAndromedaUpdatesModal()" id="nav-updates" class="w-full text-left sidebar-item flex items-center space-x-3 px-3 py-2.5 rounded-xl transition text-slate-600 hover:bg-slate-100 hover:text-slate-900 font-medium">
             <svg class="w-4 h-4 text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
             </svg>
             <span>Andromeda Updates</span>
-          </a>
+          </button>
 
           <!-- 4. Campaigns -->
-          <a href="#view-campaigns" onclick="switchNav('campaigns')" id="nav-campaigns" class="sidebar-item flex items-center space-x-3 px-3 py-2.5 rounded-xl transition text-slate-600 hover:bg-slate-100 hover:text-slate-900 font-medium">
+          <button type="button" onclick="openCampaignsModal()" id="nav-campaigns" class="w-full text-left sidebar-item flex items-center space-x-3 px-3 py-2.5 rounded-xl transition text-slate-600 hover:bg-slate-100 hover:text-slate-900 font-medium">
             <svg class="w-4 h-4 text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
             </svg>
             <span>Campaigns</span>
-          </a>
+          </button>
 
           <!-- 5. Reports -->
-          <a href="#view-reports" onclick="switchNav('reports')" id="nav-reports" class="sidebar-item flex items-center space-x-3 px-3 py-2.5 rounded-xl transition text-slate-600 hover:bg-slate-100 hover:text-slate-900 font-medium">
+          <button type="button" onclick="openReportsModal()" id="nav-reports" class="w-full text-left sidebar-item flex items-center space-x-3 px-3 py-2.5 rounded-xl transition text-slate-600 hover:bg-slate-100 hover:text-slate-900 font-medium">
             <svg class="w-4 h-4 text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
             </svg>
             <span>Reports</span>
-          </a>
+          </button>
 
           <!-- 6. Saved Plans -->
-          <a href="#view-plans" onclick="switchNav('plans')" id="nav-plans" class="sidebar-item flex items-center space-x-3 px-3 py-2.5 rounded-xl transition text-slate-600 hover:bg-slate-100 hover:text-slate-900 font-medium">
+          <button type="button" onclick="openSavedPlans()" id="nav-plans" class="w-full text-left sidebar-item flex items-center space-x-3 px-3 py-2.5 rounded-xl transition text-slate-600 hover:bg-slate-100 hover:text-slate-900 font-medium">
             <svg class="w-4 h-4 text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
             </svg>
             <span>Saved Plans</span>
-          </a>
+          </button>
 
           <!-- 7. Settings -->
-          <a href="#view-settings" onclick="switchNav('settings')" id="nav-settings" class="sidebar-item flex items-center space-x-3 px-3 py-2.5 rounded-xl transition text-slate-600 hover:bg-slate-100 hover:text-slate-900 font-medium">
+          <button type="button" onclick="openSettingsModal()" id="nav-settings" class="w-full text-left sidebar-item flex items-center space-x-3 px-3 py-2.5 rounded-xl transition text-slate-600 hover:bg-slate-100 hover:text-slate-900 font-medium">
             <svg class="w-4 h-4 text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
             </svg>
             <span>Settings</span>
-          </a>
+          </button>
 
         </nav>
 
       </div>
 
-      <!-- User Profile Card in Sidebar Bottom -->
-      <div class="border-t border-slate-200 pt-3 flex items-center justify-between">
-        <div class="flex items-center space-x-2.5">
-          <div class="w-8 h-8 rounded-full bg-brand-primary text-white font-bold flex items-center justify-center text-xs">
-            S
+      <!-- App Info & GitHub Link in Sidebar Bottom (No Personal Name) -->
+      <div class="border-t border-slate-200 pt-3 space-y-2.5">
+        <!-- Follow GitHub Link Button -->
+        <a href="https://github.com/heyshahid/meta-andromeda-calculator" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between px-3 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 transition group" title="Follow & Star on GitHub">
+          <div class="flex items-center space-x-2">
+            <svg class="w-4 h-4 text-slate-800" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+            <span class="text-xs font-semibold text-slate-800">GitHub Repo</span>
           </div>
-          <div class="min-w-0">
-            <span class="block text-xs font-bold text-slate-900 truncate">Shahid Akram</span>
-            <span class="block text-[10px] text-slate-400 truncate">Media Buyer</span>
+          <span class="text-[10px] font-bold text-slate-400 group-hover:text-brand-primary">Follow &rarr;</span>
+        </a>
+
+        <!-- App Name & Version -->
+        <div class="px-2 py-0.5 flex items-center justify-between text-slate-500">
+          <div>
+            <span class="block text-[11px] font-bold text-slate-700">Meta Andromeda Cockpit</span>
+            <span class="text-[10px] text-slate-400">Release v2.4 (2026 AI)</span>
           </div>
+          <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-emerald-100 text-emerald-700">Active</span>
         </div>
-        <select id="selGlobalCurrency" onchange="onCurrencyChange(this.value)" class="text-[11px] font-bold bg-slate-50 border border-slate-200 rounded-lg px-2 py-1 focus:outline-none">
-          <option value="$" selected>USD ($)</option>
-          <option value="AED ">AED</option>
-          <option value="SAR ">SAR</option>
-          <option value="Rs ">PKR</option>
-          <option value="₹">INR</option>
-          <option value="€">EUR (€)</option>
-          <option value="£">GBP (£)</option>
-        </select>
       </div>
 
     </aside>
 
     <!-- MAIN DASHBOARD CONTENT AREA -->
-    <main class="flex-1 min-w-0 p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto w-full">
+    <main class="flex-1 min-w-0 p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto w-full" id="view-dashboard">
       
-      <!-- TOP HEADER (Title + Subtitle + Date Picker + Avatar) -->
+      <!-- TOP HEADER (Title + Subtitle + Currency + Install PWA + Export PDF) -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
@@ -296,159 +305,169 @@
           </p>
         </div>
 
-        <div class="flex items-center space-x-2.5 shrink-0">
+        <!-- Top Right Actions: Currency Selector, Install PWA, Export PDF -->
+        <div class="flex items-center flex-wrap gap-2 shrink-0">
           
-          <!-- Date Range Picker Pill -->
-          <div class="inline-flex items-center space-x-2 bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 shadow-xs cursor-pointer hover:border-slate-300">
-            <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-            </svg>
-            <span>Oct 1, 2026 - Oct 30, 2026</span>
-            <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-            </svg>
+          <!-- Currency Switcher -->
+          <div class="inline-flex items-center space-x-1.5 bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 shadow-xs">
+            <span class="text-[11px] font-medium text-slate-400">Currency:</span>
+            <select id="selGlobalCurrency" onchange="onCurrencyChange(this.value)" class="text-xs font-bold text-slate-800 bg-transparent focus:outline-none cursor-pointer">
+              <option value="$" selected>USD ($)</option>
+              <option value="Rs ">PKR (Rs)</option>
+              <option value="AED ">AED</option>
+              <option value="SAR ">SAR</option>
+              <option value="₹">INR (₹)</option>
+              <option value="€">EUR (€)</option>
+              <option value="£">GBP (£)</option>
+              <option value="C$">CAD (C$)</option>
+            </select>
           </div>
 
-          <!-- User Avatar -->
-          <div class="w-9 h-9 rounded-xl bg-brand-primary text-white font-bold flex items-center justify-center text-sm shadow-sm">
-            S
-          </div>
+          <!-- Install App Button -->
+          <button id="pwaInstallBtn" onclick="installPWA()" class="inline-flex items-center space-x-1.5 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-3 py-1.5 rounded-xl text-xs font-semibold shadow-xs transition cursor-pointer" title="Install Web App">
+            <svg class="w-3.5 h-3.5 text-brand-primary shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+            </svg>
+            <span>Install App</span>
+          </button>
+
+          <!-- Export Audit (PDF) Button -->
+          <button onclick="exportAuditPdf()" class="inline-flex items-center space-x-1.5 bg-brand-primary hover:bg-brand-dark text-white px-3.5 py-1.5 rounded-xl text-xs font-semibold shadow-xs transition cursor-pointer" title="Export Official 1-Page PDF">
+            <svg class="w-3.5 h-3.5 text-white shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            <span>Export PDF</span>
+          </button>
+
         </div>
       </div>
 
-      <!-- ROW 1: TOP 4 KPI METRIC CARDS (Exact Match to Image) -->
+      <!-- ROW 1: TOP 4 KPI METRIC CARDS -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
         
-        <!-- Metric 1: Ad Spend -->
-        <div class="saas-card p-4 sm:p-5 flex items-center justify-between">
-          <div class="space-y-1">
+        <!-- Card 1: Ad Spend -->
+        <div class="saas-card p-4 sm:p-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
             <span class="text-xs font-medium text-slate-500">Ad Spend</span>
-            <div class="flex items-center space-x-2">
-              <span class="text-xl sm:text-2xl font-bold text-slate-900" id="kpiAdSpend">$4,250</span>
-              <span class="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full inline-flex items-center">
-                <span>↑ +12.5%</span>
-              </span>
+            <div class="w-8 h-8 rounded-lg bg-blue-50 text-brand-primary flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
+              </svg>
             </div>
           </div>
-          <!-- Icon in circle -->
-          <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-brand-primary shrink-0">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
-            </svg>
+          <div class="mt-3 flex items-baseline space-x-2">
+            <span class="text-xl sm:text-2xl font-bold text-slate-900" id="kpiSpend">$4,250</span>
+            <span class="inline-flex items-center text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">
+              &uarr;+12.5%
+            </span>
           </div>
         </div>
 
-        <!-- Metric 2: Revenue -->
-        <div class="saas-card p-4 sm:p-5 flex items-center justify-between">
-          <div class="space-y-1">
+        <!-- Card 2: Revenue -->
+        <div class="saas-card p-4 sm:p-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
             <span class="text-xs font-medium text-slate-500">Revenue</span>
-            <div class="flex items-center space-x-2">
-              <span class="text-xl sm:text-2xl font-bold text-slate-900" id="kpiRevenue">$17,850</span>
-              <span class="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full inline-flex items-center">
-                <span>↑ +18.3%</span>
-              </span>
+            <div class="w-8 h-8 rounded-lg bg-blue-50 text-brand-primary flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
             </div>
           </div>
-          <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-brand-primary shrink-0">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-            </svg>
+          <div class="mt-3 flex items-baseline space-x-2">
+            <span class="text-xl sm:text-2xl font-bold text-slate-900" id="kpiRevenue">$17,850</span>
+            <span class="inline-flex items-center text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">
+              &uarr;+18.3%
+            </span>
           </div>
         </div>
 
-        <!-- Metric 3: ROAS -->
-        <div class="saas-card p-4 sm:p-5 flex items-center justify-between">
-          <div class="space-y-1">
+        <!-- Card 3: ROAS -->
+        <div class="saas-card p-4 sm:p-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
             <span class="text-xs font-medium text-slate-500">ROAS</span>
-            <div class="flex items-center space-x-2">
-              <span class="text-xl sm:text-2xl font-bold text-slate-900" id="kpiRoas">4.20x</span>
-              <span class="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full inline-flex items-center">
-                <span>↑ +5.8%</span>
-              </span>
+            <div class="w-8 h-8 rounded-lg bg-blue-50 text-brand-primary flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+              </svg>
             </div>
           </div>
-          <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-brand-primary shrink-0">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
-            </svg>
+          <div class="mt-3 flex items-baseline space-x-2">
+            <span class="text-xl sm:text-2xl font-bold text-slate-900" id="kpiRoas">4.20x</span>
+            <span class="inline-flex items-center text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">
+              &uarr;+5.8%
+            </span>
           </div>
         </div>
 
-        <!-- Metric 4: Conversions -->
-        <div class="saas-card p-4 sm:p-5 flex items-center justify-between">
-          <div class="space-y-1">
+        <!-- Card 4: Conversions -->
+        <div class="saas-card p-4 sm:p-5 flex flex-col justify-between">
+          <div class="flex items-center justify-between">
             <span class="text-xs font-medium text-slate-500">Conversions</span>
-            <div class="flex items-center space-x-2">
-              <span class="text-xl sm:text-2xl font-bold text-slate-900" id="kpiConversions">893</span>
-              <span class="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full inline-flex items-center">
-                <span>↑ +14.2%</span>
-              </span>
+            <div class="w-8 h-8 rounded-lg bg-blue-50 text-brand-primary flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
             </div>
           </div>
-          <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-brand-primary shrink-0">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-            </svg>
+          <div class="mt-3 flex items-baseline space-x-2">
+            <span class="text-xl sm:text-2xl font-bold text-slate-900" id="kpiConversions">893</span>
+            <span class="inline-flex items-center text-[11px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">
+              &uarr;+14.2%
+            </span>
           </div>
         </div>
 
       </div>
 
-      <!-- ROW 2: PERFORMANCE OVERVIEW + SCALING RECOMMENDATION (Exact Layout) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+      <!-- ROW 2: PERFORMANCE OVERVIEW (Chart) & SCALING RECOMMENDATION -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
         
-        <!-- Left: Performance Overview Chart Card (~60%) -->
-        <div class="lg:col-span-7 saas-card p-5 sm:p-6 flex flex-col justify-between">
-          <div>
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 gap-2">
-              <h2 class="text-base font-bold text-slate-900">Performance Overview</h2>
-              
-              <!-- Legend matching Image -->
-              <div class="flex items-center space-x-4 text-xs font-medium text-slate-600">
-                <div class="flex items-center space-x-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-blue-300"></span>
-                  <span>Spend</span>
-                </div>
-                <div class="flex items-center space-x-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-blue-700"></span>
-                  <span>Revenue</span>
-                </div>
-                <div class="flex items-center space-x-1.5">
-                  <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
-                  <span>ROAS</span>
-                </div>
-              </div>
+        <!-- Performance Overview Chart (Left 8 Cols) -->
+        <div class="lg:col-span-8 saas-card p-5 space-y-4">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <h3 class="font-bold text-sm text-slate-900">Performance Overview</h3>
+            <div class="flex items-center space-x-4 text-xs font-medium text-slate-500">
+              <span class="flex items-center space-x-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-300"></span>
+                <span>Spend</span>
+              </span>
+              <span class="flex items-center space-x-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-brand-primary"></span>
+                <span>Revenue</span>
+              </span>
+              <span class="flex items-center space-x-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+                <span>ROAS</span>
+              </span>
             </div>
+          </div>
 
-            <!-- Chart Canvas -->
-            <div class="relative w-full h-64 sm:h-72">
-              <canvas id="performanceChart"></canvas>
-            </div>
+          <!-- Chart Canvas Container -->
+          <div class="relative w-full h-64 sm:h-72">
+            <canvas id="performanceChart"></canvas>
           </div>
         </div>
 
-        <!-- Right: Scaling Recommendation Card (~40%) -->
-        <div class="lg:col-span-5 saas-card p-5 sm:p-6 flex flex-col justify-between space-y-4">
+        <!-- Scaling Recommendation (Right 4 Cols) -->
+        <div class="lg:col-span-4 saas-card p-5 flex flex-col justify-between space-y-4">
           <div>
-            <h2 class="text-base font-bold text-slate-900 mb-3">Scaling Recommendation</h2>
+            <h3 class="font-bold text-sm text-slate-900">Scaling Recommendation</h3>
             
-            <!-- Green Tinted Callout Box -->
-            <div class="rounded-2xl bg-emerald-50/80 border border-emerald-200 p-4 space-y-1 mb-4">
-              <div class="flex items-center space-x-3">
-                <div class="w-9 h-9 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-700 shrink-0">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="text-base font-bold text-emerald-900" id="recScaleHeading">Scale by +30%</h3>
-                  <p class="text-xs text-emerald-700 font-medium" id="recScaleSub">Your ROAS is 4.20x and stable.</p>
-                </div>
+            <!-- Green Recommendation Callout Box -->
+            <div class="mt-3 p-3.5 rounded-xl bg-accent-greenBg border border-emerald-200/60 flex items-start space-x-3">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <div>
+                <span class="block font-bold text-sm text-slate-900 leading-tight">Scale by +30%</span>
+                <span class="text-xs text-slate-600 mt-0.5 block">Your ROAS is 4.20x and stable.</span>
               </div>
             </div>
 
             <!-- Action Checklist -->
-            <div class="space-y-2.5 text-xs font-medium text-slate-700">
+            <div class="mt-4 space-y-2.5 text-xs font-medium text-slate-700">
               <div class="flex items-center space-x-2.5">
                 <span class="w-4 h-4 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
                   <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
@@ -470,35 +489,31 @@
             </div>
           </div>
 
-          <!-- Primary CTA Button -->
-          <button onclick="applyScalingPlan()" class="w-full py-3 rounded-xl bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs sm:text-sm flex items-center justify-center space-x-2 shadow-sm transition">
+          <!-- Apply Scaling Plan Action Button -->
+          <button onclick="applyScalingPlan()" class="w-full py-2.5 px-4 rounded-xl bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs flex items-center justify-center space-x-2 shadow-xs transition">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
             </svg>
-            <span>Apply Scaling Plan →</span>
+            <span>Apply Scaling Plan &rarr;</span>
           </button>
         </div>
 
       </div>
 
-      <!-- ROW 3: THREE SUB-CARDS (Meta Updates + Saved Plans + Active Campaigns) -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <!-- ROW 3: META UPDATES, SAVED PLANS, ACTIVE CAMPAIGNS -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         
-        <!-- Sub-card 1: Meta Andromeda Updates -->
-        <div class="saas-card p-4 sm:p-5 flex items-center justify-between cursor-pointer hover:border-brand-primary" onclick="scrollToUpdates()">
-          <div class="flex items-start space-x-3">
-            <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-brand-primary shrink-0">
-              <svg class="w-6 h-6" viewBox="0 0 100 100" fill="#0B5FFF">
-                <path d="M50 49c-4.2-6.5-9.6-11.5-16.1-11.5-11.2 0-20.9 9.8-20.9 22.3 0 12.8 9.3 22.7 20.9 22.7 7.2 0 13.2-4.8 17.6-11.7l1.5-2.4 1.5 2.4c4.4 6.9 10.4 11.7 17.6 11.7 11.6 0 20.9-9.9 20.9-22.7 0-12.5-9.7-22.3-20.9-22.3-6.5 0-11.9 5-16.1 11.5L50 51l-1.5-2zM21.5 59.8c0-7.7 5.7-13.8 12.4-13.8 4.2 0 8.1 3.5 11.1 9.2-3 5.7-6.9 9.2-11.1 9.2-6.7 0-12.4-6.1-12.4-13.8zm57 0c0 7.7-5.7 13.8-12.4 13.8-4.2 0-8.1-3.5-11.1-9.2 3-5.7 6.9-9.2 11.1-9.2 6.7 0 12.4 6.1 12.4 13.8z"/>
-              </svg>
-            </div>
+        <!-- Meta Andromeda Updates Sub-Card -->
+        <div class="saas-card p-4 flex items-center justify-between hover:border-blue-300 transition cursor-pointer" onclick="openAndromedaUpdatesModal()">
+          <div class="flex items-center space-x-3">
+            <img src="icons/icon-192.png" alt="Meta Logo" class="w-9 h-9 rounded-xl object-contain shrink-0 shadow-xs border border-slate-200">
             <div>
               <div class="flex items-center space-x-1.5">
-                <span class="text-xs font-bold text-slate-900">Meta Andromeda Updates</span>
-                <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-purple-100 text-purple-700">New</span>
+                <span class="font-bold text-xs text-slate-900">Meta Andromeda Updates</span>
+                <span class="bg-purple-100 text-purple-700 text-[10px] font-extrabold px-1.5 py-0.2 rounded-full">New</span>
               </div>
-              <p class="text-[11px] text-slate-500 font-normal mt-0.5">Latest algorithm changes, signals, and recommendations.</p>
-              <span class="text-[11px] font-semibold text-brand-primary mt-1 inline-block">View Updates →</span>
+              <p class="text-[11px] text-slate-500 mt-0.5 line-clamp-1">Latest algorithm changes, signals, and recommendations.</p>
+              <span class="text-[11px] font-semibold text-brand-primary hover:underline mt-1 inline-block">View Updates &rarr;</span>
             </div>
           </div>
           <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -506,18 +521,20 @@
           </svg>
         </div>
 
-        <!-- Sub-card 2: Saved Plans -->
-        <div class="saas-card p-4 sm:p-5 flex items-center justify-between cursor-pointer hover:border-brand-primary" onclick="showSavedPlans()">
+        <!-- Saved Plans Sub-Card -->
+        <div class="saas-card p-4 flex items-center justify-between hover:border-blue-300 transition cursor-pointer" onclick="openSavedPlans()">
           <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-brand-primary shrink-0">
+            <div class="w-9 h-9 rounded-xl bg-blue-50 text-brand-primary flex items-center justify-center shrink-0">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
               </svg>
             </div>
             <div>
-              <span class="text-xs font-bold text-slate-900 block">Saved Plans</span>
-              <span class="text-lg font-bold text-slate-900 block leading-tight" id="dispSavedPlanCount">5</span>
-              <span class="text-[11px] text-slate-400 font-normal">Scaling plans & calculations</span>
+              <span class="text-xs font-medium text-slate-500 block">Saved Plans</span>
+              <div class="flex items-baseline space-x-2">
+                <span class="text-lg font-bold text-slate-900" id="dispSavedCount">5</span>
+                <span class="text-[11px] text-slate-500">Scaling plans &amp; calculations</span>
+              </div>
             </div>
           </div>
           <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -525,22 +542,22 @@
           </svg>
         </div>
 
-        <!-- Sub-card 3: Active Campaigns -->
-        <div class="saas-card p-4 sm:p-5 flex items-center justify-between cursor-pointer hover:border-brand-primary">
+        <!-- Active Campaigns Sub-Card -->
+        <div class="saas-card p-4 flex items-center justify-between hover:border-blue-300 transition cursor-pointer" onclick="openCampaignsModal()">
           <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-brand-primary shrink-0">
+            <div class="w-9 h-9 rounded-xl bg-blue-50 text-brand-primary flex items-center justify-center shrink-0">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
             </div>
             <div>
-              <span class="text-xs font-bold text-slate-900 block">Active Campaigns</span>
-              <div class="flex items-center space-x-1.5 leading-tight">
+              <span class="text-xs font-medium text-slate-500 block">Active Campaigns</span>
+              <div class="flex items-baseline space-x-2">
                 <span class="text-lg font-bold text-slate-900">12</span>
-                <span class="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.2 rounded-full">↑ +3</span>
+                <span class="text-[11px] text-emerald-600 font-semibold">&uarr;+3</span>
+                <span class="text-[11px] text-slate-500">Live campaigns on Meta</span>
               </div>
-              <span class="text-[11px] text-slate-400 font-normal">Live campaigns on Meta</span>
             </div>
           </div>
           <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -550,272 +567,272 @@
 
       </div>
 
-      <!-- ROW 4: THE 4 DEDICATED INTERACTIVE CALCULATORS (Exact 4 Cards from Image) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 items-stretch">
-        
-        <!-- CALCULATOR 1: SCALING CALCULATOR -->
-        <div id="calc-scaling" class="saas-card p-4 sm:p-5 flex flex-col justify-between space-y-4 scroll-target">
+      <!-- ROW 4: 4 DEDICATED MODULAR INTERACTIVE CALCULATORS -->
+      <div>
+        <div class="flex items-center justify-between mb-3">
           <div>
-            <div class="flex items-center space-x-2 text-xs font-bold text-slate-900 pb-3 border-b border-slate-100">
-              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-              </svg>
-              <span>Scaling Calculator</span>
-            </div>
-
-            <!-- Inputs -->
-            <div class="space-y-2.5 mt-3 text-xs">
-              <div>
-                <label class="block text-slate-500 font-medium mb-1 text-[11px]">Current Daily Spend</label>
-                <div class="relative">
-                  <span class="curr-sym absolute left-3 top-2 text-slate-400 font-bold">$</span>
-                  <input type="number" id="scDailySpend" value="150" step="10" min="0" oninput="calcScaling()" class="saas-input w-full pl-7 pr-3 py-1.5 text-xs">
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-slate-500 font-medium mb-1 text-[11px]">Current ROAS</label>
-                <input type="number" id="scCurrentRoas" value="4.20" step="0.1" min="0" oninput="calcScaling()" class="saas-input w-full px-3 py-1.5 text-xs">
-              </div>
-
-              <div>
-                <label class="block text-slate-500 font-medium mb-1 text-[11px]">Target ROAS (Optional)</label>
-                <input type="number" id="scTargetRoas" value="4.00" step="0.1" min="0" oninput="calcScaling()" class="saas-input w-full px-3 py-1.5 text-xs">
-              </div>
-
-              <div>
-                <label class="block text-slate-500 font-medium mb-1 text-[11px]">Scale By</label>
-                <select id="scScaleBy" onchange="calcScaling()" class="saas-input w-full px-3 py-1.5 text-xs cursor-pointer">
-                  <option value="20">+20% (Safe Rule)</option>
-                  <option value="30" selected>+30% (Recommended)</option>
-                  <option value="40">+40%</option>
-                  <option value="50">+50% (Aggressive)</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Output Box -->
-            <div class="mt-4 p-3 rounded-xl bg-blue-50/70 border border-blue-100 text-xs space-y-1.5">
-              <span class="text-[11px] font-semibold text-slate-600 block">Recommended Scale</span>
-              <div class="flex items-baseline space-x-1.5">
-                <span class="text-lg font-bold text-emerald-600" id="scRecSpend">$195</span>
-                <span class="text-xs font-semibold text-slate-500">/ day</span>
-                <span class="text-[10px] font-bold text-emerald-600 ml-auto" id="scScaleTag">(+30%)</span>
-              </div>
-              
-              <div class="border-t border-blue-200/60 pt-1.5 space-y-1 text-[10px]">
-                <div class="flex justify-between text-slate-600">
-                  <span>Est. Daily Revenue</span>
-                  <span class="font-bold text-slate-900" id="scDailyRev">$780</span>
-                </div>
-                <div class="flex justify-between text-slate-600">
-                  <span>Est. ROAS</span>
-                  <span class="font-bold text-slate-900" id="scEstRoas">4.00x</span>
-                </div>
-                <div class="flex justify-between text-slate-600">
-                  <span>Est. Monthly Revenue</span>
-                  <span class="font-bold text-slate-900" id="scMonthlyRev">$23,400</span>
-                </div>
-              </div>
-            </div>
+            <h2 class="font-bold text-base text-slate-900 tracking-tight">Interactive Ad Calculators</h2>
+            <p class="text-xs text-slate-500">Modular calculations for safe budgets, ROAS thresholds, and break-even targets.</p>
           </div>
-
-          <button onclick="saveCurrentPlan('Scaling Plan')" class="w-full py-2.5 rounded-xl bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs flex items-center justify-center space-x-1.5 transition">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
-            </svg>
-            <span>Save Plan</span>
-          </button>
         </div>
 
-        <!-- CALCULATOR 2: BUDGET PLANNER -->
-        <div id="calc-budget" class="saas-card p-4 sm:p-5 flex flex-col justify-between space-y-4 scroll-target">
-          <div>
-            <div class="flex items-center space-x-2 text-xs font-bold text-slate-900 pb-3 border-b border-slate-100">
-              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+          
+          <!-- CALCULATOR 1: SCALING CALCULATOR -->
+          <div class="saas-card p-5 flex flex-col justify-between space-y-4" id="calc-scaling">
+            <div>
+              <div class="flex items-center space-x-2 pb-2 border-b border-slate-100">
+                <svg class="w-3.5 h-3.5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                </svg>
+                <h3 class="font-bold text-xs text-slate-900 uppercase tracking-tight">Scaling Calculator</h3>
+              </div>
+
+              <div class="mt-3.5 space-y-3 text-xs">
+                <div>
+                  <label class="block text-[11px] font-medium text-slate-600 mb-1">Current Daily Spend</label>
+                  <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-2.5 flex items-center text-slate-400 font-semibold cur-sym">$</span>
+                    <input type="number" id="scDailySpend" value="150" oninput="calcScaling()" class="w-full pl-7 pr-3 py-1.5 rounded-lg bg-surface-input border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-brand-primary">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-medium text-slate-600 mb-1">Current ROAS</label>
+                  <input type="number" step="0.1" id="scCurrentRoas" value="4.20" oninput="calcScaling()" class="w-full px-3 py-1.5 rounded-lg bg-surface-input border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-brand-primary">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-medium text-slate-600 mb-1">Target ROAS (Optional)</label>
+                  <input type="number" step="0.1" id="scTargetRoas" value="4.00" oninput="calcScaling()" class="w-full px-3 py-1.5 rounded-lg bg-surface-input border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-brand-primary">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-medium text-slate-600 mb-1">Scale By</label>
+                  <select id="scScalePct" onchange="calcScaling()" class="w-full px-3 py-1.5 rounded-lg bg-surface-input border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-brand-primary">
+                    <option value="0.20">20% (Safe Scaling)</option>
+                    <option value="0.30" selected>30% (Recommended)</option>
+                    <option value="0.50">50% (Aggressive)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Recommendation Result Box -->
+              <div class="mt-4 p-3 rounded-xl bg-blue-50/60 border border-blue-100 space-y-2">
+                <div class="flex justify-between items-baseline">
+                  <span class="text-[11px] font-medium text-slate-500">Recommended Scale</span>
+                  <span class="text-xs font-bold text-brand-primary" id="scScaleBadge">(+30%)</span>
+                </div>
+                <div class="text-lg font-extrabold text-slate-900" id="scRecScaleSpend">$195 / day</div>
+
+                <div class="pt-2 border-t border-blue-200/60 space-y-1 text-[11px] text-slate-600">
+                  <div class="flex justify-between">
+                    <span>Est. Daily Revenue</span>
+                    <span class="font-bold text-slate-800" id="scEstDailyRev">$780</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Est. ROAS</span>
+                    <span class="font-bold text-slate-800" id="scEstRoas">4.00x</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Est. Monthly Revenue</span>
+                    <span class="font-bold text-slate-800" id="scEstMonthlyRev">$23,400</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button onclick="saveCurrentPlan('Scaling Plan')" class="w-full py-2.5 rounded-xl bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs flex items-center justify-center space-x-1.5 transition">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
               </svg>
-              <span>Budget Planner</span>
-            </div>
-
-            <!-- Inputs -->
-            <div class="space-y-2.5 mt-3 text-xs">
-              <div>
-                <label class="block text-slate-500 font-medium mb-1 text-[11px]">Target Monthly Revenue</label>
-                <div class="relative">
-                  <span class="curr-sym absolute left-3 top-2 text-slate-400 font-bold">$</span>
-                  <input type="number" id="bpTargetRev" value="20000" step="500" min="0" oninput="calcBudgetPlanner()" class="saas-input w-full pl-7 pr-3 py-1.5 text-xs">
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-slate-500 font-medium mb-1 text-[11px]">Expected ROAS</label>
-                <input type="number" id="bpExpectedRoas" value="4.00" step="0.1" min="0.1" oninput="calcBudgetPlanner()" class="saas-input w-full px-3 py-1.5 text-xs">
-              </div>
-
-              <div>
-                <label class="block text-slate-500 font-medium mb-1 text-[11px]">Campaign Duration</label>
-                <select id="bpDuration" onchange="calcBudgetPlanner()" class="saas-input w-full px-3 py-1.5 text-xs cursor-pointer">
-                  <option value="30" selected>30 days</option>
-                  <option value="60">60 days</option>
-                  <option value="90">90 days</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Output Box -->
-            <div class="mt-4 p-3 rounded-xl bg-blue-50/70 border border-blue-100 text-xs space-y-1.5">
-              <span class="text-[11px] font-semibold text-slate-600 block">Recommended Budget</span>
-              <div class="flex items-baseline space-x-1.5">
-                <span class="text-lg font-bold text-emerald-600" id="bpRecBudget">$5,000</span>
-                <span class="text-xs font-semibold text-slate-500">per month</span>
-              </div>
-              
-              <div class="border-t border-blue-200/60 pt-1.5 space-y-1 text-[10px]">
-                <div class="flex justify-between text-slate-600">
-                  <span>Daily Budget</span>
-                  <span class="font-bold text-slate-900" id="bpDailyBudget">$167</span>
-                </div>
-                <div class="flex justify-between text-slate-600">
-                  <span>Est. Conversions</span>
-                  <span class="font-bold text-slate-900" id="bpEstConversions">1,000</span>
-                </div>
-              </div>
-            </div>
+              <span>Save Plan</span>
+            </button>
           </div>
 
-          <button onclick="saveCurrentPlan('Budget Plan')" class="w-full py-2.5 rounded-xl bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs flex items-center justify-center space-x-1.5 transition">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
-            </svg>
-            <span>Save Plan</span>
-          </button>
-        </div>
+          <!-- CALCULATOR 2: BUDGET PLANNER -->
+          <div class="saas-card p-5 flex flex-col justify-between space-y-4" id="calc-budget">
+            <div>
+              <div class="flex items-center space-x-2 pb-2 border-b border-slate-100">
+                <svg class="w-3.5 h-3.5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                <h3 class="font-bold text-xs text-slate-900 uppercase tracking-tight">Budget Planner</h3>
+              </div>
 
-        <!-- CALCULATOR 3: ROAS CALCULATOR -->
-        <div id="calc-roas" class="saas-card p-4 sm:p-5 flex flex-col justify-between space-y-4 scroll-target">
-          <div>
-            <div class="flex items-center space-x-2 text-xs font-bold text-slate-900 pb-3 border-b border-slate-100">
-              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+              <div class="mt-3.5 space-y-3 text-xs">
+                <div>
+                  <label class="block text-[11px] font-medium text-slate-600 mb-1">Target Monthly Revenue</label>
+                  <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-2.5 flex items-center text-slate-400 font-semibold cur-sym">$</span>
+                    <input type="number" id="bpTargetRev" value="20000" oninput="calcBudget()" class="w-full pl-7 pr-3 py-1.5 rounded-lg bg-surface-input border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-brand-primary">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-medium text-slate-600 mb-1">Expected ROAS</label>
+                  <input type="number" step="0.1" id="bpExpectedRoas" value="4.00" oninput="calcBudget()" class="w-full px-3 py-1.5 rounded-lg bg-surface-input border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-brand-primary">
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-medium text-slate-600 mb-1">Campaign Duration</label>
+                  <select id="bpDurationDays" onchange="calcBudget()" class="w-full px-3 py-1.5 rounded-lg bg-surface-input border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-brand-primary">
+                    <option value="30" selected>30 days</option>
+                    <option value="60">60 days</option>
+                    <option value="90">90 days</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Recommendation Result Box -->
+              <div class="mt-4 p-3 rounded-xl bg-blue-50/60 border border-blue-100 space-y-2">
+                <div class="flex justify-between items-baseline">
+                  <span class="text-[11px] font-medium text-slate-500">Recommended Budget</span>
+                </div>
+                <div class="text-lg font-extrabold text-slate-900" id="bpRecBudget">$5,000</div>
+                <div class="text-[10px] text-slate-500 font-medium -mt-1">per month</div>
+
+                <div class="pt-2 border-t border-blue-200/60 space-y-1 text-[11px] text-slate-600">
+                  <div class="flex justify-between">
+                    <span>Daily Budget</span>
+                    <span class="font-bold text-slate-800" id="bpDailyBudget">$167</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Est. Conversions</span>
+                    <span class="font-bold text-slate-800" id="bpEstConversions">1,000</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button onclick="saveCurrentPlan('Budget Plan')" class="w-full py-2.5 rounded-xl bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs flex items-center justify-center space-x-1.5 transition">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
               </svg>
-              <span>ROAS Calculator</span>
-            </div>
-
-            <!-- Inputs -->
-            <div class="space-y-2.5 mt-3 text-xs">
-              <div>
-                <label class="block text-slate-500 font-medium mb-1 text-[11px]">Ad Spend</label>
-                <div class="relative">
-                  <span class="curr-sym absolute left-3 top-2 text-slate-400 font-bold">$</span>
-                  <input type="number" id="roasSpend" value="4250" step="50" min="0" oninput="calcRoas()" class="saas-input w-full pl-7 pr-3 py-1.5 text-xs">
-                </div>
-              </div>
-
-              <div>
-                <label class="block text-slate-500 font-medium mb-1 text-[11px]">Revenue</label>
-                <div class="relative">
-                  <span class="curr-sym absolute left-3 top-2 text-slate-400 font-bold">$</span>
-                  <input type="number" id="roasRevenue" value="17850" step="100" min="0" oninput="calcRoas()" class="saas-input w-full pl-7 pr-3 py-1.5 text-xs">
-                </div>
-              </div>
-            </div>
-
-            <!-- Output Box -->
-            <div class="mt-4 p-3 rounded-xl bg-blue-50/70 border border-blue-100 text-xs space-y-1.5">
-              <span class="text-[11px] font-semibold text-slate-600 block">ROAS Result</span>
-              <div class="flex items-baseline space-x-2">
-                <span class="text-2xl font-bold text-emerald-600" id="roasResult">4.20x</span>
-              </div>
-              
-              <div class="border-t border-blue-200/60 pt-1.5">
-                <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-full" id="roasPerfPill">
-                  <svg class="w-3 h-3 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-                  <span>Good performance</span>
-                </span>
-              </div>
-            </div>
+              <span>Save Plan</span>
+            </button>
           </div>
 
-          <button onclick="saveCurrentPlan('ROAS Audit Result')" class="w-full py-2.5 rounded-xl bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs flex items-center justify-center space-x-1.5 transition">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
-            </svg>
-            <span>Save Result</span>
-          </button>
-        </div>
+          <!-- CALCULATOR 3: ROAS CALCULATOR -->
+          <div class="saas-card p-5 flex flex-col justify-between space-y-4" id="calc-roas">
+            <div>
+              <div class="flex items-center space-x-2 pb-2 border-b border-slate-100">
+                <svg class="w-3.5 h-3.5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+                <h3 class="font-bold text-xs text-slate-900 uppercase tracking-tight">ROAS Calculator</h3>
+              </div>
 
-        <!-- CALCULATOR 4: BREAK-EVEN CALCULATOR -->
-        <div id="calc-breakeven" class="saas-card p-4 sm:p-5 flex flex-col justify-between space-y-4 scroll-target">
-          <div>
-            <div class="flex items-center space-x-2 text-xs font-bold text-slate-900 pb-3 border-b border-slate-100">
-              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-              </svg>
-              <span>Break-even Calculator</span>
-            </div>
+              <div class="mt-3.5 space-y-3 text-xs">
+                <div>
+                  <label class="block text-[11px] font-medium text-slate-600 mb-1">Ad Spend</label>
+                  <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-2.5 flex items-center text-slate-400 font-semibold cur-sym">$</span>
+                    <input type="number" id="roasSpend" value="4250" oninput="calcRoas()" class="w-full pl-7 pr-3 py-1.5 rounded-lg bg-surface-input border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-brand-primary">
+                  </div>
+                </div>
 
-            <!-- Inputs -->
-            <div class="space-y-2.5 mt-3 text-xs">
-              <div>
-                <label class="block text-slate-500 font-medium mb-1 text-[11px]">Product / Order Value</label>
-                <div class="relative">
-                  <span class="curr-sym absolute left-3 top-2 text-slate-400 font-bold">$</span>
-                  <input type="number" id="beOrderValue" value="50" step="5" min="0" oninput="calcBreakEven()" class="saas-input w-full pl-7 pr-3 py-1.5 text-xs">
+                <div>
+                  <label class="block text-[11px] font-medium text-slate-600 mb-1">Revenue</label>
+                  <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-2.5 flex items-center text-slate-400 font-semibold cur-sym">$</span>
+                    <input type="number" id="roasRevenue" value="17850" oninput="calcRoas()" class="w-full pl-7 pr-3 py-1.5 rounded-lg bg-surface-input border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-brand-primary">
+                  </div>
                 </div>
               </div>
 
-              <div>
-                <label class="block text-slate-500 font-medium mb-1 text-[11px]">Gross Margin</label>
-                <select id="beGrossMargin" onchange="calcBreakEven()" class="saas-input w-full px-3 py-1.5 text-xs cursor-pointer">
-                  <option value="40">40%</option>
-                  <option value="50">50%</option>
-                  <option value="60" selected>60%</option>
-                  <option value="70">70%</option>
-                  <option value="80">80%</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="block text-slate-500 font-medium mb-1 text-[11px]">Target ROAS</label>
-                <input type="number" id="beTargetRoas" value="3.00" step="0.1" min="0" oninput="calcBreakEven()" class="saas-input w-full px-3 py-1.5 text-xs">
-              </div>
-            </div>
-
-            <!-- Output Box -->
-            <div class="mt-4 p-3 rounded-xl bg-blue-50/70 border border-blue-100 text-xs space-y-1.5">
-              <span class="text-[11px] font-semibold text-slate-600 block">Break-even ROAS</span>
-              <div class="flex items-baseline space-x-2">
-                <span class="text-2xl font-bold text-emerald-600" id="beResult">1.67x</span>
-              </div>
-              
-              <div class="border-t border-blue-200/60 pt-1.5">
-                <span class="text-[10px] text-slate-500 font-normal">You need at least <strong id="beHelperText" class="font-bold text-slate-900">1.67x</strong> ROAS to break even.</span>
+              <!-- Recommendation Result Box -->
+              <div class="mt-4 p-3 rounded-xl bg-blue-50/60 border border-blue-100 space-y-2">
+                <div class="flex justify-between items-baseline">
+                  <span class="text-[11px] font-medium text-slate-500">ROAS Result</span>
+                </div>
+                <div class="text-2xl font-extrabold text-slate-900" id="roasResult">4.20x</div>
+                
+                <div class="border-t border-blue-200/60 pt-1.5">
+                  <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-full" id="roasPerfPill">
+                    <svg class="w-3 h-3 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                    <span>Good performance</span>
+                  </span>
+                </div>
               </div>
             </div>
+
+            <button onclick="saveCurrentPlan('ROAS Audit Result')" class="w-full py-2.5 rounded-xl bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs flex items-center justify-center space-x-1.5 transition">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
+              </svg>
+              <span>Save Result</span>
+            </button>
           </div>
 
-          <button onclick="saveCurrentPlan('Break-even Target')" class="w-full py-2.5 rounded-xl bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs flex items-center justify-center space-x-1.5 transition">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
-            </svg>
-            <span>Save Result</span>
-          </button>
-        </div>
+          <!-- CALCULATOR 4: BREAK-EVEN CALCULATOR -->
+          <div class="saas-card p-5 flex flex-col justify-between space-y-4" id="calc-breakeven">
+            <div>
+              <div class="flex items-center space-x-2 pb-2 border-b border-slate-100">
+                <svg class="w-3.5 h-3.5 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/>
+                </svg>
+                <h3 class="font-bold text-xs text-slate-900 uppercase tracking-tight">Break-even Calculator</h3>
+              </div>
 
+              <div class="mt-3.5 space-y-3 text-xs">
+                <div>
+                  <label class="block text-[11px] font-medium text-slate-600 mb-1">Product / Order Value</label>
+                  <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-2.5 flex items-center text-slate-400 font-semibold cur-sym">$</span>
+                    <input type="number" id="beOrderValue" value="50" oninput="calcBreakEven()" class="w-full pl-7 pr-3 py-1.5 rounded-lg bg-surface-input border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-brand-primary">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-medium text-slate-600 mb-1">Gross Margin</label>
+                  <select id="beGrossMargin" onchange="calcBreakEven()" class="w-full px-3 py-1.5 rounded-lg bg-surface-input border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-brand-primary">
+                    <option value="80">80% (Digital / SaaS)</option>
+                    <option value="60" selected>60% (High Margin)</option>
+                    <option value="40">40% (Standard Ecom)</option>
+                    <option value="25">25% (Low Margin)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[11px] font-medium text-slate-600 mb-1">Target ROAS</label>
+                  <input type="number" step="0.1" id="beTargetRoas" value="3.00" oninput="calcBreakEven()" class="w-full px-3 py-1.5 rounded-lg bg-surface-input border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-brand-primary">
+                </div>
+              </div>
+
+              <!-- Recommendation Result Box -->
+              <div class="mt-4 p-3 rounded-xl bg-blue-50/60 border border-blue-100 space-y-2">
+                <div class="flex justify-between items-baseline">
+                  <span class="text-[11px] font-medium text-slate-500">Break-even ROAS</span>
+                </div>
+                <div class="text-2xl font-extrabold text-slate-900" id="beRoasResult">1.67x</div>
+                <p class="text-[10px] text-slate-500 leading-tight">
+                  You need at least <strong class="text-slate-700" id="beMinRoasCopy">1.67x ROAS</strong> to break even.
+                </p>
+              </div>
+            </div>
+
+            <button onclick="saveCurrentPlan('Break-even Audit')" class="w-full py-2.5 rounded-xl bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs flex items-center justify-center space-x-1.5 transition">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
+              </svg>
+              <span>Save Result</span>
+            </button>
+          </div>
+
+        </div>
       </div>
 
-      <!-- ROW 5: ANDROMEDA 2026 AI ARCHITECTURE UPDATES & STRATEGY (Deep Retrieval) -->
-      <div id="view-updates" class="saas-card p-6 scroll-target">
-        <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
-          <div>
-            <h3 class="text-base font-bold text-slate-900">Meta Andromeda 2026 AI Retrieval Framework</h3>
-            <p class="text-xs text-slate-500">In 2026, creative is the targeting. How deep candidate retrieval changes paid acquisition.</p>
+      <!-- ROW 5: ANDROMEDA 2026 AI ARCHITECTURE CALLOUT -->
+      <div class="saas-card p-5 border border-slate-200">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-brand-primary animate-pulse"></span>
+            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-800">Andromeda 2026 AI Architecture</h3>
           </div>
-          <span class="text-xs font-bold text-brand-primary bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Live 2026 Architecture</span>
+          <span class="text-[11px] font-semibold text-brand-primary hover:underline cursor-pointer" onclick="openAndromedaUpdatesModal()">Explore Full Architecture &rarr;</span>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
             <div class="w-8 h-8 rounded-lg bg-blue-100 text-brand-primary flex items-center justify-center font-bold text-xs mb-2">+6%</div>
             <h4 class="text-xs font-bold text-slate-900">Retrieval Recall</h4>
@@ -824,7 +841,7 @@
           <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
             <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-xs mb-2">+8%</div>
             <h4 class="text-xs font-bold text-slate-900">Ad Quality Score</h4>
-            <p class="text-[11px] text-slate-600 mt-1">Multimodal visual & transcript matching drives higher click-through rates and -18% lower eCPM.</p>
+            <p class="text-[11px] text-slate-600 mt-1">Multimodal visual and transcript matching drives higher click-through rates and -18% lower eCPM.</p>
           </div>
           <div class="p-4 rounded-xl bg-slate-50 border border-slate-200/80">
             <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs mb-2">+22%</div>
@@ -834,75 +851,205 @@
         </div>
       </div>
 
-      <!-- ROW 6: DESIGN SYSTEM UI STYLE GUIDE (Exact Bottom Strip from Image) -->
-      <div class="saas-card p-6 border border-slate-200">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-          
-          <!-- Logo & Title -->
-          <div class="md:col-span-3 flex items-center space-x-3">
-            <div class="w-9 h-9 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-brand-primary shrink-0">
-              <svg class="w-6 h-6" viewBox="0 0 100 100" fill="#0B5FFF">
-                <path d="M50 49c-4.2-6.5-9.6-11.5-16.1-11.5-11.2 0-20.9 9.8-20.9 22.3 0 12.8 9.3 22.7 20.9 22.7 7.2 0 13.2-4.8 17.6-11.7l1.5-2.4 1.5 2.4c4.4 6.9 10.4 11.7 17.6 11.7 11.6 0 20.9-9.9 20.9-22.7 0-12.5-9.7-22.3-20.9-22.3-6.5 0-11.9 5-16.1 11.5L50 51l-1.5-2zM21.5 59.8c0-7.7 5.7-13.8 12.4-13.8 4.2 0 8.1 3.5 11.1 9.2-3 5.7-6.9 9.2-11.1 9.2-6.7 0-12.4-6.1-12.4-13.8zm57 0c0 7.7-5.7 13.8-12.4 13.8-4.2 0-8.1-3.5-11.1-9.2 3-5.7 6.9-9.2 11.1-9.2 6.7 0 12.4 6.1 12.4 13.8z"/>
-              </svg>
-            </div>
-            <div>
-              <span class="block font-bold text-xs text-slate-900 uppercase tracking-tight">Design System</span>
-              <span class="text-[10px] text-slate-400">UI Style Guide</span>
-            </div>
-          </div>
-
-          <!-- Color Palette Swatches -->
-          <div class="md:col-span-4 space-y-1">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Color Palette</span>
-            <div class="flex items-center space-x-1.5">
-              <div class="w-8 h-6 rounded bg-[#0B5FFF]" title="#0B5FFF Primary"></div>
-              <div class="w-8 h-6 rounded bg-[#2563EB]" title="#2563EB Brand"></div>
-              <div class="w-8 h-6 rounded bg-[#E6F0FF]" title="#E6F0FF Light"></div>
-              <div class="w-8 h-6 rounded bg-[#E8F8EC]" title="#E8F8EC Success"></div>
-              <div class="w-8 h-6 rounded bg-[#FFF4E6]" title="#FFF4E6 Warning"></div>
-              <div class="w-8 h-6 rounded bg-[#FDECEF]" title="#FDECEF Error"></div>
-              <div class="w-8 h-6 rounded bg-[#F5F7FA] border border-slate-200" title="#F5F7FA Surface"></div>
-            </div>
-          </div>
-
-          <!-- Typography -->
-          <div class="md:col-span-2 space-y-1">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Typography (Inter)</span>
-            <div class="flex items-baseline space-x-2">
-              <span class="text-xl font-bold text-slate-900">Aa</span>
-              <span class="text-[10px] text-slate-500 font-normal">Bold / Semibold / Regular</span>
-            </div>
-          </div>
-
-          <!-- Key Components Preview -->
-          <div class="md:col-span-3 space-y-1 text-right">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Key Components</span>
-            <div class="flex items-center justify-end space-x-2">
-              <button class="px-2.5 py-1 rounded-lg bg-brand-primary text-white text-[10px] font-bold">Primary</button>
-              <button class="px-2.5 py-1 rounded-lg bg-white border border-slate-300 text-slate-700 text-[10px] font-medium">Secondary</button>
-              <input type="text" placeholder="Input Field" class="w-20 px-2 py-1 text-[10px] rounded-lg bg-slate-50 border border-slate-300">
-            </div>
-          </div>
-
-        </div>
-      </div>
-
     </main>
 
   </div>
 
-  <!-- SAVED PLANS MODAL DRAWER -->
+  <!-- SAVED PLANS MODAL -->
   <div id="savedPlansModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-md w-full p-5 space-y-4 shadow-2xl border border-slate-200">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-        <h3 class="font-bold text-sm text-slate-900">Saved Plans & Calculations</h3>
-        <button onclick="closeSavedPlans()" class="text-slate-400 hover:text-slate-700 p-1 rounded transition" aria-label="Close"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+        <h3 class="font-bold text-sm text-slate-900">Saved Plans &amp; Calculations</h3>
+        <button onclick="closeSavedPlans()" class="text-slate-400 hover:text-slate-700 p-1 rounded transition" aria-label="Close">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
       </div>
       <div id="savedPlansList" class="space-y-2 max-h-60 overflow-y-auto text-xs">
         <!-- Rendered dynamically -->
       </div>
-      <div class="pt-2 flex justify-end">
+      <div class="pt-2 flex justify-between items-center">
+        <button onclick="clearAllSavedPlans()" class="text-[11px] font-semibold text-rose-600 hover:text-rose-800">Clear All</button>
         <button onclick="closeSavedPlans()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANDROMEDA UPDATES MODAL -->
+  <div id="andromedaUpdatesModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-5 space-y-4 shadow-2xl border border-slate-200">
+      <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+        <div class="flex items-center space-x-2">
+          <img src="icons/icon-192.png" alt="Meta Logo" class="w-6 h-6 rounded-lg object-contain">
+          <h3 class="font-bold text-sm text-slate-900">Meta Andromeda 2026 Engine Updates</h3>
+        </div>
+        <button onclick="closeModal('andromedaUpdatesModal')" class="text-slate-400 hover:text-slate-700 p-1 rounded transition" aria-label="Close">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="space-y-3 text-xs max-h-80 overflow-y-auto pr-1 text-slate-600">
+        <div class="p-3 bg-blue-50/70 border border-blue-100 rounded-xl">
+          <span class="font-bold text-slate-900 block text-xs">1. Neural Candidate Retrieval (+6% Recall)</span>
+          <p class="mt-1 text-[11px]">Meta Andromeda replaces legacy audience lookalikes with deep continuous vector embeddings. Ad inventory is matched against real-time buyer engagement intent across Instagram, Facebook, and WhatsApp.</p>
+        </div>
+        <div class="p-3 bg-purple-50/70 border border-purple-100 rounded-xl">
+          <span class="font-bold text-slate-900 block text-xs">2. Multimodal Quality Score (+8% Quality)</span>
+          <p class="mt-1 text-[11px]">Computer vision scans video hooks, poster typography, and voiceovers. High-retention creatives receive an automated auction bid discount, lowering effective cost per impression (eCPM) by up to 18%.</p>
+        </div>
+        <div class="p-3 bg-emerald-50/70 border border-emerald-100 rounded-xl">
+          <span class="font-bold text-slate-900 block text-xs">3. Advantage+ Scaling Protocol (&le; +20% / 24h)</span>
+          <p class="mt-1 text-[11px]">To prevent algorithmic reset back into the learning phase, scaling increments should remain capped at +20% to +30% every 24-48 hours once ROAS exceeds target by &ge; 15%.</p>
+        </div>
+      </div>
+      <div class="pt-2 flex justify-end">
+        <button onclick="closeModal('andromedaUpdatesModal')" class="px-4 py-2 rounded-xl bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs">Got It</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAMPAIGNS MODAL -->
+  <div id="campaignsModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-5 space-y-4 shadow-2xl border border-slate-200">
+      <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+        <div>
+          <h3 class="font-bold text-sm text-slate-900">Active Meta Campaigns (12 Live)</h3>
+          <p class="text-[11px] text-slate-500">Live campaign health, spend velocity, and scaling actions.</p>
+        </div>
+        <button onclick="closeModal('campaignsModal')" class="text-slate-400 hover:text-slate-700 p-1 rounded transition" aria-label="Close">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="overflow-x-auto max-h-72 text-xs">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-slate-200 bg-slate-50 text-[11px] font-bold text-slate-600">
+              <th class="py-2 px-3">Campaign Name</th>
+              <th class="py-2 px-3">Status</th>
+              <th class="py-2 px-3">Daily Spend</th>
+              <th class="py-2 px-3">ROAS</th>
+              <th class="py-2 px-3 text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-[11px]">
+            <tr>
+              <td class="py-2.5 px-3 font-semibold text-slate-800">ASC // Sales - Top Conversion 01</td>
+              <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-700">Active</span></td>
+              <td class="py-2.5 px-3 font-medium text-slate-700">$350 / day</td>
+              <td class="py-2.5 px-3 font-bold text-slate-900">4.42x</td>
+              <td class="py-2.5 px-3 text-right"><button onclick="quickScaleAction('ASC // Sales - Top Conversion 01')" class="px-2 py-1 bg-brand-primary text-white rounded text-[10px] font-bold hover:bg-brand-dark">Scale +20%</button></td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-semibold text-slate-800">CBO // Advantage+ Evergreen Reels</td>
+              <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-700">Active</span></td>
+              <td class="py-2.5 px-3 font-medium text-slate-700">$220 / day</td>
+              <td class="py-2.5 px-3 font-bold text-slate-900">4.18x</td>
+              <td class="py-2.5 px-3 text-right"><button onclick="quickScaleAction('CBO // Advantage+ Evergreen Reels')" class="px-2 py-1 bg-brand-primary text-white rounded text-[10px] font-bold hover:bg-brand-dark">Scale +20%</button></td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-semibold text-slate-800">DABA // Dynamic Product Catalog</td>
+              <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-700">Learning</span></td>
+              <td class="py-2.5 px-3 font-medium text-slate-700">$140 / day</td>
+              <td class="py-2.5 px-3 font-bold text-slate-900">3.65x</td>
+              <td class="py-2.5 px-3 text-right"><span class="text-slate-400 text-[10px] font-medium">Keep Stable</span></td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-semibold text-slate-800">TEST // Hook Creative Iteration #4</td>
+              <td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 text-purple-700">Testing</span></td>
+              <td class="py-2.5 px-3 font-medium text-slate-700">$85 / day</td>
+              <td class="py-2.5 px-3 font-bold text-slate-900">5.12x</td>
+              <td class="py-2.5 px-3 text-right"><button onclick="quickScaleAction('TEST // Hook Creative Iteration #4')" class="px-2 py-1 bg-brand-primary text-white rounded text-[10px] font-bold hover:bg-brand-dark">Graduate to Main</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pt-2 flex justify-end">
+        <button onclick="closeModal('campaignsModal')" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REPORTS MODAL -->
+  <div id="reportsModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-5 space-y-4 shadow-2xl border border-slate-200">
+      <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+        <div>
+          <h3 class="font-bold text-sm text-slate-900">Performance &amp; Scaling Audit Report</h3>
+          <p class="text-[11px] text-slate-500">Executive summary of account velocity and efficiency.</p>
+        </div>
+        <button onclick="closeModal('reportsModal')" class="text-slate-400 hover:text-slate-700 p-1 rounded transition" aria-label="Close">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="space-y-3 text-xs text-slate-700">
+        <div class="grid grid-cols-2 gap-2.5">
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+            <span class="text-[10px] font-bold text-slate-400 uppercase">Account Net Spend</span>
+            <span class="block text-base font-extrabold text-slate-900 mt-0.5" id="repSpend">$4,250</span>
+          </div>
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+            <span class="text-[10px] font-bold text-slate-400 uppercase">Gross Revenue</span>
+            <span class="block text-base font-extrabold text-slate-900 mt-0.5" id="repRev">$17,850</span>
+          </div>
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+            <span class="text-[10px] font-bold text-slate-400 uppercase">Aggregated ROAS</span>
+            <span class="block text-base font-extrabold text-brand-primary mt-0.5">4.20x</span>
+          </div>
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+            <span class="text-[10px] font-bold text-slate-400 uppercase">Health Index</span>
+            <span class="block text-base font-extrabold text-emerald-600 mt-0.5">Optimal (94/100)</span>
+          </div>
+        </div>
+        <p class="text-[11px] text-slate-600 leading-relaxed bg-blue-50/60 p-3 rounded-xl border border-blue-100">
+          <strong>Key Audit Finding:</strong> Account has satisfied the 50-conversion weekly threshold. Creative velocity is currently at 4.2 new variants per week, maintaining healthy auction relevance scores. Recommended scaling budget increase: +30%.
+        </p>
+      </div>
+      <div class="pt-2 flex justify-between items-center">
+        <button onclick="closeModal('reportsModal'); exportAuditPdf();" class="px-3.5 py-2 rounded-xl bg-brand-primary hover:bg-brand-dark text-white font-semibold text-xs flex items-center space-x-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <span>Print / Export PDF</span>
+        </button>
+        <button onclick="closeModal('reportsModal')" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS MODAL -->
+  <div id="settingsModal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-5 space-y-4 shadow-2xl border border-slate-200">
+      <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+        <h3 class="font-bold text-sm text-slate-900">Cockpit Settings</h3>
+        <button onclick="closeModal('settingsModal')" class="text-slate-400 hover:text-slate-700 p-1 rounded transition" aria-label="Close">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="space-y-3.5 text-xs">
+        <div>
+          <label class="block text-[11px] font-medium text-slate-600 mb-1">Default Account Currency</label>
+          <select id="setCurrency" onchange="onCurrencyChange(this.value); document.getElementById('selGlobalCurrency').value = this.value;" class="w-full px-3 py-1.5 rounded-lg bg-surface-input border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:border-brand-primary">
+            <option value="$" selected>USD ($)</option>
+            <option value="Rs ">PKR (Rs)</option>
+            <option value="AED ">AED</option>
+            <option value="SAR ">SAR</option>
+            <option value="₹">INR (₹)</option>
+            <option value="€">EUR (€)</option>
+            <option value="£">GBP (£)</option>
+            <option value="C$">CAD (C$)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[11px] font-medium text-slate-600 mb-1">Default Target ROAS Threshold</label>
+          <input type="number" step="0.1" id="setDefaultRoas" value="4.00" class="w-full px-3 py-1.5 rounded-lg bg-surface-input border border-slate-200 text-xs font-bold text-slate-800">
+        </div>
+        <div class="pt-2 border-t border-slate-100 space-y-2">
+          <button onclick="resetDefaults()" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg text-xs transition">
+            Reset Calculator Values to Defaults
+          </button>
+          <button onclick="clearCacheAndReload()" class="w-full py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 font-semibold rounded-lg text-xs transition">
+            Clear Local Cache &amp; Reload App
+          </button>
+        </div>
+      </div>
+      <div class="pt-2 flex justify-end">
+        <button onclick="closeModal('settingsModal')" class="px-4 py-2 rounded-xl bg-brand-primary text-white font-semibold text-xs">Save &amp; Close</button>
       </div>
     </div>
   </div>
@@ -915,150 +1062,177 @@
     <span id="toastMessage">Plan saved successfully!</span>
   </div>
 
+  <!-- 1-PAGE OFFICIAL MEDIA AUDIT PROPOSAL (STRICTLY PRINT ONLY) -->
+  <div class="print-only max-w-3xl mx-auto text-slate-900 font-sans">
+    <div class="flex justify-between items-start border-b-2 border-black pb-3 mb-4">
+      <div class="flex items-center space-x-3">
+        <img src="icons/icon-192.png" alt="Meta Logo" class="w-10 h-10 object-contain">
+        <div>
+          <h1 class="text-xl font-black uppercase tracking-tight">Meta Andromeda AI Media Audit Proposal</h1>
+          <p class="text-[11px] text-gray-700">Andromeda 2026 Paid Acquisition Strategy &amp; Scaling Framework</p>
+        </div>
+      </div>
+      <div class="text-right text-[11px] text-gray-800">
+        <p><strong>Audit Date:</strong> <span id="printDate"></span></p>
+        <p><strong>Ref Code:</strong> #AND-<span id="printRef"></span></p>
+        <p><strong>Auditor:</strong> Meta Andromeda AI Cockpit</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-3 mb-4 text-xs">
+      <div class="p-2.5 border border-gray-300 rounded bg-gray-50">
+        <p class="font-bold text-gray-500 uppercase text-[9px]">Break-Even ROAS</p>
+        <p class="text-sm font-black text-black mt-0.5" id="printBeRoas">1.67x</p>
+      </div>
+      <div class="p-2.5 border border-gray-300 rounded bg-gray-50">
+        <p class="font-bold text-gray-500 uppercase text-[9px]">Current ROAS</p>
+        <p class="text-sm font-black text-black mt-0.5" id="printCurrentRoas">4.20x</p>
+      </div>
+      <div class="p-2.5 border border-gray-300 rounded bg-gray-50">
+        <p class="font-bold text-gray-500 uppercase text-[9px]">Target ROAS</p>
+        <p class="text-sm font-black text-black mt-0.5" id="printTargetRoas">4.00x</p>
+      </div>
+    </div>
+
+    <table class="w-full text-xs text-left border-collapse mb-5">
+      <thead>
+        <tr class="border-b-2 border-black bg-gray-100">
+          <th class="py-1.5 px-3">Metric Dimension</th>
+          <th class="py-1.5 px-3 text-right">Value / Target</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <tr>
+          <td class="py-1.5 px-3">Current Daily Spend Baseline</td>
+          <td class="py-1.5 px-3 text-right font-medium" id="printDailySpend">$150.00</td>
+        </tr>
+        <tr>
+          <td class="py-1.5 px-3">Safe Daily Scaling Step (+30% Rule)</td>
+          <td class="py-1.5 px-3 text-right font-medium" id="printNextScale">$195.00 / day</td>
+        </tr>
+        <tr>
+          <td class="py-1.5 px-3">Estimated Monthly Revenue at Target</td>
+          <td class="py-1.5 px-3 text-right font-medium" id="printMonthlyRev">$23,400.00</td>
+        </tr>
+        <tr>
+          <td class="py-1.5 px-3">Advantage+ Candidate Retrieval Recall</td>
+          <td class="py-1.5 px-3 text-right font-medium">+6% Precision Lift</td>
+        </tr>
+        <tr>
+          <td class="py-1.5 px-3">Multimodal Ad Quality Optimization</td>
+          <td class="py-1.5 px-3 text-right font-medium">-18% Lower eCPM</td>
+        </tr>
+        <tr>
+          <td class="py-1.5 px-3">Scaling Governance Policy</td>
+          <td class="py-1.5 px-3 text-right font-bold text-black">&le; +30% Step / 48hr Window</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="border border-gray-300 rounded p-3 text-[10px] text-gray-600 mb-6 bg-gray-50">
+      <p class="font-bold text-gray-700 mb-1">STRATEGIC MEDIA EXECUTION CONDITIONS:</p>
+      <p>Meta Andromeda 2026 relies on creative diversity rather than narrow audience gating. Creative velocity must meet the minimum weekly requirement to avoid auction decay. Budget increases must strictly adhere to the &le; +30% / 48h scaling rule to protect algorithmic learning states.</p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-8 text-xs pt-3 border-t border-gray-400">
+      <div>
+        <p class="text-[9px] uppercase font-bold text-gray-500 mb-6">Cockpit Verification</p>
+        <div class="border-b border-black w-48 mb-1"></div>
+        <p class="text-[10px] text-gray-600">Meta Andromeda Engine &bull; Automated Audit</p>
+      </div>
+      <div>
+        <p class="text-[9px] uppercase font-bold text-gray-500 mb-6">Client / Media Representative</p>
+        <div class="border-b border-black w-48 mb-1"></div>
+        <p class="text-[10px] text-gray-600">Authorized Media Strategist</p>
+      </div>
+    </div>
+  </div>
+
   <!-- JAVASCRIPT ENGINE -->
   <script>
     let globalCurrency = '$';
     let savedPlans = [
-      { title: 'Scaling Plan (Q4 Boost)', date: 'Oct 28, 2026', value: '$195 / day (+30%)' },
-      { title: 'Budget Plan (E-Commerce Holiday)', date: 'Oct 25, 2026', value: '$5,000 / month' },
-      { title: 'ROAS Audit (Core ASC)', date: 'Oct 22, 2026', value: '4.20x ROAS' },
-      { title: 'Break-even Analysis (Apparel)', date: 'Oct 19, 2026', value: '1.67x Floor' },
-      { title: 'Moonshot Angle Test', date: 'Oct 15, 2026', value: '$25 / day' }
+      { id: 1, title: 'Summer Scaling Plan', spend: 150, roas: 4.20, recSpend: 195, date: '2026-10-24' },
+      { id: 2, title: 'Black Friday Budget Plan', spend: 200, roas: 4.50, recSpend: 260, date: '2026-10-26' },
+      { id: 3, title: 'Advantage+ Testing Scale', spend: 100, roas: 3.80, recSpend: 120, date: '2026-10-28' },
+      { id: 4, title: 'High Margin Break-even', spend: 300, roas: 4.10, recSpend: 390, date: '2026-10-29' },
+      { id: 5, title: 'Reels Liquidity Campaign', spend: 250, roas: 4.30, recSpend: 325, date: '2026-10-30' }
     ];
 
-    function showToast(msg) {
-      const toast = document.getElementById('toastNotification');
-      const text = document.getElementById('toastMessage');
-      if (!toast || !text) return;
-      text.innerText = msg;
-      toast.classList.remove('translate-y-16', 'opacity-0');
-      toast.classList.add('translate-y-0', 'opacity-100');
-      setTimeout(() => {
-        toast.classList.remove('translate-y-0', 'opacity-100');
-        toast.classList.add('translate-y-16', 'opacity-0');
-      }, 2600);
+    // Helper to format currency numbers
+    function fmt(val) {
+      return globalCurrency + Number(val).toLocaleString('en-US', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      });
     }
 
+    // Currency Switcher
     function onCurrencyChange(val) {
       globalCurrency = val;
-      document.querySelectorAll('.curr-sym').forEach(el => el.innerText = val.trim());
-      calcAll();
-      showToast(`Currency changed to ${val.trim()}`);
-    }
-
-    function toggleCalcMenu() {
-      const sub = document.getElementById('calcSubMenu');
-      const arrow = document.getElementById('calcMenuArrow');
-      if (sub.classList.contains('hidden')) {
-        sub.classList.remove('hidden');
-        arrow.classList.remove('-rotate-90');
-      } else {
-        sub.classList.add('hidden');
-        arrow.classList.add('-rotate-90');
-      }
-    }
-
-    function switchNav(key) {
-      document.querySelectorAll('.sidebar-item').forEach(el => {
-        el.classList.remove('sidebar-active');
-        el.classList.remove('text-white');
-        el.classList.add('text-slate-600');
-      });
-      const activeEl = document.getElementById(`nav-${key}`);
-      if (activeEl) {
-        activeEl.classList.add('sidebar-active');
-        activeEl.classList.remove('text-slate-600');
-        activeEl.classList.add('text-white');
-      }
-    }
-
-    function scrollToUpdates() {
-      switchNav('updates');
-      const target = document.getElementById('view-updates');
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function showSavedPlans() {
-      const modal = document.getElementById('savedPlansModal');
-      const list = document.getElementById('savedPlansList');
-      if (!modal || !list) return;
-      list.innerHTML = savedPlans.map(p => `
-        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
-          <div>
-            <span class="block font-semibold text-slate-900">${p.title}</span>
-            <span class="text-[10px] text-slate-400 font-normal">${p.date}</span>
-          </div>
-          <span class="text-xs font-bold text-brand-primary">${p.value}</span>
-        </div>
-      `).join('');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    }
-
-    function closeSavedPlans() {
-      const modal = document.getElementById('savedPlansModal');
-      if (modal) {
-        modal.classList.remove('flex');
-        modal.classList.add('hidden');
-      }
-    }
-
-    function saveCurrentPlan(type) {
-      const title = type + ' (' + new Date().toLocaleDateString('en-US', {month: 'short', day: 'numeric'}) + ')';
-      let val = '$195 / day';
-      if (type.includes('Budget')) val = document.getElementById('bpRecBudget').innerText + ' / mo';
-      else if (type.includes('ROAS')) val = document.getElementById('roasResult').innerText;
-      else if (type.includes('Break-even')) val = document.getElementById('beResult').innerText;
-      else val = document.getElementById('scRecSpend').innerText + ' / day';
+      document.querySelectorAll('.cur-sym').forEach(el => el.innerText = val);
+      const selTop = document.getElementById('selGlobalCurrency');
+      if (selTop) selTop.value = val;
+      const setSel = document.getElementById('setCurrency');
+      if (setSel) setSel.value = val;
       
-      savedPlans.unshift({ title, date: 'Just now', value: val });
-      document.getElementById('dispSavedPlanCount').innerText = savedPlans.length;
-      showToast(`${type} saved to your plans!`);
+      // Update top cards
+      document.getElementById('kpiSpend').innerText = fmt(4250);
+      document.getElementById('kpiRevenue').innerText = fmt(17850);
+      document.getElementById('repSpend').innerText = fmt(4250);
+      document.getElementById('repRev').innerText = fmt(17850);
+      
+      calcAll();
+      showToast('Currency updated to ' + val);
     }
 
-    function applyScalingPlan() {
-      showToast('Scaling Plan (+30%) applied to active campaigns!');
+    // Safe parser that preserves 0
+    function parseNum(id, fallback) {
+      const el = document.getElementById(id);
+      if (!el) return fallback;
+      const val = parseFloat(el.value);
+      return isNaN(val) ? fallback : val;
     }
 
     // 1. SCALING CALCULATOR LOGIC
     function calcScaling() {
-      const spend = Math.max(0, parseFloat(document.getElementById('scDailySpend').value) || 0);
-      const currentRoas = Math.max(0.1, parseFloat(document.getElementById('scCurrentRoas').value) || 4.2);
-      const targetRoas = parseFloat(document.getElementById('scTargetRoas').value) || currentRoas;
-      const scalePct = (parseFloat(document.getElementById('scScaleBy').value) || 30) / 100;
+      const dailySpend = Math.max(0, parseNum('scDailySpend', 150));
+      const currentRoas = Math.max(0, parseNum('scCurrentRoas', 4.20));
+      const targetRoas = Math.max(0, parseNum('scTargetRoas', 4.00));
+      const scalePct = parseFloat(document.getElementById('scScalePct').value) || 0.30;
 
-      const recSpend = spend * (1 + scalePct);
-      const dailyRev = recSpend * targetRoas;
-      const monthlyRev = dailyRev * 30;
+      const recSpend = dailySpend * (1 + scalePct);
+      const estDailyRev = recSpend * (targetRoas > 0 ? targetRoas : currentRoas);
+      const estMonthlyRev = estDailyRev * 30;
 
-      document.getElementById('scRecSpend').innerText = globalCurrency + Math.round(recSpend).toLocaleString();
-      document.getElementById('scDailyRev').innerText = globalCurrency + Math.round(dailyRev).toLocaleString();
-      document.getElementById('scEstRoas').innerText = targetRoas.toFixed(2) + 'x';
-      document.getElementById('scMonthlyRev').innerText = globalCurrency + Math.round(monthlyRev).toLocaleString();
-      document.getElementById('scScaleTag').innerText = `(+${Math.round(scalePct * 100)}%)`;
-      document.getElementById('recStep1').innerText = `Increase budget to ${globalCurrency + Math.round(recSpend * 28.3).toLocaleString()}`;
+      document.getElementById('scScaleBadge').innerText = '(+' + Math.round(scalePct * 100) + '%)';
+      document.getElementById('scRecScaleSpend').innerText = fmt(recSpend) + ' / day';
+      document.getElementById('scEstDailyRev').innerText = fmt(estDailyRev);
+      document.getElementById('scEstRoas').innerText = (targetRoas > 0 ? targetRoas : currentRoas).toFixed(2) + 'x';
+      document.getElementById('scEstMonthlyRev').innerText = fmt(estMonthlyRev);
+
+      document.getElementById('recStep1').innerText = 'Increase budget to ' + fmt(recSpend);
     }
 
     // 2. BUDGET PLANNER LOGIC
-    function calcBudgetPlanner() {
-      const targetRev = Math.max(0, parseFloat(document.getElementById('bpTargetRev').value) || 0);
-      const expectedRoas = Math.max(0.1, parseFloat(document.getElementById('bpExpectedRoas').value) || 4.0);
-      const duration = parseInt(document.getElementById('bpDuration').value, 10) || 30;
+    function calcBudget() {
+      const targetRev = Math.max(0, parseNum('bpTargetRev', 20000));
+      const expRoas = Math.max(0.1, parseNum('bpExpectedRoas', 4.00));
+      const duration = parseInt(document.getElementById('bpDurationDays').value) || 30;
 
-      const recBudget = expectedRoas > 0 ? (targetRev / expectedRoas) : 0;
-      const dailyBudget = duration > 0 ? (recBudget / duration) : 0;
-      const avgAov = 20; // benchmark estimate
-      const estConversions = avgAov > 0 ? Math.round(targetRev / avgAov) : 0;
+      const totalBudget = targetRev / expRoas;
+      const dailyBudget = totalBudget / duration;
+      const estConv = Math.round(targetRev / 20); // standard baseline
 
-      document.getElementById('bpRecBudget').innerText = globalCurrency + Math.round(recBudget).toLocaleString();
-      document.getElementById('bpDailyBudget').innerText = globalCurrency + Math.round(dailyBudget).toLocaleString();
-      document.getElementById('bpEstConversions').innerText = estConversions.toLocaleString();
+      document.getElementById('bpRecBudget').innerText = fmt(totalBudget);
+      document.getElementById('bpDailyBudget').innerText = fmt(dailyBudget);
+      document.getElementById('bpEstConversions').innerText = estConv.toLocaleString();
     }
 
     // 3. ROAS CALCULATOR LOGIC
     function calcRoas() {
-      const spend = Math.max(0, parseFloat(document.getElementById('roasSpend').value) || 0);
-      const rev = Math.max(0, parseFloat(document.getElementById('roasRevenue').value) || 0);
+      const spend = Math.max(0, parseNum('roasSpend', 4250));
+      const rev = Math.max(0, parseNum('roasRevenue', 17850));
 
       const roas = spend > 0 ? (rev / spend) : 0;
       document.getElementById('roasResult').innerText = roas.toFixed(2) + 'x';
@@ -1078,87 +1252,323 @@
 
     // 4. BREAK-EVEN CALCULATOR LOGIC
     function calcBreakEven() {
-      const orderVal = Math.max(0, parseFloat(document.getElementById('beOrderValue').value) || 0);
-      const marginPct = (parseFloat(document.getElementById('beGrossMargin').value) || 60) / 100;
-
+      const orderVal = Math.max(0, parseNum('beOrderValue', 50));
+      const marginPct = (parseNum('beGrossMargin', 60)) / 100;
+      
       const beRoas = marginPct > 0 ? (1 / marginPct) : 0;
-      document.getElementById('beResult').innerText = beRoas.toFixed(2) + 'x';
-      document.getElementById('beHelperText').innerText = beRoas.toFixed(2) + 'x';
+      document.getElementById('beRoasResult').innerText = beRoas.toFixed(2) + 'x';
+      document.getElementById('beMinRoasCopy').innerText = beRoas.toFixed(2) + 'x ROAS';
     }
 
     function calcAll() {
       calcScaling();
-      calcBudgetPlanner();
+      calcBudget();
       calcRoas();
       calcBreakEven();
     }
 
-    // Initialize Chart.js Performance Overview (Dual Y-Axis matching image)
+    // SAVED PLANS ACTIONS
+    function saveCurrentPlan(planType) {
+      const dailySpend = parseNum('scDailySpend', 150);
+      const currentRoas = parseNum('scCurrentRoas', 4.20);
+      const recSpend = dailySpend * 1.30;
+      
+      const newPlan = {
+        id: Date.now(),
+        title: planType + ' #' + (savedPlans.length + 1),
+        spend: dailySpend,
+        roas: currentRoas,
+        recSpend: recSpend,
+        date: new Date().toISOString().split('T')[0]
+      };
+      savedPlans.unshift(newPlan);
+      renderSavedPlans();
+      showToast(planType + ' saved to your cockpit!');
+    }
+
+    function applyScalingPlan() {
+      document.getElementById('scScalePct').value = "0.30";
+      calcScaling();
+      scrollToCalc('calc-scaling');
+      showToast('Scaling plan applied! Recommended spend recalculated.');
+    }
+
+    function renderSavedPlans() {
+      const container = document.getElementById('savedPlansList');
+      document.getElementById('dispSavedCount').innerText = savedPlans.length;
+      if (!container) return;
+
+      if (savedPlans.length === 0) {
+        container.innerHTML = '<p class="text-slate-400 text-center py-4">No saved plans yet.</p>';
+        return;
+      }
+
+      container.innerHTML = savedPlans.map(p => `
+        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
+          <div>
+            <span class="font-bold text-slate-800 block">${p.title}</span>
+            <span class="text-[10px] text-slate-500">Spend: ${fmt(p.spend)} &bull; Rec: ${fmt(p.recSpend)} &bull; ROAS: ${p.roas}x</span>
+          </div>
+          <div class="flex items-center space-x-1">
+            <button onclick="loadPlan(${p.id})" class="px-2 py-1 bg-brand-primary text-white text-[10px] font-bold rounded-lg hover:bg-brand-dark transition">Load</button>
+            <button onclick="deletePlan(${p.id})" class="p-1 text-slate-400 hover:text-rose-600 rounded transition" aria-label="Delete">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function loadPlan(id) {
+      const plan = savedPlans.find(p => p.id === id);
+      if (plan) {
+        document.getElementById('scDailySpend').value = plan.spend;
+        document.getElementById('scCurrentRoas').value = plan.roas;
+        calcScaling();
+        closeSavedPlans();
+        scrollToCalc('calc-scaling');
+        showToast('Loaded ' + plan.title);
+      }
+    }
+
+    function deletePlan(id) {
+      savedPlans = savedPlans.filter(p => p.id !== id);
+      renderSavedPlans();
+      showToast('Plan removed.');
+    }
+
+    function clearAllSavedPlans() {
+      savedPlans = [];
+      renderSavedPlans();
+      showToast('All saved plans cleared.');
+    }
+
+    // MODAL HELPERS
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.remove('hidden');
+        el.classList.add('flex');
+      }
+    }
+
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.add('hidden');
+        el.classList.remove('flex');
+      }
+    }
+
+    function openSavedPlans() {
+      renderSavedPlans();
+      openModal('savedPlansModal');
+    }
+
+    function closeSavedPlans() {
+      closeModal('savedPlansModal');
+    }
+
+    function openAndromedaUpdatesModal() {
+      openModal('andromedaUpdatesModal');
+    }
+
+    function openCampaignsModal() {
+      openModal('campaignsModal');
+    }
+
+    function openReportsModal() {
+      openModal('reportsModal');
+    }
+
+    function openSettingsModal() {
+      openModal('settingsModal');
+    }
+
+    function quickScaleAction(name) {
+      showToast('Scaled +20% for ' + name);
+    }
+
+    function resetDefaults() {
+      document.getElementById('scDailySpend').value = 150;
+      document.getElementById('scCurrentRoas').value = 4.20;
+      document.getElementById('scTargetRoas').value = 4.00;
+      document.getElementById('scScalePct').value = "0.30";
+      document.getElementById('bpTargetRev').value = 20000;
+      document.getElementById('bpExpectedRoas').value = 4.00;
+      document.getElementById('bpDurationDays').value = "30";
+      document.getElementById('roasSpend').value = 4250;
+      document.getElementById('roasRevenue').value = 17850;
+      document.getElementById('beOrderValue').value = 50;
+      document.getElementById('beGrossMargin').value = "60";
+      calcAll();
+      closeModal('settingsModal');
+      showToast('Calculator reset to defaults.');
+    }
+
+    function clearCacheAndReload() {
+      if ('caches' in window) {
+        caches.keys().then(names => {
+          for (let name of names) caches.delete(name);
+        });
+      }
+      localStorage.clear();
+      window.location.reload(true);
+    }
+
+    // NAVIGATION ACTIONS
+    function navTo(view) {
+      document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('sidebar-active', 'text-white'));
+      const activeEl = document.getElementById('nav-' + view);
+      if (activeEl) activeEl.classList.add('sidebar-active', 'text-white');
+      
+      if (view === 'dashboard') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function scrollToCalc(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.classList.add('card-highlight');
+        setTimeout(() => el.classList.remove('card-highlight'), 2400);
+      }
+    }
+
+    function toggleCalcMenu() {
+      const sub = document.getElementById('calcSubMenu');
+      const arrow = document.getElementById('calcMenuArrow');
+      if (sub.classList.contains('hidden')) {
+        sub.classList.remove('hidden');
+        arrow.classList.remove('-rotate-90');
+      } else {
+        sub.classList.add('hidden');
+        arrow.classList.add('-rotate-90');
+      }
+    }
+
+    // Toast Notification helper
+    function showToast(msg) {
+      const toast = document.getElementById('toastNotification');
+      const msgEl = document.getElementById('toastMessage');
+      if (!toast || !msgEl) return;
+      msgEl.innerText = msg;
+      toast.classList.remove('translate-y-16', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-16', 'opacity-0');
+      }, 2500);
+    }
+
+    // PRINT / PDF EXPORT
+    function exportAuditPdf() {
+      calcAll();
+      document.getElementById('printDate').innerText = new Date().toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'});
+      document.getElementById('printRef').innerText = Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('printBeRoas').innerText = document.getElementById('beRoasResult').innerText;
+      document.getElementById('printCurrentRoas').innerText = document.getElementById('scCurrentRoas').value + 'x';
+      document.getElementById('printTargetRoas').innerText = document.getElementById('scTargetRoas').value + 'x';
+      document.getElementById('printDailySpend').innerText = fmt(parseNum('scDailySpend', 150));
+      document.getElementById('printNextScale').innerText = document.getElementById('scRecScaleSpend').innerText;
+      document.getElementById('printMonthlyRev').innerText = document.getElementById('scEstMonthlyRev').innerText;
+      window.print();
+    }
+
+    // PWA INSTALL LOGIC
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const btn = document.getElementById('pwaInstallBtn');
+      if (btn) btn.classList.remove('hidden');
+    });
+
+    function installPWA() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            showToast('App installed successfully!');
+          }
+          deferredPrompt = null;
+        });
+      } else {
+        showToast('App is ready! In browser menu, tap "Add to Home Screen"');
+      }
+    }
+
+    // PERFORMANCE CHART (Chart.js)
     let perfChart;
     function initPerformanceChart() {
       const ctx = document.getElementById('performanceChart');
       if (!ctx) return;
-
+      
       const labels = ['Oct 1', 'Oct 5', 'Oct 9', 'Oct 13', 'Oct 17', 'Oct 21', 'Oct 25', 'Oct 29'];
-      const spendData = [1800, 3200, 4800, 6500, 7800, 8900, 10200, 11500];
-      const revenueData = [4500, 7200, 10800, 14200, 16800, 18500, 21000, 23800];
-      const roasData = [2.5, 3.2, 3.6, 3.9, 3.8, 4.0, 4.3, 4.2];
+      const spendData = [1200, 1800, 2400, 2200, 2600, 3100, 3500, 4250];
+      const revData = [4800, 7500, 9800, 9200, 11200, 13100, 15200, 17850];
+      const roasData = [4.0, 4.16, 4.08, 4.18, 4.30, 4.22, 4.34, 4.20];
 
       perfChart = new Chart(ctx, {
-        type: 'bar',
         data: {
           labels: labels,
           datasets: [
             {
-              type: 'line',
-              label: 'ROAS',
-              data: roasData,
-              yAxisID: 'yRoas',
-              borderColor: '#A855F7',
-              backgroundColor: '#A855F7',
-              borderWidth: 2.5,
-              tension: 0.35,
-              pointRadius: 4,
-              pointBackgroundColor: '#FFFFFF',
-              pointBorderColor: '#A855F7',
-              pointBorderWidth: 2,
-              order: 1
-            },
-            {
               type: 'bar',
               label: 'Spend',
               data: spendData,
-              yAxisID: 'yCurrency',
               backgroundColor: '#93C5FD',
               borderRadius: 6,
-              barPercentage: 0.45,
+              barPercentage: 0.5,
               categoryPercentage: 0.7,
-              order: 3
+              yAxisID: 'y'
             },
             {
               type: 'bar',
               label: 'Revenue',
-              data: revenueData,
-              yAxisID: 'yCurrency',
-              backgroundColor: '#1D4ED8',
+              data: revData,
+              backgroundColor: '#0B5FFF',
               borderRadius: 6,
-              barPercentage: 0.45,
+              barPercentage: 0.5,
               categoryPercentage: 0.7,
-              order: 2
+              yAxisID: 'y'
+            },
+            {
+              type: 'line',
+              label: 'ROAS',
+              data: roasData,
+              borderColor: '#A855F7',
+              backgroundColor: '#A855F7',
+              borderWidth: 2.5,
+              pointRadius: 3.5,
+              pointBackgroundColor: '#FFFFFF',
+              pointBorderColor: '#A855F7',
+              pointBorderWidth: 2,
+              tension: 0.35,
+              yAxisID: 'y1'
             }
           ]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
           plugins: {
             legend: { display: false },
             tooltip: {
               backgroundColor: '#0F172A',
-              titleFont: { family: 'Inter', size: 12, weight: 'bold' },
+              titleFont: { family: 'Inter', size: 11, weight: '700' },
               bodyFont: { family: 'Inter', size: 11 },
               padding: 10,
-              cornerRadius: 10
+              cornerRadius: 8,
+              callbacks: {
+                label: function(context) {
+                  let label = context.dataset.label || '';
+                  if (context.dataset.yAxisID === 'y1') {
+                    return label + ': ' + context.parsed.y.toFixed(2) + 'x';
+                  }
+                  return label + ': ' + fmt(context.parsed.y);
+                }
+              }
             }
           },
           scales: {
@@ -1166,22 +1576,20 @@
               grid: { display: false },
               ticks: { font: { family: 'Inter', size: 10, weight: '500' }, color: '#64748B' }
             },
-            yCurrency: {
+            y: {
               type: 'linear',
               position: 'left',
               min: 0,
               max: 20000,
               ticks: {
                 stepSize: 5000,
-                callback: function(val) {
-                  return val === 0 ? '0' : (val / 1000) + 'K';
-                },
+                callback: function(val) { return val === 0 ? '0' : (val / 1000) + 'K'; },
                 font: { family: 'Inter', size: 10, weight: '500' },
                 color: '#64748B'
               },
               grid: { color: '#F1F5F9' }
             },
-            yRoas: {
+            y1: {
               type: 'linear',
               position: 'right',
               min: 0,
@@ -1202,7 +1610,7 @@
     // PWA Service Worker Registration
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=12').then(reg => {
+        navigator.serviceWorker.register('./sw.js?v=13').then(reg => {
           console.log('Andromeda SW registered:', reg.scope);
         }).catch(err => {
           console.log('SW error:', err);
@@ -1212,6 +1620,7 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       calcAll();
+      renderSavedPlans();
       initPerformanceChart();
     });
   </script>
