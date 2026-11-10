@@ -1,122 +1,145 @@
 <div align="center">
-  <a href="https://heyshahid.github.io/meta-andromeda-calculator/">
-    <img src="https://raw.githubusercontent.com/heyshahid/heyshahid/main/andromeda-logo.png" width="90" height="90" alt="Meta Andromeda Logo" />
-  </a>
+  <img src="https://raw.githubusercontent.com/heyshahid/heyshahid/main/andromeda-logo.png" width="90" height="90" alt="Open MarketingOps Logo" />
   
-  # Meta Andromeda ROAS & Ad Scaling Calculator
+  # Open MarketingOps
   
-  <p><strong>Professional Meta Ads Manager Cockpit for Media Buyers & E-Commerce Brands</strong></p>
+  <p><strong>Understand Performance. Make Better Decisions. Scale Smarter.</strong></p>
+  
+  <p>An enterprise-ready open-source marketing analytics, deterministic calculations, budget planning, and campaign optimization platform.</p>
 
-  [![Launch Live Web App](https://img.shields.io/badge/LAUNCH_LIVE_WEB_APP-CLICK_HERE_TO_OPEN-0081FB?style=for-the-badge&logo=googlechrome&logoColor=white)](https://heyshahid.github.io/meta-andromeda-calculator/)
-  [![PWA Ready](https://img.shields.io/badge/PWA-Installable_Offline-10B981?style=for-the-badge&logo=pwa&logoColor=white)](https://heyshahid.github.io/meta-andromeda-calculator/)
-  [![License: MIT](https://img.shields.io/badge/License-MIT-F59E0B?style=for-the-badge)](LICENSE)
-  [![Author: Shahid Akram](https://img.shields.io/badge/Author-Shahid_Akram-1E293B?style=for-the-badge&logo=github&logoColor=white)](https://github.com/heyshahid)
-
+  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
+  [![Next.js 14](https://img.shields.io/badge/Next.js-14_App_Router-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+  [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+  [![Vitest](https://img.shields.io/badge/Vitest-Passed_100%25-6E9F18?style=for-the-badge&logo=vitest)](https://vitest.dev/)
+  [![Author: Shahid Akram](https://img.shields.io/badge/Author-Shahid_Akram-1E293B?style=for-the-badge&logo=github)](https://github.com/heyshahid)
 </div>
 
-> **Live Interactive Web App:** [https://heyshahid.github.io/meta-andromeda-calculator/](https://heyshahid.github.io/meta-andromeda-calculator/)  
-> Precision Break-Even ROAS, Max Allowable CAC, and Meta Machine Learning Scaling Engine. Operates seamlessly on iOS, Android, and Desktop with zero app store downloads.
+---
+
+## 🌟 Executive Overview
+
+**Open MarketingOps** is a production-grade, open-source marketing analytics suite built for performance marketers, media buyers, advertising consultants, and agencies. 
+
+Unlike black-box dashboards or simplistic calculators, Open MarketingOps provides **100% deterministic mathematical calculations**, multi-channel CSV ingestion, rule-based scaling intelligence (protecting against Meta algorithmic learning resets), and audit-ready client proposals.
 
 ---
 
-## Live Web Application
-Launch Tool: [https://heyshahid.github.io/meta-andromeda-calculator/](https://heyshahid.github.io/meta-andromeda-calculator/)  
-*(Installable directly to iOS, Android, macOS, and Windows home screens with zero app store downloads).*
+## 🚀 Key Modules & Architecture
+
+### 1. 📊 Executive Performance Dashboard
+- **10 Core Blended KPIs:** Total Spend, Attributed Revenue, ROAS, CPA, Net ROI, Total Conversions, AOV, CTR, CPC, and CPM.
+- **Velocity Visualization:** Daily Spend vs Revenue trajectory and platform allocation pie charts.
+- **Performance Filtering:** Real-time multi-platform filters (Meta Ads, Google Ads, TikTok Ads) and currency toggles (USD, EUR, GBP, PKR, INR, CAD, AUD, AED).
+
+### 2. 🧮 Deterministic Marketing Calculation Engine
+Implements 16 unit-tested mathematical formulas with zero-division safety:
+1. **ROAS Calculator:** `Revenue / Ad Spend`
+2. **Break-Even ROAS Engine:** `1 / Gross Margin`
+3. **Budget Scaling Ladder:** Anti-Learning-Reset compounding steps (+15% to +20%).
+4. **ROI Calculator:** `(Net Profit / Investment) × 100`
+5. **CPA Calculator:** `Ad Spend / Conversions`
+6. **CPM Calculator:** `(Ad Spend / Impressions) × 1,000`
+7. **CPC Calculator:** `Ad Spend / Clicks`
+8. **CTR Calculator:** `(Clicks / Impressions) × 100`
+9. **Conversion Rate:** `(Conversions / Clicks) × 100`
+10. **Average Order Value (AOV):** `Revenue / Orders`
+11. **Net Contribution Profit:** `Revenue - COGS - Ad Spend - Fees`
+12. **Ad Frequency:** `Impressions / Reach`
+13. **Customer Acquisition Cost (CAC):** `Acquisition Costs / New Customers`
+14. **Customer Lifetime Value (LTV):** `(AOV × Frequency × Lifespan) × Margin`
+15. **Marketing Funnel:** Drop-off attrition rates across funnel stages.
+16. **Creative Head-to-Head Comparison:** A vs B creative efficiency benchmarks.
+
+### 3. 📈 Scaling Intelligence
+- Transparent rule-based algorithmic decision engine.
+- Identifies **Insufficient Data (<50 conversions)**, **Scaling Opportunities**, and **Rising Acquisition Costs**.
+- Compounding budget intervals (+10%, +15%, +20%, +30%, +50%) protecting Meta algorithm stability.
+
+### 4. 🎨 Creative Intelligence
+- Tracks video engagement benchmarks: **3-Second Hook Rate %** and **15-Second Hold Rate %**.
+- Creative decay indicators monitoring frequency spikes, CTR deterioration, and CPA inflation.
+
+### 5. 📁 4-Step CSV Import Wizard
+- Auto-detects column headers from Meta Ads Manager, Google Ads, TikTok, or custom spreadsheets.
+- Type validation and preview before database ingestion.
+
+### 6. 📄 1-Page Official Executive PDF & CSV Reports
+- Clean, printable single-page audits formatted for founders, CFOs, and client pitch decks.
 
 ---
 
-## The Problem It Solves
+## 🛠️ Technology Stack
 
-Most e-commerce brands and media buyers scale paid media incorrectly:
-1. **Flawed Break-Even ROAS:** Traditional calculators use `1 / Margin`, ignoring merchant processing fees (2.9% + $0.30), return rates, and shipping costs. Brands think they are profitable at a 1.8x ROAS when they are actually bleeding cash.
-2. **Algorithmic Learning Phase Resets:** Increasing Meta ad budgets by more than 20% in a single day shocks Meta’s delivery system, re-entering the campaign into the volatile learning phase and spiking Cost Per Acquisition (CPA).
-3. **No Executive Client Reporting:** Media buyers lack a fast, clean way to export a professional 1-page scaling roadmap and financial audit for founders and CFOs.
-
-**Meta Andromeda Calculator** solves all three with zero bloat and 100% offline capability.
-
----
-
-## Core Calculation Engines
-
-### 1. Unit Economics & True Break-Even ROAS
-- **Inputs:** Average Order Value (AOV), Cost of Goods Sold (COGS), Pick/Pack/Shipping, Merchant Gateway Fee (%), Return/Refund Rate (%).
-- **Outputs:**
-  - **Net Contribution Margin ($ & %):** Real profit per order before advertising spend.
-  - **Break-Even ROAS:** The exact minimum ROAS required to avoid losing money.
-  - **Max Allowable CAC (Customer Acquisition Cost):** The absolute ceiling you can afford to pay for a new customer.
-  - **Target ROAS at Desired Margin (10%, 20%, 30%):** Exact ROAS needed to hit specific bottom-line profit targets.
-
-### 2. Andromeda Machine Learning Scaling Trajectory
-- **Safe Scaling Increments:** Automatically models day-by-day +15% and +20% compounding budget steps to scale from $100/day to $5,000+/day without throwing campaigns back into the learning phase.
-- **70 / 20 / 10 Budget Allocation:**
-  - **70% Core Scaling:** Meta Advantage+ Shopping Campaigns (ASC) and proven winning CBOs.
-  - **20% Creative Testing:** Dynamic Creative Ad sets (DCT) testing new hooks and visual angles.
-  - **10% Moonshot / Retargeting:** High-leverage angles, whitelisting, or bottom-of-funnel conversion boosters.
-- **Projected Revenue & Profit at Scale:** Models forecasted blended ROAS degradation as budgets expand.
-
-### 3. Reverse Target Profit Simulator
-- Enter your **Monthly Net Profit Target** (e.g. $20,000/month).
-- Instantly computes:
-  - Required Monthly Ad Spend.
-  - Minimum blended ROAS required.
-  - Total monthly orders and daily unit volume needed.
-
-### 4. 1-Page Executive Scaling Proposal (PDF Export)
-- Prints a polished, professional single-page audit formatted with:
-  - Client & brand details.
-  - Unit economics breakdown.
-  - 14-day budget scaling trajectory table.
-  - Agency / Media Buyer recommendations and client sign-off block.
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript 5.7
+- **Styling:** Tailwind CSS & Enterprise Fintech Design System
+- **Icons:** Lucide React
+- **Data Visualization:** Recharts
+- **CSV Engine:** PapaParse
+- **Automated Testing:** Vitest
+- **Database:** PostgreSQL / Supabase Schema with Row Level Security (RLS)
 
 ---
 
-## Formulas & Financial Logic
+## 💻 Quick Start & Local Development
 
-$$\text{Net Margin (\%)} = \frac{\text{AOV} - (\text{COGS} + \text{Shipping} + \text{Payment Fee} + \text{Return Allowance})}{\text{AOV}}$$
+### Prerequisites
+- Node.js `v18+` or `v20+` (v24 supported)
+- npm or pnpm
 
-$$\text{Break-Even ROAS} = \frac{1}{\text{Net Margin (\%)}} = \frac{\text{AOV}}{\text{Net Margin (\$)}} = \frac{\text{AOV}}{\text{Max Allowable CAC}}$$
-
-$$\text{Daily Scaled Budget}_{t+1} = \text{Budget}_t \times (1 + \text{Scaling Factor}) \quad \text{where } \text{Scaling Factor} \le 0.20$$
-
----
-
-## Progressive Web App (PWA) Features
-- **Offline First:** Cached via Service Worker (`sw.js`). Operates seamlessly mid-flight or on spotty connections.
-- **Instant Load Time:** Built with zero runtime JavaScript frameworks (vanilla JavaScript logic) and styled with Tailwind CSS for 60 FPS performance.
-- **Local Storage Vault:** Stores recent audits and scaling models locally in your browser with zero data sent to external servers.
-
----
-
-## Installation & Local Development
-
-No Node.js or build steps required. Clone and open:
+### Installation
 
 ```bash
-git clone https://github.com/heyshahid/meta-andromeda-calculator.git
-cd meta-andromeda-calculator
-# Open index.html directly in any modern browser
-open index.html # On macOS
-start index.html # On Windows
+# Clone the repository
+git clone https://github.com/heyshahid/open-marketingops.git
+cd open-marketingops
+
+# Install dependencies
+npm install
+
+# Run automated calculation tests
+npm test
+
+# Start development server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 🐳 Docker Deployment
+
+Run Open MarketingOps in an isolated container:
+
+```bash
+# Build & start container
+docker-compose up --build -d
 ```
 
 ---
 
-## Search & Topic Tags
-`meta-ads`, `roas-calculator`, `facebook-ads`, `andromeda-scaling`, `break-even-roas`, `cpa-calculator`, `performance-marketing`, `media-buying`, `ad-spend-calculator`, `ecommerce-growth`, `pwa`, `progressive-web-app`
+## 🧪 Testing
+
+Open MarketingOps enforces strict automated testing across all financial calculation formulas:
+
+```bash
+npm test
+```
 
 ---
 
-## Author & Architecture
+## 👤 Author & Architecture Lead
+
 **Shahid Akram**  
 *Paid Ads Architect & Systems Lead*  
 - Portfolio: [byshahid.vercel.app](https://byshahid.vercel.app/)  
-- GitHub: [github.com/heyshahid](https://github.com/heyshahid)  
-- LinkedIn: [linkedin.com/in/shahidakram](https://linkedin.com/in/shahidakram)  
-- Blogger: [byshahid.blogspot.com](https://byshahid.blogspot.com/)  
-- Substack: [byshahidakram.substack.com](https://byshahidakram.substack.com/)  
-- Email: [heyshahidakram@gmail.com](mailto:heyshahidakram@gmail.com)
+- GitHub: [@heyshahid](https://github.com/heyshahid)  
+- LinkedIn: [linkedin.com/in/shahidakram](https://linkedin.com/in/shahidakram)
 
 ---
 
-## License
+## 📜 License
+
 This project is open-source under the [MIT License](LICENSE).

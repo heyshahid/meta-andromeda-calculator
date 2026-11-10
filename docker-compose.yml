@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  open-marketingops:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: open-marketingops-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./.env.local:/app/.env.local:ro
+

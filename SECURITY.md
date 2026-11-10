@@ -1,5 +1,15 @@
 # Security Policy
 
-Meta Andromeda Calculator is a 100% client-side Progressive Web App (PWA). All ad budget and revenue data remains strictly on your local device.
+## Supported Versions
 
-Report vulnerabilities directly to: heyshahidakram@gmail.com
+| Version | Supported          |
+| ------- | ------------------ |
+| 1.0.x   | :white_check_mark: |
+
+## Reporting a Vulnerability
+
+If you discover a security vulnerability within Open MarketingOps, please do not disclose it publicly in issues. Please send an email to:
+
+`heyshahidakram@gmail.com`
+
+All security vulnerabilities will be promptly addressed, evaluated, and credited in security release advisories.
