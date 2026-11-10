@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { Campaign, PlatformType, CampaignObjective } from "@/lib/types";
+import React, { useState, useEffect } from "react";
+import { Campaign, PlatformType, CampaignObjective, AdvertisingAccount } from "@/lib/types";
 import { StorageService } from "@/lib/storage";
 import { X, Check } from "lucide-react";
 
@@ -14,6 +14,8 @@ interface AddCampaignModalProps {
 export function AddCampaignModal({ isOpen, onClose, onSuccess }: AddCampaignModalProps) {
   const [name, setName] = useState("");
   const [platform, setPlatform] = useState<PlatformType>("Meta Ads");
+  const [accountId, setAccountId] = useState("act-001");
+  const [accounts, setAccounts] = useState<AdvertisingAccount[]>([]);
   const [objective, setObjective] = useState<CampaignObjective>("OUTCOME_SALES");
   const [dailyBudget, setDailyBudget] = useState("100");
   const [spend, setSpend] = useState("500");
@@ -22,6 +24,16 @@ export function AddCampaignModal({ isOpen, onClose, onSuccess }: AddCampaignModa
   const [clicks, setClicks] = useState("650");
   const [conversions, setConversions] = useState("28");
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (isOpen) {
+      const accs = StorageService.getAccounts();
+      setAccounts(accs);
+      if (accs.length > 0) {
+        setAccountId(accs[0].id);
+      }
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -45,12 +57,15 @@ export function AddCampaignModal({ isOpen, onClose, onSuccess }: AddCampaignModa
     const cpm = nImpressions > 0 ? (nSpend / nImpressions) * 1000 : 0;
     const ctr = nImpressions > 0 ? (nClicks / nImpressions) * 100 : 0;
 
+    const selectedAcc = accounts.find(a => a.id === accountId);
+
     const newCampaign: Campaign = {
       id: `cmp-${Date.now()}`,
       workspaceId: "active-workspace",
+      accountId: accountId || "act-001",
       name: name.trim(),
       platform,
-      accountName: "Primary Ad Account",
+      accountName: selectedAcc ? selectedAcc.name : "Primary Ad Account",
       objective,
       status: "ACTIVE",
       dailyBudget: nBudget,
@@ -103,6 +118,24 @@ export function AddCampaignModal({ isOpen, onClose, onSuccess }: AddCampaignModa
 
           <div className="grid grid-cols-2 gap-3">
             <div>
+              <label className="block text-xs font-semibold text-[#475569] mb-1">Ad Account</label>
+              <select
+                value={accountId}
+                onChange={(e) => setAccountId(e.target.value)}
+                className="w-full text-xs border border-[#E2E8F0] rounded-lg p-2.5 bg-[#F8FAFC]"
+              >
+                {accounts.length > 0 ? (
+                  accounts.map((acc) => (
+                    <option key={acc.id} value={acc.id}>
+                      {acc.name} ({acc.platform})
+                    </option>
+                  ))
+                ) : (
+                  <option value="act-001">Primary Ad Account (act-001)</option>
+                )}
+              </select>
+            </div>
+            <div>
               <label className="block text-xs font-semibold text-[#475569] mb-1">Platform</label>
               <select
                 value={platform}
@@ -112,6 +145,23 @@ export function AddCampaignModal({ isOpen, onClose, onSuccess }: AddCampaignModa
                 <option value="Meta Ads">Meta Ads</option>
                 <option value="Google Ads">Google Ads</option>
                 <option value="TikTok Ads">TikTok Ads</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-semibold text-[#475569] mb-1">Campaign Objective</label>
+              <select
+                value={objective}
+                onChange={(e) => setObjective(e.target.value as CampaignObjective)}
+                className="w-full text-xs border border-[#E2E8F0] rounded-lg p-2.5 bg-[#F8FAFC]"
+              >
+                <option value="OUTCOME_SALES">Sales / Conversions</option>
+                <option value="OUTCOME_LEADS">Leads Generation</option>
+                <option value="OUTCOME_TRAFFIC">Traffic / Link Clicks</option>
+                <option value="OUTCOME_ENGAGEMENT">Engagement</option>
+                <option value="OUTCOME_AWARENESS">Brand Awareness</option>
               </select>
             </div>
             <div>

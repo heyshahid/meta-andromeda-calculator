@@ -1,5 +1,5 @@
 /**
- * Open MarketingOps - Domain Data Types & Schemas
+ * Open MarketingOps - Comprehensive Domain Data Types & Schemas
  */
 
 export type PlatformType = 'Meta Ads' | 'Google Ads' | 'TikTok Ads' | 'Google Analytics 4' | 'Shopify' | 'WooCommerce';
@@ -15,9 +15,21 @@ export type CampaignObjective =
   | 'OUTCOME_AWARENESS' 
   | 'OUTCOME_ENGAGEMENT';
 
+export interface AdvertisingAccount {
+  id: string;
+  workspaceId: string;
+  name: string;
+  platform: PlatformType;
+  accountId: string;
+  currency: CurrencyCode;
+  totalSpend: number;
+  status: 'CONNECTED' | 'DISCONNECTED';
+}
+
 export interface Campaign {
   id: string;
   workspaceId: string;
+  accountId: string;
   name: string;
   platform: PlatformType;
   accountName: string;
@@ -34,14 +46,17 @@ export interface Campaign {
   cpc: number;
   cpm: number;
   ctr: number;
+  notes?: string;
   updatedAt: string;
 }
 
 export interface AdSet {
   id: string;
   campaignId: string;
+  campaignName: string;
   name: string;
   targeting: string;
+  status: CampaignStatus;
   dailyBudget: number;
   spend: number;
   revenue: number;
@@ -49,6 +64,26 @@ export interface AdSet {
   clicks: number;
   conversions: number;
   roas: number;
+  cpa: number;
+}
+
+export interface IndividualAd {
+  id: string;
+  adSetId: string;
+  adSetName: string;
+  campaignId: string;
+  name: string;
+  status: CampaignStatus;
+  creativeId?: string;
+  creativeName?: string;
+  spend: number;
+  revenue: number;
+  impressions: number;
+  clicks: number;
+  conversions: number;
+  roas: number;
+  cpa: number;
+  ctr: number;
 }
 
 export interface AdCreative {
@@ -58,6 +93,7 @@ export interface AdCreative {
   type: 'IMAGE' | 'VIDEO' | 'CAROUSEL' | 'REEL';
   headline: string;
   primaryText: string;
+  description?: string;
   previewUrl: string;
   landingPageUrl: string;
   spend: number;
@@ -73,6 +109,7 @@ export interface AdCreative {
   tags: string[];
   notes?: string;
   fatigueStatus?: 'HEALTHY' | 'MONITOR' | 'FATIGUED';
+  createdAt: string;
 }
 
 export interface DailyInsight {
@@ -123,6 +160,14 @@ export interface ScalingPlan {
   riskAssessment: 'Safe' | 'Moderate' | 'High Risk';
 }
 
+export interface ActivityLog {
+  id: string;
+  timestamp: string;
+  type: 'CAMPAIGN_CREATED' | 'CSV_IMPORTED' | 'BUDGET_SAVED' | 'SCALING_AUDITED' | 'SETTINGS_UPDATED';
+  description: string;
+  actor: string;
+}
+
 export interface AndromedaUpdateArticle {
   id: string;
   title: string;
@@ -144,4 +189,3 @@ export interface UserSettings {
   aiProvider: 'gemini' | 'openai' | 'anthropic';
   workspaceName: string;
 }
-

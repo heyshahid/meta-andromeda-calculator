@@ -1,16 +1,46 @@
-import { Campaign, AdCreative, DailyInsight, AndromedaUpdateArticle } from './types';
+import { AdvertisingAccount, Campaign, AdSet, IndividualAd, AdCreative, DailyInsight, AndromedaUpdateArticle, ActivityLog } from './types';
 
-/**
- * Clearly labelled Demo Datasets for demonstration and initial exploration
- */
+export const DEMO_ACCOUNTS: AdvertisingAccount[] = [
+  {
+    id: 'acc-meta-1',
+    workspaceId: 'demo-workspace',
+    name: 'Shahid Growth Lab (Meta)',
+    platform: 'Meta Ads',
+    accountId: 'act_1048291048',
+    currency: 'USD',
+    totalSpend: 5250.00,
+    status: 'CONNECTED'
+  },
+  {
+    id: 'acc-google-1',
+    workspaceId: 'demo-workspace',
+    name: 'Shahid Search HQ (Google)',
+    platform: 'Google Ads',
+    accountId: '942-104-5829',
+    currency: 'USD',
+    totalSpend: 2100.00,
+    status: 'CONNECTED'
+  },
+  {
+    id: 'acc-tiktok-1',
+    workspaceId: 'demo-workspace',
+    name: 'TikTok Viral Lab',
+    platform: 'TikTok Ads',
+    accountId: '71948201948',
+    currency: 'USD',
+    totalSpend: 850.00,
+    status: 'CONNECTED'
+  }
+];
 
 export const DEMO_CAMPAIGNS: Campaign[] = [
   {
     id: 'demo-cmp-1',
     workspaceId: 'demo-workspace',
+    accountId: 'acc-meta-1',
     name: '[DEMO] Advantage+ Shopping - High Margin Skincare',
     platform: 'Meta Ads',
-    accountName: 'Shahid Growth Lab',
+    accountName: 'Shahid Growth Lab (Meta)',
     objective: 'OUTCOME_SALES',
     status: 'ACTIVE',
     dailyBudget: 250,
@@ -24,14 +54,16 @@ export const DEMO_CAMPAIGNS: Campaign[] = [
     cpc: 1.01,
     cpm: 24.30,
     ctr: 2.41,
+    notes: 'Core acquisition engine. Operates with 70/20/10 budget allocation.',
     updatedAt: '2026-11-10T10:00:00Z'
   },
   {
     id: 'demo-cmp-2',
     workspaceId: 'demo-workspace',
+    accountId: 'acc-meta-1',
     name: '[DEMO] Dynamic Creative Testing (DCT) - Q4 Hooks',
     platform: 'Meta Ads',
-    accountName: 'Shahid Growth Lab',
+    accountName: 'Shahid Growth Lab (Meta)',
     objective: 'OUTCOME_SALES',
     status: 'ACTIVE',
     dailyBudget: 100,
@@ -45,14 +77,16 @@ export const DEMO_CAMPAIGNS: Campaign[] = [
     cpc: 0.81,
     cpm: 17.65,
     ctr: 2.19,
+    notes: 'Testing 3 visual hooks against 2 primary copy variations.',
     updatedAt: '2026-11-09T18:30:00Z'
   },
   {
     id: 'demo-cmp-3',
     workspaceId: 'demo-workspace',
+    accountId: 'acc-google-1',
     name: '[DEMO] Google Search - High Intent Brand Terms',
     platform: 'Google Ads',
-    accountName: 'Shahid Search HQ',
+    accountName: 'Shahid Search HQ (Google)',
     objective: 'OUTCOME_SALES',
     status: 'ACTIVE',
     dailyBudget: 150,
@@ -66,14 +100,16 @@ export const DEMO_CAMPAIGNS: Campaign[] = [
     cpc: 0.98,
     cpm: 73.94,
     ctr: 7.57,
+    notes: 'Exact match brand defense campaigns.',
     updatedAt: '2026-11-10T09:15:00Z'
   },
   {
     id: 'demo-cmp-4',
     workspaceId: 'demo-workspace',
+    accountId: 'acc-tiktok-1',
     name: '[DEMO] TikTok Spark Ads - UGC Viral Angles',
     platform: 'TikTok Ads',
-    accountName: 'TikTok Media Lab',
+    accountName: 'TikTok Viral Lab',
     objective: 'OUTCOME_SALES',
     status: 'ACTIVE',
     dailyBudget: 80,
@@ -92,9 +128,10 @@ export const DEMO_CAMPAIGNS: Campaign[] = [
   {
     id: 'demo-cmp-5',
     workspaceId: 'demo-workspace',
+    accountId: 'acc-meta-1',
     name: '[DEMO] Retargeting - Cart Abandoners 7-Day Window',
     platform: 'Meta Ads',
-    accountName: 'Shahid Growth Lab',
+    accountName: 'Shahid Growth Lab (Meta)',
     objective: 'OUTCOME_SALES',
     status: 'ACTIVE',
     dailyBudget: 50,
@@ -112,14 +149,94 @@ export const DEMO_CAMPAIGNS: Campaign[] = [
   }
 ];
 
-export const DEMO_DAILY_INSIGHTS: DailyInsight[] = [
-  { date: '2026-11-04', spend: 1100, revenue: 4200, conversions: 52, roas: 3.82, clicks: 1750, impressions: 68000, platform: 'Meta Ads' },
-  { date: '2026-11-05', spend: 1150, revenue: 4600, conversions: 58, roas: 4.00, clicks: 1820, impressions: 71000, platform: 'Meta Ads' },
-  { date: '2026-11-06', spend: 1200, revenue: 4950, conversions: 61, roas: 4.12, clicks: 1910, impressions: 74500, platform: 'Meta Ads' },
-  { date: '2026-11-07', spend: 1180, revenue: 4700, conversions: 59, roas: 3.98, clicks: 1880, impressions: 73000, platform: 'Meta Ads' },
-  { date: '2026-11-08', spend: 1250, revenue: 5300, conversions: 68, roas: 4.24, clicks: 2020, impressions: 79000, platform: 'Meta Ads' },
-  { date: '2026-11-09', spend: 1300, revenue: 5650, conversions: 72, roas: 4.35, clicks: 2110, impressions: 82000, platform: 'Meta Ads' },
-  { date: '2026-11-10', spend: 1020, revenue: 5245, conversions: 65, roas: 5.14, clicks: 1950, impressions: 76000, platform: 'Meta Ads' },
+export const DEMO_ADSETS: AdSet[] = [
+  {
+    id: 'as-1',
+    campaignId: 'demo-cmp-1',
+    campaignName: '[DEMO] Advantage+ Shopping - High Margin Skincare',
+    name: 'Broad Targeting - US 25-54 Female',
+    targeting: 'Broad demographic, zero interest layering',
+    status: 'ACTIVE',
+    dailyBudget: 175,
+    spend: 2415.00,
+    revenue: 10143.00,
+    impressions: 99400,
+    clicks: 2394,
+    conversions: 118,
+    roas: 4.20,
+    cpa: 20.46
+  },
+  {
+    id: 'as-2',
+    campaignId: 'demo-cmp-1',
+    campaignName: '[DEMO] Advantage+ Shopping - High Margin Skincare',
+    name: 'Existing Customers & Lookalikes Exclusion Tier',
+    targeting: '180-day purchaser exclusion',
+    status: 'ACTIVE',
+    dailyBudget: 75,
+    spend: 1035.00,
+    revenue: 4002.00,
+    impressions: 42600,
+    clicks: 1026,
+    conversions: 47,
+    roas: 3.86,
+    cpa: 22.02
+  },
+  {
+    id: 'as-3',
+    campaignId: 'demo-cmp-2',
+    campaignName: '[DEMO] Dynamic Creative Testing (DCT) - Q4 Hooks',
+    name: 'DCT Batch 1: Problem vs Solution Angles',
+    targeting: 'Engaged Shoppers + Skincare Affinity',
+    status: 'ACTIVE',
+    dailyBudget: 100,
+    spend: 1200.00,
+    revenue: 3360.00,
+    impressions: 68000,
+    clicks: 1490,
+    conversions: 48,
+    roas: 2.80,
+    cpa: 25.00
+  }
+];
+
+export const DEMO_ADS: IndividualAd[] = [
+  {
+    id: 'ad-1',
+    adSetId: 'as-1',
+    adSetName: 'Broad Targeting - US 25-54 Female',
+    campaignId: 'demo-cmp-1',
+    name: 'UGC Video - Why Traditional Serums Fail (Hook 1)',
+    status: 'ACTIVE',
+    creativeId: 'demo-crt-1',
+    creativeName: '[DEMO] Founder Story UGC (Problem/Agitation)',
+    spend: 1420.00,
+    revenue: 6532.00,
+    impressions: 58000,
+    clicks: 1450,
+    conversions: 74,
+    roas: 4.60,
+    cpa: 19.18,
+    ctr: 2.50
+  },
+  {
+    id: 'ad-2',
+    adSetId: 'as-1',
+    adSetName: 'Broad Targeting - US 25-54 Female',
+    campaignId: 'demo-cmp-1',
+    name: 'Unboxing Reel - Fast Delivery & First Reaction',
+    status: 'ACTIVE',
+    creativeId: 'demo-crt-2',
+    creativeName: '[DEMO] Unboxing & Reaction Reel',
+    spend: 995.00,
+    revenue: 3611.00,
+    impressions: 41400,
+    clicks: 944,
+    conversions: 44,
+    roas: 3.62,
+    cpa: 22.61,
+    ctr: 2.28
+  }
 ];
 
 export const DEMO_CREATIVES: AdCreative[] = [
@@ -130,6 +247,7 @@ export const DEMO_CREATIVES: AdCreative[] = [
     type: 'VIDEO',
     headline: 'Stop Burning Ad Spend on Flawed ROAS Calculations',
     primaryText: 'Here is how top performance marketing agencies scale without algorithmic learning resets.',
+    description: 'Direct response video showing founders reviewing live dashboard economics.',
     previewUrl: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&auto=format&fit=crop&q=80',
     landingPageUrl: 'https://byshahid.com',
     spend: 1840.00,
@@ -143,8 +261,9 @@ export const DEMO_CREATIVES: AdCreative[] = [
     videoHookRate3s: 38.4,
     videoHoldRate15s: 18.2,
     tags: ['Founder', 'UGC', 'Hook-Agitation'],
-    notes: 'Strongest performing top-of-funnel creative. Hook holds through first 3 seconds.',
-    fatigueStatus: 'HEALTHY'
+    notes: 'Strongest performing top-of-funnel creative. 3s hook rate exceeds 35% benchmark.',
+    fatigueStatus: 'HEALTHY',
+    createdAt: '2026-11-01T12:00:00Z'
   },
   {
     id: 'demo-crt-2',
@@ -153,6 +272,7 @@ export const DEMO_CREATIVES: AdCreative[] = [
     type: 'REEL',
     headline: 'Look What Arrived In The Mail Today!',
     primaryText: 'Genuine customer first impressions showing texture, packaging, and immediate results.',
+    description: 'Fast-paced 9:16 mobile format showcasing packaging and instant application.',
     previewUrl: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&auto=format&fit=crop&q=80',
     landingPageUrl: 'https://byshahid.com',
     spend: 920.00,
@@ -166,7 +286,8 @@ export const DEMO_CREATIVES: AdCreative[] = [
     videoHookRate3s: 29.1,
     videoHoldRate15s: 14.5,
     tags: ['Reels', 'Unboxing', 'Social-Proof'],
-    fatigueStatus: 'HEALTHY'
+    fatigueStatus: 'HEALTHY',
+    createdAt: '2026-11-03T14:30:00Z'
   },
   {
     id: 'demo-crt-3',
@@ -175,6 +296,7 @@ export const DEMO_CREATIVES: AdCreative[] = [
     type: 'IMAGE',
     headline: 'Standard Methods vs Andromeda Algorithmic Scaling',
     primaryText: 'Side-by-side breakdown of why traditional calculators bleed margin.',
+    description: 'High contrast visual comparison infographic testing against direct offers.',
     previewUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=80',
     landingPageUrl: 'https://byshahid.com',
     spend: 650.00,
@@ -186,8 +308,43 @@ export const DEMO_CREATIVES: AdCreative[] = [
     cpa: 36.11,
     ctr: 1.69,
     tags: ['Comparison', 'Static', 'Educational'],
-    notes: 'CPA rising over the last 5 days. Consider refreshing headline or testing new visual hook.',
-    fatigueStatus: 'MONITOR'
+    notes: 'Frequency has climbed to 3.8x with CTR dropping below 1.8%. Consider refreshing angle.',
+    fatigueStatus: 'MONITOR',
+    createdAt: '2026-10-25T09:00:00Z'
+  }
+];
+
+export const DEMO_DAILY_INSIGHTS: DailyInsight[] = [
+  { date: '2026-11-04', spend: 1100, revenue: 4200, conversions: 52, roas: 3.82, clicks: 1750, impressions: 68000, platform: 'Meta Ads' },
+  { date: '2026-11-05', spend: 1150, revenue: 4600, conversions: 58, roas: 4.00, clicks: 1820, impressions: 71000, platform: 'Meta Ads' },
+  { date: '2026-11-06', spend: 1200, revenue: 4950, conversions: 61, roas: 4.12, clicks: 1910, impressions: 74500, platform: 'Meta Ads' },
+  { date: '2026-11-07', spend: 1180, revenue: 4700, conversions: 59, roas: 3.98, clicks: 1880, impressions: 73000, platform: 'Meta Ads' },
+  { date: '2026-11-08', spend: 1250, revenue: 5300, conversions: 68, roas: 4.24, clicks: 2020, impressions: 79000, platform: 'Meta Ads' },
+  { date: '2026-11-09', spend: 1300, revenue: 5650, conversions: 72, roas: 4.35, clicks: 2110, impressions: 82000, platform: 'Meta Ads' },
+  { date: '2026-11-10', spend: 1020, revenue: 5245, conversions: 65, roas: 5.14, clicks: 1950, impressions: 76000, platform: 'Meta Ads' },
+];
+
+export const DEMO_ACTIVITY_LOGS: ActivityLog[] = [
+  {
+    id: 'act-1',
+    timestamp: '2026-11-10T14:30:00Z',
+    type: 'CSV_IMPORTED',
+    description: 'Imported 165 campaign records from Meta Ads Manager CSV export.',
+    actor: 'Shahid Akram'
+  },
+  {
+    id: 'act-2',
+    timestamp: '2026-11-10T12:15:00Z',
+    type: 'SCALING_AUDITED',
+    description: 'Executed +20% Anti-Learning-Reset budget scaling plan on Advantage+ Shopping.',
+    actor: 'Shahid Akram'
+  },
+  {
+    id: 'act-3',
+    timestamp: '2026-11-09T18:00:00Z',
+    type: 'BUDGET_SAVED',
+    description: 'Saved Q4 Holiday Scaling Blueprint ($6,000/mo at 3.5x target ROAS).',
+    actor: 'Shahid Akram'
   }
 ];
 
@@ -229,4 +386,3 @@ export const DEMO_ANDROMEDA_ARTICLES: AndromedaUpdateArticle[] = [
     isVerified: true
   }
 ];
-

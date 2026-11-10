@@ -112,6 +112,7 @@ export function CSVImportWizard({ isOpen, onClose, onImportComplete }: CSVImport
       newCampaigns.push({
         id: `csv-${Date.now()}-${index}`,
         workspaceId: "active-workspace",
+        accountId: "act-001",
         name,
         platform: (rawPlatform.includes("Google") ? "Google Ads" : rawPlatform.includes("TikTok") ? "TikTok Ads" : "Meta Ads"),
         accountName: "Imported CSV Source",

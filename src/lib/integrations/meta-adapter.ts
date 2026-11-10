@@ -120,6 +120,7 @@ export class MetaMarketingAdapter {
       return {
         id: `meta-${row.campaign_id || Date.now() + '-' + idx}`,
         workspaceId: 'active-workspace',
+        accountId: row.account_id || 'act-meta-001',
         name: row.campaign_name || `Meta Campaign ${idx + 1}`,
         platform: 'Meta Ads',
         accountName: row.account_name || 'Connected Meta Ad Account',
