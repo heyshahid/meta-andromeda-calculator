@@ -195,3 +195,4 @@ export function CampaignDetailsModal({
     </div>
   );
 }
+

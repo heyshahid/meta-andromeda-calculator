@@ -154,3 +154,4 @@ describe('Manual Campaign Management CRUD (Section 2)', () => {
     expect(StorageService.getCampaigns()).toHaveLength(0);
   });
 });
+

@@ -122,3 +122,4 @@ CREATE POLICY saved_calcs_tenant_isolation ON saved_calculations
     USING (workspace_id IN (
         SELECT workspace_id FROM workspace_members WHERE user_id = auth.uid()
     ));
+

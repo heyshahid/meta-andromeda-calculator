@@ -1,0 +1,39 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "pwa-msedge",
+      "name": "Launch Open MarketingOps (http://localhost:3000)",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}",
+      "runtimeArgs": [
+        "--remote-debugging-port=9222"
+      ]
+    },
+    {
+      "type": "pwa-msedge",
+      "name": "Launch Open MarketingOps (Live GitHub Pages)",
+      "request": "launch",
+      "url": "https://heyshahid.github.io/open-marketingops/",
+      "runtimeArgs": [
+        "--remote-debugging-port=9222"
+      ]
+    },
+    {
+      "type": "vscode-edge-devtools.debug",
+      "name": "Open Edge DevTools (Open MarketingOps)",
+      "request": "launch",
+      "url": "http://localhost:3000"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Launch Open MarketingOps & Attach Edge DevTools",
+      "configurations": [
+        "Launch Open MarketingOps (http://localhost:3000)",
+        "Open Edge DevTools (Open MarketingOps)"
+      ]
+    }
+  ]
+}

@@ -18,6 +18,7 @@ import {
   calculateLTV,
   calculateBudgetScaling,
   calculateMarketingFunnel,
+  compareCreatives,
   formatCurrency,
   formatPercent
 } from "@/lib/calculator-engine";
@@ -121,6 +122,14 @@ export default function CalculatorsPage() {
   const [funnelLeads, setFunnelLeads] = useState("180");
   const [funnelOrders, setFunnelOrders] = useState("45");
 
+  // 16. Creative Comparison State
+  const [cmpACtr, setCmpACtr] = useState("2.8");
+  const [cmpACpa, setCmpACpa] = useState("18.50");
+  const [cmpARoas, setCmpARoas] = useState("3.9");
+  const [cmpBCtr, setCmpBCtr] = useState("1.9");
+  const [cmpBCpa, setCmpBCpa] = useState("26.00");
+  const [cmpBRoas, setCmpBRoas] = useState("2.4");
+
   const loadSavedCalcs = () => {
     const list = StorageService.getSavedCalculations();
     setSavedCalcs(list);
@@ -152,6 +161,10 @@ export default function CalculatorsPage() {
     parseInt(funnelClicks, 10) || 0,
     parseInt(funnelLeads, 10) || 0,
     parseInt(funnelOrders, 10) || 0
+  );
+  const creativeResult = compareCreatives(
+    { ctr: parseFloat(cmpACtr) || 0, cpa: parseFloat(cmpACpa) || 0, roas: parseFloat(cmpARoas) || 0 },
+    { ctr: parseFloat(cmpBCtr) || 0, cpa: parseFloat(cmpBCpa) || 0, roas: parseFloat(cmpBRoas) || 0 }
   );
 
   const copyToClipboard = (text: string) => {
@@ -278,6 +291,25 @@ export default function CalculatorsPage() {
             ClickToLead: `${(funnelResult[2]?.conversionFromPrevious || 0).toFixed(2)}%`
           }
         };
+      case "creative":
+        return {
+          type: "Creative Comparison",
+          defaultTitle: `Creative Comparison (${creativeResult.winnerMetric})`,
+          inputs: {
+            CreativeA_CTR: cmpACtr + "%",
+            CreativeA_CPA: cmpACpa,
+            CreativeA_ROAS: cmpARoas + "x",
+            CreativeB_CTR: cmpBCtr + "%",
+            CreativeB_CPA: cmpBCpa,
+            CreativeB_ROAS: cmpBRoas + "x"
+          },
+          outputs: {
+            Winner: creativeResult.winnerMetric,
+            ROAS_Difference: `${creativeResult.roasDifference >= 0 ? '+' : ''}${creativeResult.roasDifference.toFixed(2)}x`,
+            CPA_Difference: `${creativeResult.cpaDifference <= 0 ? '' : '+'}${creativeResult.cpaDifference.toFixed(2)}`,
+            Summary: creativeResult.summary
+          }
+        };
       default:
         return {
           type: "ROAS",
@@ -369,6 +401,7 @@ export default function CalculatorsPage() {
     { id: "ltv", label: "LTV" },
     { id: "frequency", label: "Frequency" },
     { id: "funnel", label: "Funnel Stages" },
+    { id: "creative", label: "Creative Comparison" },
   ];
 
   // Filtered Saved Calculations
@@ -386,7 +419,7 @@ export default function CalculatorsPage() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <h1 className="text-page-title text-[#172033] tracking-tight">Marketing Calculation & Saved Audit Suite</h1>
-            <p className="text-secondary text-[#64748B]">15 deterministic formulas with zero-division protection, live saving, and CSV export.</p>
+            <p className="text-secondary text-[#64748B]">16 deterministic formulas with zero-division protection, live saving, and CSV export.</p>
           </div>
 
           {/* Toggle between Calculator Tools and Saved Calculations */}
@@ -977,6 +1010,85 @@ export default function CalculatorsPage() {
                       <span className="text-3xl font-extrabold text-[#172033]">{freqResult.formattedValue}</span>
                     </div>
                     <button type="button" onClick={handleOpenSaveModal} className="px-3 py-1.5 rounded-lg bg-[#2563EB] text-white text-xs font-semibold">Save Result</button>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === "creative" && (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between pb-4 border-b border-[#E2E8F0]">
+                    <div>
+                      <h3 className="text-base font-bold text-[#172033]">Creative Performance Comparison</h3>
+                      <p className="text-xs text-[#64748B]">Multi-signal A/B creative scoring based on CTR, acquisition cost, and revenue efficiency.</p>
+                    </div>
+                    <span className="text-xs font-mono bg-[#EFF6FF] text-[#2563EB] px-2 py-1 rounded">A/B Multi-Signal Matrix</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Creative A */}
+                    <div className="p-4 rounded-xl border border-[#BFDBFE] bg-[#F8FAFC] space-y-3">
+                      <div className="flex items-center justify-between">
+                        <strong className="text-sm font-bold text-[#1E40AF]">Creative A (Control)</strong>
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#EFF6FF] text-[#2563EB]">Baseline</span>
+                      </div>
+                      <div className="grid grid-cols-3 gap-2">
+                        <div>
+                          <label className="block text-[11px] font-semibold text-[#475569] mb-1">CTR (%)</label>
+                          <input type="number" step="0.01" value={cmpACtr} onChange={e => setCmpACtr(e.target.value)} className="w-full border rounded-lg p-2 text-xs bg-white" />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] font-semibold text-[#475569] mb-1">CPA ($)</label>
+                          <input type="number" step="0.01" value={cmpACpa} onChange={e => setCmpACpa(e.target.value)} className="w-full border rounded-lg p-2 text-xs bg-white" />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] font-semibold text-[#475569] mb-1">ROAS (x)</label>
+                          <input type="number" step="0.01" value={cmpARoas} onChange={e => setCmpARoas(e.target.value)} className="w-full border rounded-lg p-2 text-xs bg-white" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Creative B */}
+                    <div className="p-4 rounded-xl border border-[#CBD5E1] bg-[#F8FAFC] space-y-3">
+                      <div className="flex items-center justify-between">
+                        <strong className="text-sm font-bold text-[#172033]">Creative B (Challenger)</strong>
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#F1F5F9] text-[#64748B]">Variant</span>
+                      </div>
+                      <div className="grid grid-cols-3 gap-2">
+                        <div>
+                          <label className="block text-[11px] font-semibold text-[#475569] mb-1">CTR (%)</label>
+                          <input type="number" step="0.01" value={cmpBCtr} onChange={e => setCmpBCtr(e.target.value)} className="w-full border rounded-lg p-2 text-xs bg-white" />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] font-semibold text-[#475569] mb-1">CPA ($)</label>
+                          <input type="number" step="0.01" value={cmpBCpa} onChange={e => setCmpBCpa(e.target.value)} className="w-full border rounded-lg p-2 text-xs bg-white" />
+                        </div>
+                        <div>
+                          <label className="block text-[11px] font-semibold text-[#475569] mb-1">ROAS (x)</label>
+                          <input type="number" step="0.01" value={cmpBRoas} onChange={e => setCmpBRoas(e.target.value)} className="w-full border rounded-lg p-2 text-xs bg-white" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Winner Comparison Result Card */}
+                  <div className="p-5 rounded-xl bg-white border border-[#E2E8F0] shadow-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="space-y-1">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-xs font-semibold text-[#64748B]">Winner Assessment:</span>
+                        <span className={`text-xs font-bold px-2.5 py-0.5 rounded ${
+                          creativeResult.winnerMetric === 'Creative A' ? 'bg-[#DCFCE7] text-[#16A34A]' :
+                          creativeResult.winnerMetric === 'Creative B' ? 'bg-[#EFF6FF] text-[#2563EB]' : 'bg-[#FEF3C7] text-[#D97706]'
+                        }`}>
+                          {creativeResult.winnerMetric === 'Creative A' ? '🏆 Creative A Outperformed' :
+                           creativeResult.winnerMetric === 'Creative B' ? '🏆 Creative B Outperformed' : '⚖️ Statistical Tie'}
+                        </span>
+                      </div>
+                      <p className="text-xs text-[#475569]">{creativeResult.summary}</p>
+                    </div>
+
+                    <button type="button" onClick={handleOpenSaveModal} className="px-4 py-2 rounded-lg bg-[#2563EB] text-white text-xs font-semibold shrink-0">
+                      Save Result
+                    </button>
                   </div>
                 </div>
               )}

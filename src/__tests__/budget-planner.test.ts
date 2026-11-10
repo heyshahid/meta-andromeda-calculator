@@ -67,3 +67,4 @@ describe('Budget Planner Scenarios & Math (Section 6)', () => {
     expect(StorageService.getBudgetPlans()).toHaveLength(2);
   });
 });
+

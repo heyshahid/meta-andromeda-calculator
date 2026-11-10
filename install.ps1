@@ -1,4 +1,4 @@
-﻿# Open MarketingOps - Windows Setup & Launcher
+# Open MarketingOps - Windows Setup & Launcher
 # Copyright (c) 2026 Shahid Akram
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path

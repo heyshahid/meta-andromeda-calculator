@@ -60,3 +60,4 @@ describe('Saved Calculations Module (Section 7)', () => {
     expect(StorageService.getSavedCalculations()).toHaveLength(0);
   });
 });
+
