@@ -1,4 +1,4 @@
-import { AdvertisingAccount, Campaign, AdSet, IndividualAd, AdCreative, DailyInsight, AndromedaUpdateArticle, ActivityLog } from './types';
+import { AdvertisingAccount, Campaign, AdSet, IndividualAd, AdCreative, DailyInsight, AndromedaUpdateArticle, ActivityLog, SavedCalculation } from './types';
 
 export const DEMO_ACCOUNTS: AdvertisingAccount[] = [
   {
@@ -44,6 +44,8 @@ export const DEMO_CAMPAIGNS: Campaign[] = [
     objective: 'OUTCOME_SALES',
     status: 'ACTIVE',
     dailyBudget: 250,
+    startDate: '2026-10-15',
+    endDate: '2026-11-30',
     spend: 3450.00,
     revenue: 14145.00,
     impressions: 142000,
@@ -67,6 +69,8 @@ export const DEMO_CAMPAIGNS: Campaign[] = [
     objective: 'OUTCOME_SALES',
     status: 'ACTIVE',
     dailyBudget: 100,
+    startDate: '2026-10-20',
+    endDate: '2026-11-25',
     spend: 1200.00,
     revenue: 3360.00,
     impressions: 68000,
@@ -190,6 +194,8 @@ export const DEMO_ADSETS: AdSet[] = [
     targeting: 'Engaged Shoppers + Skincare Affinity',
     status: 'ACTIVE',
     dailyBudget: 100,
+    startDate: '2026-10-20',
+    endDate: '2026-11-25',
     spend: 1200.00,
     revenue: 3360.00,
     impressions: 68000,
@@ -384,5 +390,44 @@ export const DEMO_ANDROMEDA_ARTICLES: AndromedaUpdateArticle[] = [
     content: 'Ensuring an Event Match Quality (EMQ) score above 8.0 is critical for modern delivery. Passing hashed external customer IDs, client user agent, and IP address alongside purchase events significantly reduces under-reported conversion data.',
     isOfficialMeta: true,
     isVerified: true
+  }
+];
+
+export const DEMO_SAVED_CALCULATIONS: SavedCalculation[] = [
+  {
+    id: 'calc-1',
+    workspaceId: 'demo-workspace',
+    userId: 'user-shahid',
+    calculatorType: 'Break-even ROAS',
+    title: 'Q4 High-Ticket Skincare Break-Even Target',
+    inputs: { grossMargin: 65, cogs: 28, retailPrice: 80 },
+    outputs: { breakEvenROAS: 1.54, targetProfitROAS: 2.85 },
+    notes: 'Calculated using 65% gross margin. Requires minimum 1.54x ROAS to cover all fulfillment and payment gateway fees.',
+    createdAt: '2026-11-08T14:20:00Z',
+    updatedAt: '2026-11-08T14:20:00Z'
+  },
+  {
+    id: 'calc-2',
+    workspaceId: 'demo-workspace',
+    userId: 'user-shahid',
+    calculatorType: 'Customer Acquisition Cost (CAC)',
+    title: 'Blended Omnichannel CAC Target',
+    inputs: { totalAdSpend: 12500, newCustomersAcquired: 340 },
+    outputs: { cac: 36.76, targetCAC: 40.00 },
+    notes: 'Well within acceptable LTV:CAC boundary of 3.2:1 assuming $120 first-year LTV.',
+    createdAt: '2026-11-09T09:15:00Z',
+    updatedAt: '2026-11-09T09:15:00Z'
+  },
+  {
+    id: 'calc-3',
+    workspaceId: 'demo-workspace',
+    userId: 'user-shahid',
+    calculatorType: 'Budget Scaling',
+    title: 'Advantage+ 20% Compounding Scaling Step 1',
+    inputs: { currentBudget: 500, incrementPercentage: 20 },
+    outputs: { newDailyBudget: 600, additionalMonthlySpend: 3000 },
+    notes: 'Step 1 of safe compounding budget scaling without resetting the Meta learning phase.',
+    createdAt: '2026-11-10T11:45:00Z',
+    updatedAt: '2026-11-10T11:45:00Z'
   }
 ];

@@ -8,7 +8,7 @@ import { PerformanceCharts } from "@/components/dashboard/PerformanceCharts";
 import { CSVImportWizard } from "@/components/csv/CSVImportWizard";
 import { AddCampaignModal } from "@/components/campaigns/AddCampaignModal";
 import { StorageService } from "@/lib/storage";
-import { Campaign, CurrencyCode, DailyInsight } from "@/lib/types";
+import { Campaign, CurrencyCode, DailyInsight, AdvertisingAccount } from "@/lib/types";
 import { formatCurrency, formatPercent } from "@/lib/calculator-engine";
 import {
   DollarSign,
@@ -21,23 +21,35 @@ import {
   AlertCircle,
   CheckCircle2,
   Filter,
-  ArrowUpRight
+  ArrowUpRight,
+  RotateCcw,
+  Calendar,
+  Building2
 } from "lucide-react";
 import Link from "next/link";
 
 export default function DashboardPage() {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
+  const [accounts, setAccounts] = useState<AdvertisingAccount[]>([]);
   const [insights, setInsights] = useState<DailyInsight[]>([]);
   const [currency, setCurrency] = useState<CurrencyCode>("USD");
+  
+  // 5 Functional Filters as required by Section 1
   const [platformFilter, setPlatformFilter] = useState<string>("ALL");
+  const [accountFilter, setAccountFilter] = useState<string>("ALL");
+  const [campaignFilter, setCampaignFilter] = useState<string>("ALL");
+  const [dateRangeFilter, setDateRangeFilter] = useState<"ALL" | "7d" | "14d" | "30d">("ALL");
+
   const [isCSVOpen, setIsCSVOpen] = useState(false);
   const [isAddOpen, setIsAddOpen] = useState(false);
 
   const loadData = () => {
     const loadedCampaigns = StorageService.getCampaigns();
+    const loadedAccounts = StorageService.getAccounts();
     const loadedInsights = StorageService.getDailyInsights();
     const settings = StorageService.getSettings();
     setCampaigns(loadedCampaigns);
+    setAccounts(loadedAccounts);
     setInsights(loadedInsights);
     setCurrency(settings.currency);
   };
@@ -55,11 +67,42 @@ export default function DashboardPage() {
     };
   }, []);
 
-  const filteredCampaigns = platformFilter === "ALL" 
-    ? campaigns 
-    : campaigns.filter(c => c.platform === platformFilter);
+  const handleCurrencyChange = (newCurr: CurrencyCode) => {
+    setCurrency(newCurr);
+    const settings = StorageService.getSettings();
+    StorageService.saveSettings({ ...settings, currency: newCurr });
+  };
 
-  // Deterministic KPI aggregations
+  const handleResetFilters = () => {
+    setPlatformFilter("ALL");
+    setAccountFilter("ALL");
+    setCampaignFilter("ALL");
+    setDateRangeFilter("ALL");
+  };
+
+  const isFilterActive = platformFilter !== "ALL" || accountFilter !== "ALL" || campaignFilter !== "ALL" || dateRangeFilter !== "ALL";
+
+  // Filter Campaigns based on platform, account, and campaign ID
+  const filteredCampaigns = campaigns.filter((c) => {
+    if (platformFilter !== "ALL" && c.platform !== platformFilter) return false;
+    if (accountFilter !== "ALL" && c.accountId !== accountFilter) return false;
+    if (campaignFilter !== "ALL" && c.id !== campaignFilter) return false;
+    return true;
+  });
+
+  // Filter Insights based on platform and date range
+  const filteredInsights = insights
+    .filter((item) => {
+      if (platformFilter !== "ALL" && item.platform !== platformFilter) return false;
+      return true;
+    })
+    .slice(
+      dateRangeFilter === "7d" ? -7 :
+      dateRangeFilter === "14d" ? -14 :
+      dateRangeFilter === "30d" ? -30 : 0
+    );
+
+  // Deterministic KPI aggregations based on filtered campaigns
   const totalSpend = filteredCampaigns.reduce((acc, c) => acc + c.spend, 0);
   const totalRevenue = filteredCampaigns.reduce((acc, c) => acc + c.revenue, 0);
   const totalConversions = filteredCampaigns.reduce((acc, c) => acc + c.conversions, 0);
@@ -76,7 +119,7 @@ export default function DashboardPage() {
 
   // Top performers vs Attention required
   const topCampaigns = [...filteredCampaigns].sort((a, b) => b.roas - a.roas).slice(0, 3);
-  const attentionCampaigns = [...filteredCampaigns].filter(c => c.roas < 2.0 && c.spend > 100);
+  const attentionCampaigns = [...filteredCampaigns].filter((c) => c.roas < 2.0 && c.spend > 100);
 
   return (
     <>
@@ -86,20 +129,40 @@ export default function DashboardPage() {
       />
 
       <main className="flex-1 p-6 max-w-7xl w-full mx-auto space-y-6">
-        {/* Top Control Bar */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        {/* Top Control Bar & Functional Filter Strip */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
             <h1 className="text-page-title text-[#172033] tracking-tight">Executive Dashboard</h1>
             <p className="text-secondary text-[#64748B]">Real-time blended advertising performance, unit economics, and campaign velocity.</p>
           </div>
 
-          <div className="flex items-center space-x-2">
-            <div className="flex items-center space-x-1 border border-[#E2E8F0] rounded-lg bg-white p-1 text-xs">
-              <Filter className="w-3.5 h-3.5 text-[#64748B] ml-1 mr-0.5" />
+          {/* 5 Functional Filter Dropdowns */}
+          <div className="flex flex-wrap items-center gap-2">
+            {/* 1. Date Range Filter */}
+            <div className="flex items-center space-x-1 border border-[#E2E8F0] rounded-lg bg-white px-2 py-1.5 text-xs shadow-xs">
+              <Calendar className="w-3.5 h-3.5 text-[#64748B]" />
+              <select
+                value={dateRangeFilter}
+                onChange={(e) => setDateRangeFilter(e.target.value as any)}
+                className="bg-transparent font-medium text-[#172033] focus:outline-none cursor-pointer"
+              >
+                <option value="ALL">All Time</option>
+                <option value="7d">Last 7 Days</option>
+                <option value="14d">Last 14 Days</option>
+                <option value="30d">Last 30 Days</option>
+              </select>
+            </div>
+
+            {/* 2. Platform Filter */}
+            <div className="flex items-center space-x-1 border border-[#E2E8F0] rounded-lg bg-white px-2 py-1.5 text-xs shadow-xs">
+              <Filter className="w-3.5 h-3.5 text-[#64748B]" />
               <select
                 value={platformFilter}
-                onChange={(e) => setPlatformFilter(e.target.value)}
-                className="bg-transparent font-medium text-[#172033] focus:outline-none cursor-pointer pr-1"
+                onChange={(e) => {
+                  setPlatformFilter(e.target.value);
+                  setCampaignFilter("ALL"); // Reset campaign if platform changes
+                }}
+                className="bg-transparent font-medium text-[#172033] focus:outline-none cursor-pointer"
               >
                 <option value="ALL">All Platforms</option>
                 <option value="Meta Ads">Meta Ads</option>
@@ -107,6 +170,71 @@ export default function DashboardPage() {
                 <option value="TikTok Ads">TikTok Ads</option>
               </select>
             </div>
+
+            {/* 3. Advertising Account Filter */}
+            <div className="flex items-center space-x-1 border border-[#E2E8F0] rounded-lg bg-white px-2 py-1.5 text-xs shadow-xs">
+              <Building2 className="w-3.5 h-3.5 text-[#64748B]" />
+              <select
+                value={accountFilter}
+                onChange={(e) => setAccountFilter(e.target.value)}
+                className="bg-transparent font-medium text-[#172033] focus:outline-none cursor-pointer max-w-[140px] truncate"
+              >
+                <option value="ALL">All Accounts</option>
+                {accounts.map((acc) => (
+                  <option key={acc.id} value={acc.id}>
+                    {acc.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* 4. Campaign Filter */}
+            <div className="flex items-center space-x-1 border border-[#E2E8F0] rounded-lg bg-white px-2 py-1.5 text-xs shadow-xs">
+              <Layers className="w-3.5 h-3.5 text-[#64748B]" />
+              <select
+                value={campaignFilter}
+                onChange={(e) => setCampaignFilter(e.target.value)}
+                className="bg-transparent font-medium text-[#172033] focus:outline-none cursor-pointer max-w-[150px] truncate"
+              >
+                <option value="ALL">All Campaigns ({campaigns.length})</option>
+                {campaigns.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* 5. Currency Selector */}
+            <div className="flex items-center space-x-1 border border-[#E2E8F0] rounded-lg bg-white px-2 py-1.5 text-xs shadow-xs">
+              <DollarSign className="w-3.5 h-3.5 text-[#64748B]" />
+              <select
+                value={currency}
+                onChange={(e) => handleCurrencyChange(e.target.value as CurrencyCode)}
+                className="bg-transparent font-bold text-[#172033] focus:outline-none cursor-pointer"
+              >
+                <option value="USD">USD ($)</option>
+                <option value="EUR">EUR (€)</option>
+                <option value="GBP">GBP (£)</option>
+                <option value="PKR">PKR (Rs)</option>
+                <option value="CAD">CAD (C$)</option>
+                <option value="AUD">AUD (A$)</option>
+                <option value="AED">AED (AED)</option>
+              </select>
+            </div>
+
+            {/* Reset Filters Button */}
+            {isFilterActive && (
+              <button
+                type="button"
+                onClick={handleResetFilters}
+                className="flex items-center space-x-1 px-2.5 py-1.5 rounded-lg bg-[#FEE2E2] text-[#DC2626] text-xs font-semibold hover:bg-[#FCA5A5] transition-colors"
+                title="Reset all filters to default"
+              >
+                <RotateCcw className="w-3 h-3" />
+                <span>Reset</span>
+              </button>
+            )}
           </div>
         </div>
 
@@ -122,9 +250,24 @@ export default function DashboardPage() {
               loadData();
             }}
           />
+        ) : filteredCampaigns.length === 0 ? (
+          <div className="bg-white rounded-2xl border border-[#E2E8F0] p-12 text-center space-y-4">
+            <AlertCircle className="w-10 h-10 text-[#F59E0B] mx-auto" />
+            <h3 className="text-base font-bold text-[#172033]">No campaigns match the selected filters</h3>
+            <p className="text-xs text-[#64748B] max-w-md mx-auto">
+              Your active filter combination returned 0 campaigns. Reset your filters or change parameter selections to view performance.
+            </p>
+            <button
+              type="button"
+              onClick={handleResetFilters}
+              className="px-4 py-2 rounded-lg bg-[#2563EB] text-white text-xs font-semibold hover:bg-[#1D4ED8]"
+            >
+              Clear Active Filters
+            </button>
+          </div>
         ) : (
           <>
-            {/* KPI Metrics Grid (10 Core Metrics as specified in Section 3.A) */}
+            {/* KPI Metrics Grid (10 Core Metrics as specified in Section 1 & Section 3.A) */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               <KPICard
                 label="Total Ad Spend"
@@ -200,8 +343,12 @@ export default function DashboardPage() {
               />
             </div>
 
-            {/* Performance Charts */}
-            <PerformanceCharts insights={insights} currencySymbol={currency === "USD" ? "$" : currency + " "} />
+            {/* Dynamic Performance Charts with all 5 visualization modes */}
+            <PerformanceCharts
+              insights={filteredInsights}
+              campaigns={filteredCampaigns}
+              currencySymbol={currency === "USD" ? "$" : currency + " "}
+            />
 
             {/* Performance Comparison Tables */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -249,7 +396,7 @@ export default function DashboardPage() {
 
                 {attentionCampaigns.length === 0 ? (
                   <div className="text-center py-8 text-xs text-[#64748B]">
-                    All active campaigns are currently operating above target break-even thresholds.
+                    All filtered campaigns are operating above target break-even thresholds.
                   </div>
                 ) : (
                   <div className="space-y-3">
@@ -292,4 +439,3 @@ export default function DashboardPage() {
     </>
   );
 }
-

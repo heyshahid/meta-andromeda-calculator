@@ -36,6 +36,8 @@ export interface Campaign {
   objective: CampaignObjective;
   status: CampaignStatus;
   dailyBudget: number;
+  startDate?: string;
+  endDate?: string;
   spend: number;
   revenue: number;
   impressions: number;
@@ -58,6 +60,8 @@ export interface AdSet {
   targeting: string;
   status: CampaignStatus;
   dailyBudget: number;
+  startDate?: string;
+  endDate?: string;
   spend: number;
   revenue: number;
   impressions: number;
@@ -140,6 +144,19 @@ export interface BudgetPlan {
     balanced: { spend: number; revenue: number; roas: number; conversions: number };
     aggressive: { spend: number; revenue: number; roas: number; conversions: number };
   };
+}
+
+export interface SavedCalculation {
+  id: string;
+  workspaceId: string;
+  userId: string;
+  calculatorType: string;
+  title: string;
+  inputs: Record<string, number | string>;
+  outputs: Record<string, number | string>;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ScalingPlan {
