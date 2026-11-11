@@ -11,7 +11,9 @@ import {
   Search,
   Plus,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  Github,
+  Star
 } from "lucide-react";
 
 interface HeaderProps {
@@ -55,7 +57,7 @@ export function Header({ onDataRefresh, onOpenAddModal }: HeaderProps) {
 
   return (
     <header className="h-16 bg-white border-b border-[#E2E8F0] px-6 flex items-center justify-between shrink-0 sticky top-0 z-20">
-      {/* Workspace Indicator */}
+      {/* Workspace Indicator & GitHub Follow/Star */}
       <div className="flex items-center space-x-3">
         <div className="flex items-center space-x-2 text-sm font-semibold text-[#172033]">
           <span className="w-2.5 h-2.5 rounded-full bg-[#16A34A] animate-pulse"></span>
@@ -63,6 +65,32 @@ export function Header({ onDataRefresh, onOpenAddModal }: HeaderProps) {
           <span className="text-xs px-2 py-0.5 rounded bg-[#F1F5F9] text-[#64748B] font-normal border border-[#E2E8F0]">
             Workspace
           </span>
+        </div>
+
+        {/* GitHub Star & Follow Buttons */}
+        <div className="hidden sm:flex items-center space-x-2 border-l border-[#E2E8F0] pl-3">
+          <a
+            href="https://github.com/heyshahid/open-marketingops"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-[#0F172A] text-white text-xs font-semibold hover:bg-[#1E293B] transition-all shadow-xs group"
+            title="Star Open MarketingOps on GitHub"
+          >
+            <Github className="w-3.5 h-3.5 text-white" />
+            <span>Star</span>
+            <Star className="w-3 h-3 text-[#FBBF24] fill-[#FBBF24] group-hover:scale-110 transition-transform" />
+          </a>
+
+          <a
+            href="https://github.com/heyshahid"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center space-x-1 px-2.5 py-1 rounded-lg bg-[#F8FAFC] border border-[#CBD5E1] text-[#334155] text-xs font-medium hover:bg-[#F1F5F9] hover:text-[#0F172A] transition-colors"
+            title="Follow Shahid Akram on GitHub"
+          >
+            <span>Follow</span>
+            <span className="font-semibold text-[#0F172A]">@heyshahid</span>
+          </a>
         </div>
       </div>
 
