@@ -32,6 +32,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" href={`${basePath}/favicon.png`} />
         <link rel="shortcut icon" href={`${basePath}/favicon.ico`} />
         <link rel="apple-touch-icon" href={`${basePath}/icon.svg`} />
+        <link rel="manifest" href={`${basePath}/manifest.json`} />
         <script
           dangerouslySetInnerHTML={{
             __html: `

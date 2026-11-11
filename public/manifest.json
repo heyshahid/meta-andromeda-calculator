@@ -1,0 +1,25 @@
+{
+  "name": "Open MarketingOps - Marketing Analytics & Campaign Optimization",
+  "short_name": "MarketingOps",
+  "description": "Open-source marketing analytics and campaign optimization platform. Understand Performance. Make Better Decisions. Scale Smarter.",
+  "start_url": "/open-marketingops/",
+  "scope": "/open-marketingops/",
+  "display": "standalone",
+  "background_color": "#F7F9FC",
+  "theme_color": "#14213D",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/open-marketingops/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/open-marketingops/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["business", "finance", "productivity", "utilities"]
+}
